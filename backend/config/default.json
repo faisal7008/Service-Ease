@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://serviceatease:serviceatease@cluster0.8g38ncx.mongodb.net/?retryWrites=true&w=majority",
+    "offineURL": "mongodb://localhost:27017/service-at-ease"
+}
