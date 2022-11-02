@@ -22,12 +22,13 @@ export default function Navbar(props) {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 hidden md:block">
                   {/* <img
                     className="h-12 w-12"
                     src={MainLogo}
                     alt="Your Company"
                   /> */}
+                   <h1 className="font-mono text-slate-900 text-2xl font-semibold dark:text-white">S<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>E</h1>
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
@@ -109,8 +110,9 @@ export default function Navbar(props) {
                   </Menu>
                 </div>
               </div>
-              <div className="-mr-2 flex md:hidden">
+              <div className="w-full flex justify-between md:hidden">
                 {/* Mobile menu button */}
+                <h1 className="font-mono text-slate-900 text-2xl font-semibold dark:text-white">Service<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>Ease</h1>
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
