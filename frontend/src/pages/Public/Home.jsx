@@ -19,7 +19,15 @@ export default function Home() {
 
   useEffect(() => {
     if(user){
-      navigate("student/dashboard")
+      if (user.role === "Leader"){
+        navigate("/leadership/dashboard");
+      }
+      else if (user.role === "Manager"){
+        navigate("/manager/dashboard");
+      }
+      else {
+        navigate("/employee/dashboard");
+      }
     }
   },[user, navigate])
 
