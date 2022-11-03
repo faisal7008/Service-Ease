@@ -28,7 +28,7 @@ export default function Navbar(props) {
                     src={MainLogo}
                     alt="Your Company"
                   /> */}
-                   <h1 className="font-mono text-slate-900 text-2xl font-semibold dark:text-white">S<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>E</h1>
+                   <h1 className="font-mono text-slate-900 text-2xl font-semibold text-white">S<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>E</h1>
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
