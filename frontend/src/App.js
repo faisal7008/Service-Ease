@@ -21,6 +21,7 @@ import EmployeeDashboard from "./pages/Employee/Dashboard"
 import LeaderProfile from "./pages/Leadership/LeaderProfile"
 import ManagerProfile from "./pages/Manager/ManagerProfile"
 import EmployeeProfile from "./pages/Employee/EmployeeProfile"
+import Community from "./pages/Community/Community";
 
 const LeadershipLayout = () => (
   <div>
@@ -70,6 +71,12 @@ function App() {
               path="leadership/profile"
               element={
                 user ? <Leadership LeaderComponent={<LeaderProfile />} /> : <Navigate replace to="/login" /> 
+              }
+            />
+            <Route
+              path="leadership/community"
+              element={
+                user ? <Leadership LeaderComponent={<Community />} community={true} /> : <Navigate replace to="/login" /> 
               }
             />
           </Route>
