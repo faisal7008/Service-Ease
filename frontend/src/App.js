@@ -15,7 +15,12 @@ import PageNotFound from "./pages/Public/PageNotFound";
 import Leadership from "./components/Leadership"
 import Manager from "./components/Manager"
 import Employee from "./components/Employee"
+
 import LeaderDashboard from "./pages/Leadership/Dashboard";
+import Trainings from "./pages/Leadership/Trainings";
+import Projects from "./pages/Leadership/Projects";
+import Surveys from "./pages/Leadership/Surveys";
+
 import ManagerDashboard from "./pages/Manager/Dashboard"
 import EmployeeDashboard from "./pages/Employee/Dashboard"
 import LeaderProfile from "./pages/Leadership/LeaderProfile"
@@ -67,13 +72,31 @@ function App() {
               }
             />
             <Route
+              path="leadership/trainings"
+              element={
+                user ? <Leadership LeaderComponent={<Trainings />} dashboard={true} /> : <Navigate replace to="/login" /> 
+              }
+            />
+            <Route
+              path="leadership/projects"
+              element={
+                user ? <Leadership LeaderComponent={<Projects />} dashboard={true} /> : <Navigate replace to="/login" /> 
+              }
+            />
+            <Route
+              path="leadership/surveys"
+              element={
+                user ? <Leadership LeaderComponent={<Surveys />} dashboard={true} /> : <Navigate replace to="/login" /> 
+              }
+            />
+            <Route
               path="leadership/profile"
               element={
                 user ? <Leadership LeaderComponent={<LeaderProfile />} /> : <Navigate replace to="/login" /> 
               }
             />
           </Route>
-          {/* Student Routes */}
+          {/* Manager Routes */}
           <Route element={<ManagerLayout />}>
             <Route
               path="manager/dashboard"
@@ -88,7 +111,7 @@ function App() {
               }
             />
           </Route>
-          {/* Teacher Routes */}
+          {/* Employee Routes */}
           <Route element={<EmployeeLayout />}>
             <Route
               path="employee/dashboard"

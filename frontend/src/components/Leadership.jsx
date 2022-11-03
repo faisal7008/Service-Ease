@@ -28,9 +28,9 @@ export default function Leadership(props) {
 
   const navigation = [
     { name: "Dashboard", href: "./dashboard", current: props.dashboard },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
+    { name: 'Trainings', href: './trainings', current: props.trainings },
+    { name: 'Projects', href: './projects', current: props.trainings },
+    { name: 'Surveys', href: './surveys', current: props.surveys },
     { name: 'Community', href: '#', current: false },
   ];
   
