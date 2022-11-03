@@ -22,7 +22,7 @@ export default function EmployeeDashboard() {
           </h1>
         </div>
       </header>
-      <main className="min-h-screen">
+      <main className="min-h-[calc(100vh-70px)]">
         
       </main>
     </>

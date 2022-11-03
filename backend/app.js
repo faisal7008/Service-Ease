@@ -18,9 +18,13 @@ app.use(express.urlencoded({ extended: true }));
 
 // routes
 const users = require('./routes/userRoutes');
+const messages = require('./routes/messageRoutes');
+const conversations = require('./routes/conversationRoutes');
 
 // use Routes
 app.use('/api/users', users);
+app.use('/api/messages', messages);
+app.use('/api/conversations', conversations);
 
 app.use(errorHandler)
 

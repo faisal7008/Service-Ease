@@ -151,6 +151,15 @@ const getEmployees = asyncHandler( async (req, res) => {
     res.status(200).json(employees)
 })
 
+// @desc    Get other user data
+// @route   GET /api/users/me
+// @access  Private
+
+const getOther = asyncHandler( async (req, res) => {
+    const user = await User.findById(req.params.id)
+    res.status(200).json(user)
+})
+
 // @desc    Get user data
 // @route   GET /api/users/me
 // @access  Private
@@ -168,5 +177,5 @@ const generateToken = (id) => {
 }
 
 module.exports = {
-    registerUser, loginUser, updateUser, deleteUser, getMe, getEmployees, getManagers
+    registerUser, loginUser, updateUser, deleteUser, getMe, getOther, getEmployees, getManagers
 }
