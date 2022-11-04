@@ -31,7 +31,7 @@ export default function Manager(props) {
     { name: 'Team', href: '#', current: false },
     { name: 'Projects', href: '#', current: false },
     { name: 'Calendar', href: '#', current: false },
-    { name: 'Community', href: '#', current: false },
+    { name: 'Community', href: './community', current: props.community },
   ];
   
   return (

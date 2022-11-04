@@ -58,9 +58,8 @@ function App() {
     <div className="app min-h-screen">
       <Router>
         <Routes>
-          {/* Admin Routes */}
+          {/* Leader Routes */}
           <Route element={<LeadershipLayout />}>
-            {/* Admin Routes */}
             <Route
               path="leadership/dashboard"
               element={
@@ -80,7 +79,7 @@ function App() {
               }
             />
           </Route>
-          {/* Student Routes */}
+          {/* Manager Routes */}
           <Route element={<ManagerLayout />}>
             <Route
               path="manager/dashboard"
@@ -94,8 +93,14 @@ function App() {
                 user ? <Manager ManagerComponent={<ManagerProfile />} /> : <Navigate replace to="/login" /> 
               }
             />
+            <Route
+              path="manager/community"
+              element={
+                user ? <Manager ManagerComponent={<Community />} community={true} /> : <Navigate replace to="/login" /> 
+              }
+            />
           </Route>
-          {/* Teacher Routes */}
+          {/* Employee Routes */}
           <Route element={<EmployeeLayout />}>
             <Route
               path="employee/dashboard"
@@ -107,6 +112,12 @@ function App() {
               path="employee/profile"
               element={
                 user ? <Employee EmployeeComponent={<EmployeeProfile />} /> : <Navigate replace to="/login" /> 
+              }
+            />
+            <Route
+              path="employee/community"
+              element={
+                user ? <Employee EmployeeComponent={<Community />} community={true} /> : <Navigate replace to="/login" /> 
               }
             />
           </Route>
