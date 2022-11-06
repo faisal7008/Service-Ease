@@ -146,7 +146,7 @@ export const userSlice = createSlice({
       .addCase(getManagers.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.employees = action.payload
+        state.managers = action.payload
       })
       .addCase(getManagers.rejected, (state, action) => {
         state.isLoading = false
@@ -159,7 +159,7 @@ export const userSlice = createSlice({
       .addCase(getEmployees.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.managers = action.payload
+        state.employees = action.payload
       })
       .addCase(getEmployees.rejected, (state, action) => {
         state.isLoading = false

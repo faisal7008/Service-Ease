@@ -19,7 +19,7 @@ export default function Navbar(props) {
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -28,7 +28,7 @@ export default function Navbar(props) {
                     src={MainLogo}
                     alt="Your Company"
                   /> */}
-                   <h1 className="font-mono text-2xl font-semibold text-white">S<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>E</h1>
+                   <h1 className="font-mono text-2xl hidden sm:block font-semibold text-white">S<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>E</h1>
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">

@@ -38,7 +38,7 @@ export default function Leadership(props) {
     <>
       <div className="min-h-full">
         <Navbar navigation={navigation} onLogout={onLogout} user={user} />
-        <div className="component min-h-screen">{props.LeaderComponent}</div>
+        <div className="component min-h-full">{props.LeaderComponent}</div>
       </div>
     </>
   );

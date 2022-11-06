@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+// import messageService from "../../features/messages/messageService";
 import { postMessage } from "../../features/messages/messageSlice";
 
-export default function PostMessage({currentChat, currentUser}) {
+export default function PostMessage({ socket, currentChat, currentUser}) {
   const [newMessage, setNewMessage] = useState("");
   const dispatch = useDispatch()
 
@@ -10,10 +11,22 @@ export default function PostMessage({currentChat, currentUser}) {
     e.preventDefault();
     const msgData = {
       sender: currentUser._id,
+      senderName: currentUser.name,
       text: newMessage,
       conversationId: currentChat._id,
     };
-    
+
+    const receiverId = currentChat.members.find(
+      (member) => member !== currentUser._id
+    );
+
+    await socket.current.emit("sendMessage", {
+      senderId: currentUser._id,
+      senderName: currentUser.name,
+      receiverId,
+      text: newMessage,
+    });
+    // messageService.postMessage(msgData, currentUser.token).then(p => console.log(p)).catch(err => err.message)
     dispatch(postMessage(msgData))
     setNewMessage("")
   };

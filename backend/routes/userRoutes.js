@@ -8,8 +8,8 @@ const { protect, leaderProtect, managerProtect } = require('../middlewares/authM
 router.post('/', registerUser )
 router.post('/login', loginUser )
 router.get('/me', protect, getMe )
-router.get('/managers', leaderProtect, getManagers)
-router.get('/employees', managerProtect, getEmployees)
+router.get('/managers', protect, getManagers)
+router.get('/employees', protect, getEmployees)
 router.route('/:id').delete(leaderProtect, deleteUser).put(protect, updateUser).get(protect, getOther)
 
 module.exports = router;

@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const { createConversation, getConversation, conversationBetweenUsers } = require('../controllers/conversationController')
+const { conversationBetweenUsers, createTeam, createDM, getDMs, getTeams } = require('../controllers/conversationController')
 const { protect, leaderProtect, managerProtect } = require('../middlewares/authMiddleware')
 
 // http://localhost:9000/api/conversations
 
-router.post('/', createConversation )
-router.get('/:userId', getConversation )
+router.post('/dms', createDM )
+router.post('/teams', createTeam )
+router.get('/dms/:userId', getDMs )
+router.get('/teams/:userId', getTeams )
 router.get('/find/:firstUserId/:secondUserId', conversationBetweenUsers )
 
 module.exports = router;

@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler')
 // @route   POST /api/conversations
 // @access  Public
 
-const createConversation = asyncHandler( async (req, res) => {
+const createDM = asyncHandler( async (req, res) => {
   const newConversation = new Conversation({
     members: [req.body.senderId, req.body.receiverId],
   });
@@ -18,14 +18,32 @@ const createConversation = asyncHandler( async (req, res) => {
   }
 });
 
-// @desc    Register new user
+// @desc    create teams
 // @route   POST /api/conversations
 // @access  Public
 
-const getConversation = asyncHandler( async (req, res) => {
+const createTeam = asyncHandler( async (req, res) => {
+  const newConversation = new Conversation({
+    name: req.body.name,
+    members: req.body.members,
+  });
+
+  try {
+    const savedConversation = await newConversation.save();
+    res.status(200).json(savedConversation);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// @desc    get conversations
+// @route   GET /api/conversations/conversationId
+// @access  Public
+
+const getDMs = asyncHandler( async (req, res) => {
   try {
     const conversation = await Conversation.find({
-      members: { $in: [req.params.userId] },
+      $and: [{members: { $in: [req.params.userId] }}, {members: { $size: 2 }}]
     });
     res.status(200).json(conversation);
   } catch (err) {
@@ -33,8 +51,19 @@ const getConversation = asyncHandler( async (req, res) => {
   }
 });
 
-// @desc    Register new user
-// @route   POST /api/conversations
+const getTeams = asyncHandler( async (req, res) => {
+  try {
+    const conversation = await Conversation.find({
+      $and: [{members: { $in: [req.params.userId] }}, {"members.2": { $exists: true }}]
+    });
+    res.status(200).json(conversation);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// @desc    get conversations between two users
+// @route   POST /api/conversations/:firstUserId/:secondUserId
 // @access  Public
 
 const conversationBetweenUsers = asyncHandler( async (req, res) => {
@@ -49,5 +78,5 @@ const conversationBetweenUsers = asyncHandler( async (req, res) => {
 });
 
 module.exports = {
-    createConversation, getConversation, conversationBetweenUsers
+    createDM, createTeam, getDMs, getTeams, conversationBetweenUsers
 }

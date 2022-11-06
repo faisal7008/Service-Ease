@@ -164,7 +164,7 @@ export default function EmployeeProfile() {
                     <input
                       type="file"
                       id="floating_filled"
-                      class="block rounded-none px-2.5 pb-2 pt-5 w-full text-sm text-gray-900 bg-gray-100 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                      class="block px-2.5 pb-2 pt-5 w-full text-sm text-gray-900 bg-gray-100 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                       placeholder=" "
                       disabled
                     />

@@ -130,7 +130,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

@@ -38,7 +38,7 @@ export default function Manager(props) {
     <>
       <div className="min-h-full">
         <Navbar navigation={navigation} onLogout={onLogout} user={user} />
-        <div className="component min-h-screen">{props.ManagerComponent}</div>
+        <div className="component min-h-full">{props.ManagerComponent}</div>
       </div>
     </>
   );

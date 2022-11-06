@@ -39,7 +39,7 @@ export default function Employee(props) {
     <>
       <div className="min-h-full">
         <Navbar navigation={navigation} onLogout={onLogout} user={user} />
-        <div className="component min-h-screen">{props.EmployeeComponent}</div>
+        <div className="component min-h-full">{props.EmployeeComponent}</div>
       </div>
     </>
   );
