@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import surveyForm from "./surveyForm";
 
 export default function EmployeeSurveys() {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export default function EmployeeSurveys() {
         </div>
       </header>
       <main className="min-h-screen">
-        
+        <surveyForm />
       </main>
     </>
   );
