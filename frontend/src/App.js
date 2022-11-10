@@ -21,8 +21,13 @@ import Trainings from "./pages/Leadership/Trainings";
 import Projects from "./pages/Leadership/Projects";
 import Surveys from "./pages/Leadership/Surveys";
 
+import EmployeeDashboard from "./pages/Employee/Dashboard";
+import EmployeeProjects from "./pages/Employee/Projects";
+import Learning from "./pages/Employee/Learning";
+import Rewards from "./pages/Employee/Rewards";
+import EmployeeSurveys from "./pages/Employee/Surveys";
+
 import ManagerDashboard from "./pages/Manager/Dashboard"
-import EmployeeDashboard from "./pages/Employee/Dashboard"
 import LeaderProfile from "./pages/Leadership/LeaderProfile"
 import ManagerProfile from "./pages/Manager/ManagerProfile"
 import EmployeeProfile from "./pages/Employee/EmployeeProfile"
@@ -117,6 +122,30 @@ function App() {
               path="employee/dashboard"
               element={
                 user ? <Employee EmployeeComponent={<EmployeeDashboard/>} dashboard={true} /> : <Navigate replace to="/login" />
+              }
+            />
+            <Route
+              path="employee/learning"
+              element={
+                user ? <Employee EmployeeComponent={<Learning/>} dashboard={true} /> : <Navigate replace to="/login" />
+              }
+            />
+            <Route
+              path="employee/projects"
+              element={
+                user ? <Employee EmployeeComponent={<EmployeeProjects/>} dashboard={true} /> : <Navigate replace to="/login" />
+              }
+            />
+            <Route
+              path="employee/rewards"
+              element={
+                user ? <Employee EmployeeComponent={<Rewards/>} dashboard={true} /> : <Navigate replace to="/login" />
+              }
+            />
+            <Route
+              path="employee/surveys"
+              element={
+                user ? <Employee EmployeeComponent={<EmployeeSurveys/>} dashboard={true} /> : <Navigate replace to="/login" />
               }
             />
             <Route

@@ -28,9 +28,10 @@ export default function Employee(props) {
 
   const navigation = [
     { name: "Dashboard", href: "./dashboard", current: props.dashboard },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
+    { name: 'Projects', href: './projects', current: false },
+    { name: 'Learning', href: './learning', current: false },
+    { name: 'Rewards', href: './rewards', current: false },
+    { name: 'Surveys', href: './surveys', current: false },
     { name: 'Community', href: '#', current: false },
     
   ];

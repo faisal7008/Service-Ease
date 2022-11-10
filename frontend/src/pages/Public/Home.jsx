@@ -17,12 +17,6 @@ export default function Home() {
   const navigate = useNavigate()
   const {user} = useSelector((state) => state.auth)
 
-  useEffect(() => {
-    if(user){
-      navigate("student/dashboard")
-    }
-  },[user, navigate])
-
   return (
     <>
       <div className="relative overflow-hidden bg-white">
