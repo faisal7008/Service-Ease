@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   getSurveys,
   addSurvey,
-} = require("../controllers/submissionController");
+} = require("../controllers/surveyController");
 const { protect } = require("../middlewares/authMiddleware");
 
 

@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const Survey = require("../models/Surveys");
+const Survey = require("../models/Survey");
 //const Submission = require("../models/Submissions");
 
 
