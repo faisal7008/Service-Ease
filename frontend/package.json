@@ -12,7 +12,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.0.0",
-    "flowbite": "^1.5.3",
+    "flowbite": "^1.5.4",
     "flowbite-react": "^0.2.0",
     "mdb-react-ui-kit": "^4.2.0",
     "moment": "^2.29.4",

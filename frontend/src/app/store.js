@@ -3,6 +3,7 @@ import authReducer from '../features/auth/authSlice'
 import userReducer from '../features/users/userSlice'
 import conversationReducer from '../features/conversations/conversationSlice';
 import messageReducer from "../features/messages/messageSlice"
+import postReducer from "../features/posts/postSlice"
 
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     auth: authReducer,
     users: userReducer,
     conversations: conversationReducer,
-    messages: messageReducer
+    messages: messageReducer,
+    posts: postReducer,
   },
 });

@@ -20,11 +20,15 @@ app.use(express.urlencoded({ extended: true }));
 const users = require('./routes/userRoutes');
 const messages = require('./routes/messageRoutes');
 const conversations = require('./routes/conversationRoutes');
+const posts = require("./routes/postRoutes")
 
 // use Routes
 app.use('/api/users', users);
+app.use('/api/posts', posts);
 app.use('/api/messages', messages);
 app.use('/api/conversations', conversations);
+app.use('/uploads/posts', express.static('uploads/posts'))
+app.use('/uploads/profile', express.static('uploads/profile'))
 
 app.use(errorHandler)
 

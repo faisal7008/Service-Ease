@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 // import messageService from "../../features/messages/messageService";
 import { postMessage } from "../../features/messages/messageSlice";
 
-export default function PostMessage({ socket, currentChat, currentUser}) {
+export default function PostMessage(props) {
+  const { socket, currentChat, currentUser, arrivalMessage, setMessages } = props
   const [newMessage, setNewMessage] = useState("");
   const dispatch = useDispatch()
 
@@ -20,12 +21,7 @@ export default function PostMessage({ socket, currentChat, currentUser}) {
       (member) => member !== currentUser._id
     );
 
-    await socket.current.emit("sendMessage", {
-      senderId: currentUser._id,
-      senderName: currentUser.name,
-      receiverId,
-      text: newMessage,
-    });
+    await socket.current.emit("send_message", msgData);
     // messageService.postMessage(msgData, currentUser.token).then(p => console.log(p)).catch(err => err.message)
     dispatch(postMessage(msgData))
     setNewMessage("")
@@ -33,12 +29,12 @@ export default function PostMessage({ socket, currentChat, currentUser}) {
 
 
   return (
-    <div className="display rounded-xl mb-1 mx-1">
-      <form>
+    <div className="display rounded-xl mx-0">
+      <form onSubmit={handleSubmit}>
         <label htmlFor="chat" className="sr-only">
           Your message
         </label>
-        <div className="flex items-center py-2 px-3 bg-slate-100 rounded-b-xl dark:bg-gray-700">
+        <div className="flex items-center py-2 px-3 bg-slate-200 rounded-b-xl dark:bg-gray-700">
           <button
             type="button"
             className="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
@@ -47,17 +43,17 @@ export default function PostMessage({ socket, currentChat, currentUser}) {
             <span className="sr-only">Add file</span>
           </button>
           <textarea
+            // type="text"
             id="chat"
             rows="1"
-            className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+            className="block mx-4 p-2.5 w-full text-sm text-gray-900 resize-none bg-white rounded-lg border border-gray-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
             placeholder="Your message..."
             onChange={(e) => setNewMessage(e.target.value)}
             value={newMessage}
-          ></textarea>
+          />
           <button
             type="submit"
-            onClick={handleSubmit}
-            className="inline-flex justify-center p-2 text-teal-600 rounded-full cursor-pointer hover:bg-teal-100 dark:text-teal-500 dark:hover:bg-gray-600"
+            className="inline-flex justify-center p-2 text-teal-600 rounded-full cursor-pointer hover:bg-emerald-50 dark:text-teal-500 dark:hover:bg-gray-600"
             disabled={newMessage === ""}
           >
             <svg

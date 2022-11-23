@@ -67,12 +67,40 @@ const deleteUser = async (userId, token) => {
   return response.data
 }
 
+// follow user
+const followUser = async (id, userData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.put(API_URL + "follow/" + id, userData, config)
+  return response.data
+}
+
+// get my profile
+const getMyProfile = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.get(API_URL + 'me', config)
+
+  return response.data
+}
+
+
 const userService = {
   addUser,
   getUser,
+  getMyProfile,
   getEmployees,
   getManagers,
   deleteUser,
+  followUser,
 }
 
 export default userService

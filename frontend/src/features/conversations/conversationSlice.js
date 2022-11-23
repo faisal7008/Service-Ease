@@ -50,12 +50,12 @@ export const getTeams = createAsyncThunk(
 
 
 // create conversations
-export const createConversation = createAsyncThunk(
-  'conversations/createConversation',
+export const createDM = createAsyncThunk(
+  'conversations/createDM',
   async (data, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await conversationService.createConversation(data, token)
+      return await conversationService.createDM(data, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -75,6 +75,25 @@ export const createTeam = createAsyncThunk(
     try {
       const token = thunkAPI.getState().auth.user.token
       return await conversationService.createTeam(data, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// delete conversations
+export const deleteConversation = createAsyncThunk(
+  'conversations/delete',
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await conversationService.deleteConversation(id, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -121,15 +140,15 @@ export const conversationSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
-      .addCase(createConversation.pending, (state) => {
+      .addCase(createDM.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(createConversation.fulfilled, (state, action) => {
+      .addCase(createDM.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.conversations.push(action.payload)
       })
-      .addCase(createConversation.rejected, (state, action) => {
+      .addCase(createDM.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
@@ -143,6 +162,24 @@ export const conversationSlice = createSlice({
         state.teams.push(action.payload)
       })
       .addCase(createTeam.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(deleteConversation.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteConversation.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.conversations = state.conversations.filter(
+          (conversation) => conversation._id !== action.payload.id
+        )
+        state.teams = state.teams.filter(
+          (team) => team._id !== action.payload.id
+        )
+      })
+      .addCase(deleteConversation.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

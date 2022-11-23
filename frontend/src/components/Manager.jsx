@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import { useEffect } from "react";
-import Navbar from "../pages/Manager/Navbar";
+import Navbar from "./Navbar";
 
 export default function Manager(props) {
   const navigate = useNavigate();
@@ -28,9 +28,8 @@ export default function Manager(props) {
 
   const navigation = [
     { name: "Dashboard", href: "./dashboard", current: props.dashboard },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
+    { name: 'Projects', href: './projects', current: props.projects },
+    { name: 'Teams', href: './teams', current: props.team },
     { name: 'Community', href: './community', current: props.community },
   ];
   

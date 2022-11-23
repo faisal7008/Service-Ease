@@ -149,7 +149,7 @@ export default function AddTeam({currentUser}) {
           onClick={handleSubmit}
           className="flex justify-center items-center mx-3 mb-2 p-3 text-sm font-medium rounded-md text-white bg-teal-500 border-t border-gray-200 dark:border-gray-600 hover:bg-teal-600"
         >
-          Create DM
+          Create Team
         </a>
       </div>
     </div>

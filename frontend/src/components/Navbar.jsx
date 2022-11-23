@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import userImage from "../../assets/user.webp";
+import userImage from "../assets/user.webp";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -13,10 +13,9 @@ export default function Navbar(props) {
   const userNavigation = [
     { name: "Your Profile", href: "./profile" },
     { name: "Settings", href: "#" },
-    // { name: "Sign out", href: "/", onClick: {} },
   ];
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className=" bg-gray-800">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8">

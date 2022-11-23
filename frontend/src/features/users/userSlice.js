@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import userService from './userService'
 
 const initialState = {
-  user: [],
+  profile: [],
   users: [],
   employees: [],
   managers: [],
@@ -33,11 +33,30 @@ export const addUser = createAsyncThunk(
 
 // get user
 export const getUser = createAsyncThunk(
-  'users/getOne',
+  'users/getOther',
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
       return await userService.getUser(id, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// get me
+export const getMyProfile = createAsyncThunk(
+  'users/getMe',
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await userService.getMyProfile(token)
     } catch (error) {
       const message =
         (error.response &&
@@ -105,6 +124,25 @@ export const deleteUser = createAsyncThunk(
     }
   }
 )
+// follow user
+export const followUser = createAsyncThunk(
+  'users/follow',
+  async (userData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      const id = thunkAPI.getState().auth.user._id
+      return await userService.followUser(id, userData, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
 
 export const userSlice = createSlice({
   name: 'users',
@@ -133,9 +171,22 @@ export const userSlice = createSlice({
       .addCase(getUser.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.user = action.payload
+        state.profile = action.payload
       })
       .addCase(getUser.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(getMyProfile.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getMyProfile.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.profile = action.payload
+      })
+      .addCase(getMyProfile.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
@@ -183,6 +234,19 @@ export const userSlice = createSlice({
         )
       })
       .addCase(deleteUser.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(followUser.pending, (state, action) => {
+        state.isLoading = true
+      })
+      .addCase(followUser.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.message = action.payload
+      })
+      .addCase(followUser.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

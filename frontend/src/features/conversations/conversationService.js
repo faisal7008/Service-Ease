@@ -24,7 +24,7 @@ const getTeams = async (userId, token) => {
   return response.data
 }
 
-const createConversation = async (data, token) => {
+const createDM = async (data, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -46,11 +46,23 @@ const createTeam = async (data, token) => {
   return response.data
 }
 
+const deleteConversation = async (conversationId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.delete(API_URL + "delete/" + conversationId, config)
+  return response.data
+}
+
 const conversationService = {
   getDMs,
   getTeams,
   createTeam,
-  createConversation
+  createDM,
+  deleteConversation
 }
 
 export default conversationService

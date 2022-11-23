@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import { useEffect } from "react";
-import Navbar from "../pages/Employee/Navbar";
+import Navbar from "./Navbar";
 
 export default function Employee(props) {
   const navigate = useNavigate();

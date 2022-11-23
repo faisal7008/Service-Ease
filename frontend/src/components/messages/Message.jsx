@@ -9,13 +9,13 @@ export default function Message({ prevMessage, message, currentUser }) {
   useEffect(() => {
     // console.log(nextMessage?.text)
     // console.log(message.text)
-    try {
-      userService
-        .getUser(message.sender, currentUser.token)
-        .then((res) => setUser(res));
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   userService
+    //     .getUser(message.sender, currentUser.token)
+    //     .then((res) => setUser(res));
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }, [message, currentUser.token, prevMessage]);
 
   return (
@@ -40,7 +40,7 @@ export default function Message({ prevMessage, message, currentUser }) {
         </div>
       </div>
       ) : (
-        <div className=" ">
+        <div>
         <p className="text-sm ml-10 -mt-4 font-medium text-gray-600">{message.text} <span className="ml-2 text-xs font-mono text-transparent hover:text-gray-500 ">
         {moment(message.createdAt).format('LT')}
       </span></p></div>
