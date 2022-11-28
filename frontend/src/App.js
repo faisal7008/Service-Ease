@@ -12,18 +12,19 @@ import Footer from "./pages/Public/Footer";
 import Login from "./pages/Public/Login";
 import UserRegister from "./pages/Public/UserRegister";
 import PageNotFound from "./pages/Public/PageNotFound";
-import Leadership from "./components/Leadership"
-import Manager from "./components/Manager"
-import Employee from "./components/Employee"
+import Leadership from "./components/Leadership";
+import Manager from "./components/Manager";
+import Employee from "./components/Employee";
 import LeaderDashboard from "./pages/Leadership/Dashboard";
-import ManagerDashboard from "./pages/Manager/Dashboard"
-import EmployeeDashboard from "./pages/Employee/Dashboard"
-import LeaderProfile from "./pages/Leadership/LeaderProfile"
-import ManagerProfile from "./pages/Manager/ManagerProfile"
-import EmployeeProfile from "./pages/Employee/EmployeeProfile"
+import ManagerDashboard from "./pages/Manager/Dashboard";
+import EmployeeDashboard from "./pages/Employee/Dashboard";
 import Community from "./pages/Community/Community";
 import Profile from "./components/profile/Profile";
 import ManagerProjects from "./pages/Manager/ManagerProjects";
+import NewDashboard from "./pages/Public/NewDashboard";
+import Project from "./pages/Projects/Project";
+import Task from "./pages/Projects/Task";
+import IssueDetails from "./components/projects/IssueDetails";
 
 const LeadershipLayout = () => (
   <div>
@@ -61,71 +62,86 @@ function App() {
       <Router>
         <Routes>
           {/* Leader Routes */}
-          <Route element={<LeadershipLayout />}>
+          <Route path="leadership"
+            element={
+              user ? <LeadershipLayout /> : <Navigate replace to="/login" />
+            }
+          >
             <Route
-              path="leadership/dashboard"
+              path="dashboard"
               element={
-                user ? <Leadership LeaderComponent={<LeaderDashboard />} dashboard={true} /> : <Navigate replace to="/login" /> 
+                <Leadership
+                  LeaderComponent={<LeaderDashboard />}
+                  dashboard={true}
+                />
               }
             />
             <Route
-              path="leadership/profile"
-              element={
-                user ? <Leadership LeaderComponent={<Profile />} /> : <Navigate replace to="/login" /> 
-              }
+              path="profile"
+              element={<Leadership LeaderComponent={<Profile />} />}
             />
             <Route
-              path="leadership/community"
+              path="community"
               element={
-                user ? <Leadership LeaderComponent={<Community />} community={true} /> : <Navigate replace to="/login" /> 
+                <Leadership LeaderComponent={<Community />} community={true} />
               }
             />
           </Route>
           {/* Manager Routes */}
-          <Route element={<ManagerLayout />}>
+          <Route path="manager"
+            element={
+              user ? <ManagerLayout /> : <Navigate replace to="/login" />
+            }
+          >
             <Route
-              path="manager/dashboard"
+              path="dashboard"
               element={
-                user ? <Manager ManagerComponent={<ManagerDashboard/>} dashboard={true}/> : <Navigate replace to="/login" />
+                <Manager
+                  ManagerComponent={<ManagerDashboard />}
+                  dashboard={true}
+                />
               }
             />
             <Route
-              path="manager/profile"
-              element={
-                user ? <Manager ManagerComponent={<Profile />} /> : <Navigate replace to="/login" /> 
-              }
+              path="profile"
+              element={<Manager ManagerComponent={<Profile />} />}
             />
+            <Route path="projects">
+              <Route index element={<Manager ManagerComponent={<Project />} projects={true} />} />
+              <Route path=":projectId" element={<Manager ManagerComponent={<Task />} projects={true} />}>
+                  <Route path=":issueId" element={<IssueDetails/>} />
+              </Route>
+            </Route>
             <Route
-              path="manager/projects"
+              path="community"
               element={
-                user ? <Manager ManagerComponent={<ManagerProjects />} /> : <Navigate replace to="/login" /> 
-              }
-            />
-            <Route
-              path="manager/community"
-              element={
-                user ? <Manager ManagerComponent={<Community />} community={true} /> : <Navigate replace to="/login" /> 
+                <Manager ManagerComponent={<Community />} community={true} />
               }
             />
           </Route>
           {/* Employee Routes */}
-          <Route element={<EmployeeLayout />}>
+          <Route path="employee" 
+            element={
+            user ? <EmployeeLayout /> : <Navigate replace to="/login" />
+          }
+          >
             <Route
-              path="employee/dashboard"
+              path="dashboard"
               element={
-                user ? <Employee EmployeeComponent={<EmployeeDashboard/>} dashboard={true} /> : <Navigate replace to="/login" />
+                <Employee
+                  EmployeeComponent={<EmployeeDashboard />}
+                  dashboard={true}
+                />
               }
             />
             <Route
-              path="employee/profile"
-              element={
-                user ? <Employee EmployeeComponent={<Profile />} /> : <Navigate replace to="/login" /> 
-              }
+              path="profile"
+              element={<Employee EmployeeComponent={<Profile />} />}
             />
             <Route
-              path="employee/community"
+              path="community"
               element={
-                user ? <Employee EmployeeComponent={<Community />} community={true} /> : <Navigate replace to="/login" /> 
+                <Employee EmployeeComponent={<Community />} community={true} />
               }
             />
           </Route>
@@ -134,6 +150,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<UserRegister />} />
+            <Route path="/dashboard" element={<NewDashboard />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

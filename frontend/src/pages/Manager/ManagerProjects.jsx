@@ -3,38 +3,12 @@ import IssueDetails from "../../components/projects/IssueDetails";
 
 export default function ManagerProjects() {
   return (
-    <div>
-      <header className="bg-white shadow">
-        <div className="mx-auto max-w-7xl flex justify-between py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold tracking-tight inline-flex items-center text-gray-900">
-            Projects
-            <svg
-              class="flex-shrink-0 h-8 w-8 text-gray-400 dark:text-gray-600 mx-2 "
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                d="M6 13L10 3"
-                stroke="currentColor"
-                stroke-linecap="round"
-              />
-            </svg>
-            <h1 className="text-xl font-semibold tracking-tight text-gray-700">
-              Service@Ease Engagement Platform
-            </h1>
-          </h1>
-          {/* <!-- Modal toggle --> */}
-<button class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="defaultModal">
-  Toggle modal
-</button>
-        </div>
-      </header>
-      <main className="min-h-[calc(100vh-70px)] flex justify-center">
-        <div className="max-w-7xl p-4">
+    <div className="flex">
+    <div className="w-1/5 border">
+
+</div>
+      <main className="flex w-4/5 justify-center border">
+        <div className="max-w-full p-4">
           <div className=" flex gap-2 mt-2 mb-4">
             <h1 className=" text-md font-mono font-medium">members:</h1>
             <div class="flex -space-x-2">
@@ -98,8 +72,61 @@ export default function ManagerProjects() {
           <div className="flex gap-6 justify-center">
             <div className="block w-80 p-3 bg-gray-100 rounded-md shadow-none">
               <div className=" flex justify-between mt-1 mb-3">
-                <h1 className=" text-sm font-semibold text-gray-700 uppercase">
-                    To do
+                <h1 className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-700 uppercase">
+                    To do <span class="py-1 px-2 rounded-full text-xs font-medium bg-red-200 text-red-800">6</span>
+                </h1>
+                <button className=" text-gray-600 hover:text-gray-800">
+                    <i className="fas fa-plus"></i>
+                </button>
+              </div>
+              <div className=" grid grid-cols-1 gap-2">
+                <div data-hs-overlay="#hs-vertically-centered-modal" className="block min-w-full p-3 bg-white border border-gray-200 rounded-none shadow-sm hover:bg-gray-50">
+                  <div className="flex items-center space-x-4">
+                    <div class="flex-1 min-w-0">
+                      <p class="text-xs font-medium  text-gray-500 truncate">
+                        Due on
+                      </p>
+                      <p class="text-sm text-gray-900 truncate">Jul 07</p>
+                    </div>
+                    <div class="flex-shrink-0">
+                      <img
+                        class="w-8 h-8 rounded-full"
+                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                        alt="Neil image"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex pt-2 font-mono text-sm items-center">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Pariatur, maxime!
+                  </div>
+                </div>
+                <div className="block min-w-full p-3 bg-white border border-gray-200 rounded-none shadow-sm">
+                  <div className="flex items-center space-x-4">
+                    <div class="flex-1 min-w-0">
+                      <p class="text-xs font-medium  text-gray-500 truncate">
+                        Due on
+                      </p>
+                      <p class="text-sm text-gray-900 truncate">Jul 07</p>
+                    </div>
+                    <div class="flex-shrink-0">
+                      <img
+                        class="w-8 h-8 rounded-full"
+                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                        alt="Neil image"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex pt-2 font-mono text-sm items-center">
+                    Delete direct message bug
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="block w-80 p-3 bg-gray-100 rounded-md shadow-none">
+            <div className=" flex justify-between mt-1 mb-3">
+                <h1 className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-700 uppercase">
+                    In Progress <span class="py-1 px-2 rounded-full text-xs font-medium bg-amber-200 text-amber-800">3</span>
                 </h1>
                 <button className=" text-gray-600 hover:text-gray-800">
                     <i className="fas fa-plus"></i>
@@ -151,61 +178,8 @@ export default function ManagerProjects() {
             </div>
             <div className="block w-80 p-3 bg-gray-100 rounded-md shadow-none">
             <div className=" flex justify-between mt-1 mb-3">
-                <h1 className=" text-sm font-semibold text-gray-700 uppercase">
-                    In Progress
-                </h1>
-                <button className=" text-gray-600 hover:text-gray-800">
-                    <i className="fas fa-plus"></i>
-                </button>
-              </div>
-              <div className=" grid grid-cols-1 gap-2">
-                <div className="block min-w-full p-3 bg-white border border-gray-200 rounded-none shadow-sm">
-                  <div className="flex items-center space-x-4">
-                    <div class="flex-1 min-w-0">
-                      <p class="text-xs font-medium  text-gray-500 truncate">
-                        Due on
-                      </p>
-                      <p class="text-sm text-gray-900 truncate">Jul 07</p>
-                    </div>
-                    <div class="flex-shrink-0">
-                      <img
-                        class="w-8 h-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                        alt="Neil image"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex pt-2 font-mono text-sm items-center">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Pariatur, maxime!
-                  </div>
-                </div>
-                <div className="block min-w-full p-3 bg-white border border-gray-200 rounded-none shadow-sm">
-                  <div className="flex items-center space-x-4">
-                    <div class="flex-1 min-w-0">
-                      <p class="text-xs font-medium  text-gray-500 truncate">
-                        Due on
-                      </p>
-                      <p class="text-sm text-gray-900 truncate">Jul 07</p>
-                    </div>
-                    <div class="flex-shrink-0">
-                      <img
-                        class="w-8 h-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                        alt="Neil image"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex pt-2 font-mono text-sm items-center">
-                    Delete direct message bug
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="block w-80 p-3 bg-gray-100 rounded-md shadow-none">
-            <div className=" flex justify-between mt-1 mb-3">
-                <h1 className=" text-sm font-semibold text-gray-700 uppercase">
-                    Done
+                <h1 className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-700 uppercase">
+                    Done <span class=" py-1 px-2 rounded-full text-xs font-medium bg-green-200 text-green-800">4</span>
                 </h1>
                 <button className=" text-teal-600 hover:text-teal-700">
                     <i className="fas fa-check"></i>

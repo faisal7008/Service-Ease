@@ -15,6 +15,19 @@ const addUser = async (UserData) => {
   return response.data
 }
 
+// get all users
+const getAllUsers = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.get(API_URL, config)
+
+  return response.data
+}
+
 // get user
 const getUser = async (userId, token) => {
   const config = {
@@ -96,6 +109,7 @@ const getMyProfile = async (token) => {
 const userService = {
   addUser,
   getUser,
+  getAllUsers,
   getMyProfile,
   getEmployees,
   getManagers,

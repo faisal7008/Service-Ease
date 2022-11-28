@@ -23,8 +23,8 @@ export default function Community() {
   return (
     <main className="messenger flex h-[calc(100vh-70px)]">
       <div className="chatMenu w-3/12 h-full hidden sm:block">
-        <div className="chatMenuWrapper w-full h-full">
-          <SearchBox />
+        <div className="chatMenuWrapper mt-3 w-full h-full">
+          {/* <SearchBox /> */}
           <ConversationBox
             user={user}
             currentChat={currentChat}
@@ -78,7 +78,7 @@ export default function Community() {
           />
         </div>
       </div>
-      <div className="chatBox w-full h-full border-gray-200 sm:w-6/12">
+      <div className="chatBox w-full h-full border-gray-200 sm:w-9/12">
         <div className="chatBoxWrapper flex flex-col h-full">
           {heading && (
             <div className=" flex justify-between bg-teal-500 text-white w-full shadow-sm shadow-teal-700">
@@ -97,9 +97,9 @@ export default function Community() {
           {heading === "General" && <General />}
         </div>
       </div>
-      <div className="onlinePeople w-3/12 h-full hidden sm:block">
+      {/* <div className="onlinePeople w-3/12 h-full hidden sm:block">
             <div className=" flex flex-col justify-center items-center"><h1 className="text-2xl font-mono font-medium text-teal-600">Online Folks</h1></div>
-      </div>
+      </div> */}
     </main>
   );
 }

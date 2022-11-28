@@ -50,12 +50,6 @@ export default function Post({ post }) {
   };
 
   const handleFollow = () => {
-    // try {
-    //   userService.followUser(user._id, {userId: friendUser?._id}, user.token)
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    // setIsFollowing(!isFollowing);
     dispatch(followUser({userId: friendUser?._id}))
     setIsFollowing(!isFollowing)
   }

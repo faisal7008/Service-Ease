@@ -4,6 +4,9 @@ import userReducer from '../features/users/userSlice'
 import conversationReducer from '../features/conversations/conversationSlice';
 import messageReducer from "../features/messages/messageSlice"
 import postReducer from "../features/posts/postSlice"
+import projectReducer from "../features/projects/projectSlice"
+import issueReducer from "../features/issues/issueSlice"
+import commentReducer from "../features/comments/commentSlice"
 
 
 export const store = configureStore({
@@ -13,5 +16,8 @@ export const store = configureStore({
     conversations: conversationReducer,
     messages: messageReducer,
     posts: postReducer,
+    projects: projectReducer,
+    issues: issueReducer,
+    comments: commentReducer,
   },
 });

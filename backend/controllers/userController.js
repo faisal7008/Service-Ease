@@ -148,6 +148,16 @@ const deleteUser = asyncHandler(
     }
 )
 
+// @desc    Get all users
+// @route   GET /api/users
+// @access  Admin
+
+const getAllUsers = asyncHandler( async (req, res) => {
+    const users = await User.find()
+    res.status(200).json(users)
+})
+
+
 // @desc    Get user data
 // @route   GET /api/users/students
 // @access  Admin
@@ -214,5 +224,5 @@ const generateToken = (id) => {
 }
 
 module.exports = {
-    registerUser, loginUser, updateUser, deleteUser, getMe, getOther, getEmployees, getManagers, follow
+    registerUser, loginUser, updateUser, deleteUser, getMe, getOther, getAllUsers, getEmployees, getManagers, follow
 }

@@ -21,13 +21,6 @@ export default function Profile() {
 
   return (
     <div>
-      <header className="bg-white shadow">
-        <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-            My Profile
-          </h1>
-        </div>
-      </header>
       <main className=" h-screen">
         <div className="mx-auto flex max-w-7xl h-full py-6 sm:px-6 lg:px-8">
           <div className=" w-4/6 m-2 h-full">

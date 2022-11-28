@@ -11,6 +11,16 @@ var storagePost = multer.diskStorage({
     }
 })
 
+var storageIssue = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/issues/')
+    },
+    filename: function (req, file, cb) {
+        let ext = path.extname(file.originalname)
+        cb(null, Date.now() + ext)
+    }
+})
+
 var storageProfile = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/profile/')
@@ -41,6 +51,16 @@ var uploadProfile = multer({
     }
 })
 
+var uploadIssue = multer({
+    storage: storageIssue,
+    fileFilter: function (req, file, callback) {
+        callback(null, true)
+    },
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    }
+})
+
 module.exports = {
-    uploadPosts, uploadProfile
+    uploadPosts, uploadProfile, uploadIssue
 }

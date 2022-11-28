@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { registerUser, loginUser, updateUser, deleteUser, getMe, getOther, getManagers, getEmployees, follow } = require('../controllers/userController')
+const { registerUser, loginUser, updateUser, deleteUser, getMe, getOther, getManagers, getEmployees, follow, getAllUsers } = require('../controllers/userController')
 const { protect, leaderProtect, managerProtect } = require('../middlewares/authMiddleware')
 const { uploadProfile } = require('../middlewares/uploadMiddleware')
 
 // http://localhost:9000/api/users
 
-router.post('/', uploadProfile.single('profilePicture'), registerUser )
+router.route('/').post(uploadProfile.single('profilePicture'), registerUser ).get(managerProtect, getAllUsers)
 router.post('/login', loginUser )
 router.get('/me', protect, getMe )
 router.get('/managers', protect, getManagers)
