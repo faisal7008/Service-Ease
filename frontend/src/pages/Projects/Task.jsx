@@ -2,114 +2,117 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useParams } from "react-router-dom";
-import IssueDetails from "../../components/projects/IssueDetails";
+import IssueDetails from "../../components/issues/IssueDetails";
 import issueService from "../../features/issues/issueService";
-import { getIssues } from "../../features/issues/issueSlice";
+import { getIssue, getIssues } from "../../features/issues/issueSlice";
 import moment from 'moment'
+import projectService from "../../features/projects/projectService";
+import TaskSidebar from "../../components/issues/TaskSidebar";
+import userService from "../../features/users/userService";
+import { getAllUsers } from "../../features/users/userSlice";
+import CreateIssue from "../../components/issues/CreateIssue";
+import { AiOutlineRight } from "react-icons/ai";
+import { BiTime } from "react-icons/bi";
+import UserBox from "../../components/issues/UserBox";
 
 export default function Task() {
   const dispatch = useDispatch()
   const {user} = useSelector(state => state.auth)
-  const {issues} = useSelector(state => state.issues)
+  const {users} = useSelector(state => state.users)
+  const {issues, isSuccess} = useSelector(state => state.issues)
   const {projectId} = useParams()
   const [issue, setIssue] = useState({})
+  // console.log(issue)
+  const [project, setProject] = useState({})
   // console.log(projectId);
   useEffect(() => {
     dispatch(getIssues(projectId));
+    // console.log(issues)
     // issueService.getIssues(projectId, user.token).then(res => setIssue(res.data)).catch(err => console.log(err));
+    projectService.getProject(projectId, user.token).then(res => setProject(res)).catch(err => console.log(err))
+  }, [projectId, dispatch, isSuccess])
 
-  }, [projectId, dispatch])
+  useEffect(() => {
+    dispatch(getAllUsers())
+  }, [dispatch])
   
+  const members =  users.filter(user => project.members?.includes(user._id))
+
   return (
-    <div className="flex">
-    <div className="w-1/5 border">
-
-</div>
-      <main className="flex w-4/5 justify-center border">
-        <div className="max-w-full p-4">
-          <div className=" flex gap-2 mt-2 mb-4">
+    <>
+     {/* <!-- Breadcrumb --> */}
+    {/* <div className="top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:block dark:bg-gray-800 dark:border-gray-700">
+      <div className="flex items-center py-4">
+        <ol className="ml-3 flex items-center whitespace-nowrap min-w-0" aria-label="Breadcrumb">
+          <li className="flex items-center text-sm text-gray-800 dark:text-gray-400">
+            Projects
+            <svg className="flex-shrink-0 mx-3 overflow-visible h-2.5 w-2.5 text-gray-400 dark:text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </li>
+          <li className="text-sm font-semibold text-gray-800 truncate dark:text-gray-400" aria-current="page">
+            {project.name}
+          </li>
+        </ol>
+      </div>
+    </div> */}
+      {/* <!-- End Breadcrumb --> */}
+    <div className="flex min-h-[91vh]">
+      <div className="w-1/5 border-r-[1px] bg-gray-100 border-gray-200">
+        <TaskSidebar project={project}/>
+      </div>
+      <main className="flex w-4/5 justify-left">
+        <div className="max-w-full mx-8 my-4">
+          <h1 className="my-4 text-xl font-semibold capitalize">{project.key} board</h1>
+          <div className="flex gap-2 mt-3 mb-6">
             <h1 className=" text-md font-mono font-medium">members:</h1>
-            <div class="flex -space-x-2">
-              <img
-                class="inline-block h-8 w-8 rounded-full ring-2 ring-gray-300"
-                src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                alt="Image Description"
-              />
-              <img
-                class="inline-block h-8 w-8 rounded-full ring-2 ring-gray-300"
-                src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                alt="Image Description"
-              />
-              <img
-                class="inline-block h-8 w-8 rounded-full ring-2 ring-gray-300"
-                src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80"
-                alt="Image Description"
-              />
-              <img
-                class="inline-block h-8 w-8 rounded-full ring-2 ring-gray-300"
-                src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                alt="Image Description"
-              />
-              <div class="hs-dropdown relative inline-flex [--placement:top-left]">
-                <button
-                  id="hs-dropdown-avatar-more"
-                  class="hs-dropdown-toggle inline-flex items-center justify-center h-8 w-8 rounded-full border-2 border-white font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-300 focus:outline-none focus:bg-blue-100 focus:text-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-300 focus:ring-blue-600 transition-all text-sm dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-800 dark:text-gray-400 dark:hover:text-white dark:focus:bg-blue-100 dark:focus:text-blue-600 dark:focus:ring-offset-gray-800"
-                >
-                  <span class="font-medium leading-none">9+</span>
+            <div className="flex -space-x-2">
+              {members?.map((member) => (
+                    <img
+                      key={member._id}
+                      className="inline-block h-8 w-8 rounded-full ring-2 ring-gray-300"
+                      src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                      alt="Image Description"
+                    /> 
+              ))}
+               <div className="hs-dropdown relative inline-flex [--placement:right-top]">
+              <button id="hs-dropdown-avatar-more" className="hs-dropdown-toggle inline-flex items-center justify-center h-[2rem] w-[2rem] rounded-full bg-gray-200 border-2 border-white font-medium text-gray-700 shadow-sm align-middle hover:bg-gray-300 focus:outline-none focus:bg-teal-100 focus:text-teal-600 focus:ring-2 focus:ring-offset-1 focus:ring-offset-white focus:ring-teal-600 transition-all text-sm">
+                  <span className="font-medium leading-none"><AiOutlineRight/></span>
                 </button>
-
-                <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-72 hidden z-10 transition-[margin,opacity] opacity-0 duration-300 mb-2 min-w-[15rem] bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                    href="#"
-                  >
-                    Chris Lynch
-                  </a>
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                    href="#"
-                  >
-                    Maria Guan
-                  </a>
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                    href="#"
-                  >
-                    Amil Evara
-                  </a>
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                    href="#"
-                  >
-                    Ebele Egbuna
-                  </a>
-                </div>
+                <div className="hs-dropdown-menu hs-dropdown-open:opacity-100 w-max hidden z-10 transition-[margin,opacity] opacity-0 duration-300 mb-2 min-w-[13rem] bg-white shadow-none border rounded-lg p-1">
+              {members.map((member) => (
+                  <button type="button" key={member._id} className="flex items-center w-full gap-x-3 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100">
+                   <UserBox user={member}/>
+                  </button>
+                  
+              ))}
               </div>
+            </div>
             </div>
           </div>
           <div className="flex gap-6 justify-center">
             <div className="block w-80 p-3 bg-gray-100 rounded-md shadow-none">
               <div className=" flex justify-between mt-1 mb-3">
                 <h1 className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-700 uppercase">
-                    To do <span class="py-1 px-2 rounded-full text-xs font-medium bg-red-200 text-red-800">6</span>
+                    To do <span className="py-1 px-2 rounded-full text-xs font-medium bg-red-200 text-red-800">6</span>
                 </h1>
-                <button className=" text-gray-600 hover:text-gray-800">
+                <button data-hs-overlay="#create-issue" className=" text-gray-600 hover:text-gray-800">
                     <i className="fas fa-plus"></i>
                 </button>
               </div>
               <div className=" grid grid-cols-1 gap-2">
-                {issues.map(issue => (
-                <Link to={issue._id} key={issue._id} onClick={() => setIssue(issue)} className="block min-w-full cursor-pointer p-3 bg-white border border-gray-200 rounded-none shadow-sm hover:bg-slate-50" data-hs-overlay="#hs-vertically-centered-modal">
+                {issues?.filter(issue => issue.status === "To Do").map(issue => (
+                <Link to={issue._id} key={issue._id} onClick={() => setIssue(issue)} className="block min-w-full cursor-pointer p-3 bg-white border border-gray-200 rounded shadow-sm shadow-gray-300 hover:bg-gray-200" data-hs-overlay="#hs-vertically-centered-modal">
                   <div className="flex items-center space-x-4">
-                    <div class="flex-1 min-w-0">
-                      <p class="text-xs font-medium  text-gray-500 truncate">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium  text-gray-500 truncate">
                         Due on
                       </p>
-                      <p class="text-sm text-gray-900 truncate">{moment(issue.createdAt).format("MMM DD")}</p>
+                      <p className="text-sm text-gray-900 truncate">{moment(issue.duedate).format("MMM DD")}</p>
                     </div>
-                    <div class="flex-shrink-0">
+                    <div className="flex-shrink-0">
                       <img
-                        class="w-8 h-8 rounded-full"
+                        className="w-8 h-8 rounded-full"
                         src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
                         alt="Neil image"
                       />
@@ -125,107 +128,69 @@ export default function Task() {
             <div className="block w-80 p-3 bg-gray-100 rounded-md shadow-none">
             <div className=" flex justify-between mt-1 mb-3">
                 <h1 className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-700 uppercase">
-                    In Progress <span class="py-1 px-2 rounded-full text-xs font-medium bg-amber-200 text-amber-800">3</span>
+                    In Progress <span className="py-1 px-2 rounded-full text-xs font-medium bg-amber-200 text-amber-800">3</span>
                 </h1>
-                <button className=" text-gray-600 hover:text-gray-800">
-                    <i className="fas fa-plus"></i>
+                <button className=" text-yellow-500 hover:text-yellow-600">
+                    <BiTime size={20}/>
                 </button>
               </div>
               <div className=" grid grid-cols-1 gap-2">
-                <div className="block min-w-full p-3 bg-white border border-gray-200 rounded-none shadow-sm">
+              {issues?.filter(issue => issue.status === "In Progress").map(issue => (
+                <Link to={issue._id} key={issue._id} onClick={() => setIssue(issue)} className="block min-w-full cursor-pointer p-3 bg-white border border-gray-200 rounded shadow-sm shadow-gray-300 hover:bg-gray-200" data-hs-overlay="#hs-vertically-centered-modal">
                   <div className="flex items-center space-x-4">
-                    <div class="flex-1 min-w-0">
-                      <p class="text-xs font-medium  text-gray-500 truncate">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium  text-gray-500 truncate">
                         Due on
                       </p>
-                      <p class="text-sm text-gray-900 truncate">Jul 07</p>
+                      <p className="text-sm text-gray-900 truncate">{moment(issue.duedate).format("MMM DD")}</p>
                     </div>
-                    <div class="flex-shrink-0">
+                    <div className="flex-shrink-0">
                       <img
-                        class="w-8 h-8 rounded-full"
+                        className="w-8 h-8 rounded-full"
                         src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
                         alt="Neil image"
                       />
                     </div>
                   </div>
                   <div className="flex pt-2 font-mono text-sm items-center">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Pariatur, maxime!
+                    {issue.summary}
                   </div>
-                </div>
-                <div className="block min-w-full p-3 bg-white border border-gray-200 rounded-none shadow-sm">
-                  <div className="flex items-center space-x-4">
-                    <div class="flex-1 min-w-0">
-                      <p class="text-xs font-medium  text-gray-500 truncate">
-                        Due on
-                      </p>
-                      <p class="text-sm text-gray-900 truncate">Jul 07</p>
-                    </div>
-                    <div class="flex-shrink-0">
-                      <img
-                        class="w-8 h-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                        alt="Neil image"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex pt-2 font-mono text-sm items-center">
-                    Delete direct message bug
-                  </div>
-                </div>
+                </Link>
+                ))}
               </div>
             </div>
             <div className="block w-80 p-3 bg-gray-100 rounded-md shadow-none">
             <div className=" flex justify-between mt-1 mb-3">
                 <h1 className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-700 uppercase">
-                    Done <span class=" py-1 px-2 rounded-full text-xs font-medium bg-green-200 text-green-800">4</span>
+                    Done <span className=" py-1 px-2 rounded-full text-xs font-medium bg-green-200 text-green-800">4</span>
                 </h1>
                 <button className=" text-teal-600 hover:text-teal-700">
                     <i className="fas fa-check"></i>
                 </button>
               </div>
               <div className=" grid grid-cols-1 gap-2">
-                <div className="block min-w-full p-3 bg-white border border-gray-200 rounded-none shadow-sm">
+              {issues?.filter(issue => issue.status === "Done").map(issue => (
+                <Link to={issue._id} key={issue._id} onClick={() => setIssue(issue)} className="block min-w-full cursor-pointer p-3 bg-white border border-gray-200 rounded shadow-sm shadow-gray-300 hover:bg-gray-200" data-hs-overlay="#hs-vertically-centered-modal">
                   <div className="flex items-center space-x-4">
-                    <div class="flex-1 min-w-0">
-                      <p class="text-xs font-medium  text-gray-500 truncate">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium  text-gray-500 truncate">
                         Due on
                       </p>
-                      <p class="text-sm text-gray-900 truncate">Jul 07</p>
+                      <p className="text-sm text-gray-900 truncate">{moment(issue.duedate).format("MMM DD")}</p>
                     </div>
-                    <div class="flex-shrink-0">
+                    <div className="flex-shrink-0">
                       <img
-                        class="w-8 h-8 rounded-full"
+                        className="w-8 h-8 rounded-full"
                         src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
                         alt="Neil image"
                       />
                     </div>
                   </div>
                   <div className="flex pt-2 font-mono text-sm items-center">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Pariatur, maxime!
+                    {issue.summary}
                   </div>
-                </div>
-                <div className="block min-w-full p-3 bg-white border border-gray-200 rounded-none shadow-sm">
-                  <div className="flex items-center space-x-4">
-                    <div class="flex-1 min-w-0">
-                      <p class="text-xs font-medium  text-gray-500 truncate">
-                        Due on
-                      </p>
-                      <p class="text-sm text-gray-900 truncate">Jul 07</p>
-                    </div>
-                    <div class="flex-shrink-0">
-                      <img
-                        class="w-8 h-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                        alt="Neil image"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex pt-2 font-mono text-sm items-center">
-                    Delete direct message bug
-                  </div>
-                </div>
+                </Link>
+                ))}
               </div>
             </div>
           </div>
@@ -233,8 +198,8 @@ export default function Task() {
       </main>
       
       {/* <IssueDetails issue={issue}/> */}
-      
-      <Outlet context={[issue]}/>
-    </div>
+      <CreateIssue project={project} />
+      <Outlet context={[issue, project]}/>
+    </div></>
   );
 }

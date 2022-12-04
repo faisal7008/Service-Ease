@@ -33,10 +33,10 @@ export default function Leadership(props) {
   };
 
   const navigation = [
-    { name: "Dashboard", href: "/leadership/dashboard", icon: <AiFillHome size={18}/>, current: props.dashboard },
-    { name: 'Projects', href: '/leadership/projects', icon: <BsFolderFill size={18}/>, current: props.projects },
-    { name: 'Teams', href: '/leadership/teams', icon: <FaHandshake size={18}/>, current: props.teams },
-    { name: 'Community', href: '/leadership/community', icon: <FaUsers size={18}/>, current: props.community },
+    { name: "Dashboard", href: "/leadership/dashboard", icon: <AiFillHome size={18}/>},
+    { name: 'Projects', href: '/leadership/projects', icon: <BsFolderFill size={18}/>},
+    { name: 'Teams', href: '/leadership/teams', icon: <FaHandshake size={18}/>},
+    { name: 'Community', href: '/leadership/community', icon: <FaUsers size={18}/>},
   ];
 
   const userNavigation = [
@@ -55,7 +55,10 @@ export default function Leadership(props) {
     <>
       <div className="min-h-full">
         <Navbar {...childProps} />
-        <div className="component min-h-full">{props.LeaderComponent}</div>
+        <div className="component min-h-full">
+          {/* {props.ManagerComponent} */}
+          <Outlet />
+        </div>
       </div>
     </>
   );

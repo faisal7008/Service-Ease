@@ -9,7 +9,7 @@ const dboffline = process.env.offineURI
 const connectDB = async () => {
   try {
     await mongoose.connect(
-      dboffline,
+      db,
       {
         useNewUrlParser: true
       }

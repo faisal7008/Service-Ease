@@ -43,7 +43,7 @@ export default function Community() {
       <div
         id="hs-overlay-example"
         className="hs-overlay hs-overlay-open:translate-x-0  -translate-x-full fixed top-0 left-0 transition-all duration-300 transform h-full mt-16 max-w-xs w-full z-[60] bg-white border-r dark:bg-gray-800 dark:border-gray-700 hidden"
-        tabindex="-1"
+        tabIndex="-1"
       >
         <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
           <h3 class="font-bold text-gray-800 dark:text-white">Menu</h3>
@@ -86,10 +86,9 @@ export default function Community() {
                 {" "}
                 {heading === "Announcements" || heading === "General" ? <> <i class="fas fa-hashtag"></i> {heading} </> : <> {heading} </>}
               </h1>
-             <button type="button" className={heading === "General" ? " px-4 py-0 my-2 mx-4 rounded border text-sm bg-teal-50 text-teal-600" : "hidden"}  data-modal-toggle="post-modal">Add Post</button> 
+             {/* <button type="button" className={heading === "General" ? " px-4 py-0 my-2 mx-4 rounded border text-sm bg-teal-50 text-teal-600" : "hidden"}  data-hs-overlay="#create-post">Add Post</button>  */}
             </div>
           )}
-          <AddPost/> 
           {(heading === "Direct Messages" || heading === "Teams") && (
             <MessageBox currentUser={user} currentChat={currentChat} />
           )}

@@ -20,33 +20,11 @@ import ManagerDashboard from "./pages/Manager/Dashboard";
 import EmployeeDashboard from "./pages/Employee/Dashboard";
 import Community from "./pages/Community/Community";
 import Profile from "./components/profile/Profile";
-import ManagerProjects from "./pages/Manager/ManagerProjects";
 import NewDashboard from "./pages/Public/NewDashboard";
 import Project from "./pages/Projects/Project";
 import Task from "./pages/Projects/Task";
-import IssueDetails from "./components/projects/IssueDetails";
-
-const LeadershipLayout = () => (
-  <div>
-    <h1 className="hidden">Leadership Layout</h1>
-    {/* <AdminDashboard /> */}
-    <Outlet />
-  </div>
-);
-
-const ManagerLayout = () => (
-  <div>
-    <h1 className="hidden">Manager Layout</h1>
-    <Outlet />
-  </div>
-);
-
-const EmployeeLayout = () => (
-  <div>
-    <h1 className="hidden">Employee Layout</h1>
-    <Outlet />
-  </div>
-);
+import IssueDetails from "./components/issues/IssueDetails";
+import Team from "./pages/teams/Team";
 
 const PublicLayout = () => (
   <div>
@@ -63,86 +41,51 @@ function App() {
         <Routes>
           {/* Leader Routes */}
           <Route path="leadership"
-            element={
-              user ? <LeadershipLayout /> : <Navigate replace to="/login" />
-            }
+            element={user ? <Leadership /> : <Navigate replace to="/login" />}
           >
-            <Route
-              path="dashboard"
-              element={
-                <Leadership
-                  LeaderComponent={<LeaderDashboard />}
-                  dashboard={true}
-                />
-              }
+            <Route path="dashboard" element={<LeaderDashboard/>}
             />
-            <Route
-              path="profile"
-              element={<Leadership LeaderComponent={<Profile />} />}
+            <Route path="profile" element={<Profile />}
             />
-            <Route
-              path="community"
-              element={
-                <Leadership LeaderComponent={<Community />} community={true} />
-              }
+            <Route path="community" element={<Community />}
             />
           </Route>
           {/* Manager Routes */}
           <Route path="manager"
             element={
-              user ? <ManagerLayout /> : <Navigate replace to="/login" />
+              user ? <Manager /> : <Navigate replace to="/login" />
             }
           >
-            <Route
-              path="dashboard"
-              element={
-                <Manager
-                  ManagerComponent={<ManagerDashboard />}
-                  dashboard={true}
-                />
-              }
+            <Route path="dashboard" element={<ManagerDashboard />}
             />
-            <Route
-              path="profile"
-              element={<Manager ManagerComponent={<Profile />} />}
+            <Route path="profile" element={<Profile />}
             />
             <Route path="projects">
-              <Route index element={<Manager ManagerComponent={<Project />} projects={true} />} />
-              <Route path=":projectId" element={<Manager ManagerComponent={<Task />} projects={true} />}>
+              <Route index element={<Project />} />
+              <Route path=":projectId" element={<Task />}>
                   <Route path=":issueId" element={<IssueDetails/>} />
               </Route>
             </Route>
-            <Route
-              path="community"
-              element={
-                <Manager ManagerComponent={<Community />} community={true} />
-              }
+            <Route path="teams" element={<Team />}
+            />
+            <Route path="community" element={<Community />}
             />
           </Route>
           {/* Employee Routes */}
-          <Route path="employee" 
-            element={
-            user ? <EmployeeLayout /> : <Navigate replace to="/login" />
-          }
-          >
-            <Route
-              path="dashboard"
-              element={
-                <Employee
-                  EmployeeComponent={<EmployeeDashboard />}
-                  dashboard={true}
-                />
-              }
+          <Route path="employee" element={user ? <Employee /> : <Navigate replace to="/login" />}>
+            <Route path="dashboard" element={<EmployeeDashboard/>}
             />
-            <Route
-              path="profile"
-              element={<Employee EmployeeComponent={<Profile />} />}
+            <Route path="profile" element={<Profile />}
             />
-            <Route
-              path="community"
-              element={
-                <Employee EmployeeComponent={<Community />} community={true} />
-              }
+            <Route path="projects">
+              <Route index element={<Project />} />
+              <Route path=":projectId" element={<Task />}>
+                  <Route path=":issueId" element={<IssueDetails/>} />
+              </Route>
+            </Route>
+            <Route path="teams" element={<Team />}
+            />
+            <Route path="community" element={<Community />}
             />
           </Route>
           {/* Public Routes */}

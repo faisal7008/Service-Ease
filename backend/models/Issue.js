@@ -36,7 +36,7 @@ const IssueSchema = new mongoose.Schema({
         required: [true, 'Please add project status']
     },
     duedate: {
-        type: String,
+        type: Date,
         required: [true, 'Please add due date']
     }},
     {timestamps: true}

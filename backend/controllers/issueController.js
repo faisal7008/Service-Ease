@@ -9,6 +9,10 @@ const createIssue = asyncHandler( async (req, res) => {
     const {project_id, creator_id, assignee_id, priority, summary, description, status, duedate} = req.body
     // const url = req.protocol + "://" + req.get("host");
     // attachments = url + "/uploads/issues/" + req.file.filename
+    if (!project_id || !creator_id || !assignee_id || !priority || !summary || !description || !status || !duedate) {
+        res.status(400)
+        throw new Error('Please fill all neccessary details.')
+    }
 
     const issue = await Issue.create({
         project_id, creator_id, assignee_id, priority, summary, description, status, duedate
@@ -62,16 +66,34 @@ const getIssue = asyncHandler(
 
 const updateIssue = asyncHandler(
     async (req, res) => {
+        const updatedIssue = await Issue.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        })
+        if(updatedIssue){
+            res.status(201).json(updatedIssue)
+        }
+        else{
+            res.status(400).json("Issue not found")
+        }
+    }
+)
+
+const updateIssueAttachments = asyncHandler(
+    async (req, res) => {
         const url = req.protocol + "://" + req.get("host");
         // const attachments = []
-        // for(let file in req.files){
-        //     attachments.push()
-        // }
-        req.body.attachments = url + "/uploads/issues/" + req.file.filename
-        const issue = await Issue.findById(req.params.id)
-        if(issue){
-            await issue.updateOne({$push : {attachments: req.body.attachments}})
-            res.status(201).json(issue)
+        
+        // req.files.map((file) => {
+        //     let attachmentPath = url + "/uploads/issues/" + file.filename
+        //     attachments.push(attachmentPath)
+        // })
+        
+        const attachmentPath = url + "/uploads/issues/" + req.file.filename
+        const updatedIssue = await Issue.findByIdAndUpdate(req.params.id, { $push: { attachments: attachmentPath } }, {
+            new: true,
+        })
+        if (updatedIssue) {
+            res.status(201).json(updatedIssue)
         }
         else{
             res.status(400).json("Issue not found")
@@ -86,9 +108,10 @@ const updateIssue = asyncHandler(
 const deleteIssue = asyncHandler(
     async (req, res) => {
         const issue = await Issue.findById(req.params.id)
-
+        // console.log(req.user.id)
+        // console.log(issue.creator_id)
         // Check for user
-        if(req.user.id !== req.body.creator_id){
+        if(req.user.id !== issue.creator_id.toString()){
             res.status(401)
             throw new Error('Not Authorized')
         }
@@ -100,10 +123,10 @@ const deleteIssue = asyncHandler(
 
         await issue.remove()
 
-        res.status(200).json({ id: req.params.id, creator: req.body.creator_id })
+        res.status(200).json({ id: req.params.id, creator: issue.creator_id })
     }
 )
 
 module.exports = {
-    createIssue, updateIssue, deleteIssue,  getIssue, getIssues
+    createIssue, updateIssue, deleteIssue,  getIssue, getIssues, updateIssueAttachments
 }

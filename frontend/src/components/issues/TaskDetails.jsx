@@ -8,8 +8,8 @@ export default function TaskDetails({issue}) {
   const {user} = useSelector(state => state.auth)
   // console.log(issue);
   useEffect(() => {
-    userService.getUser(issue.assignee_id, user.token).then((res) => setAssignee(res)).catch((err) => console.log(err.message));
-    userService.getUser(issue.creator_id, user.token).then(res => setReporter(res)).catch(err => console.log(err.message))
+    userService.getUser(issue?.assignee_id, user.token).then((res) => setAssignee(res)).catch((err) => console.log(err.message));
+    userService.getUser(issue?.creator_id, user.token).then(res => setReporter(res)).catch(err => console.log(err.message))
     // console.log(assignee)
     // console.log(reporter)
   }, [issue, user])

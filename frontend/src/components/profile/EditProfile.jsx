@@ -34,10 +34,6 @@ export default function EditProfile() {
     if (!user) {
       navigate("/login");
     }
-    if (isSuccess) {
-      dispatch(logout());
-      navigate("/login");
-    }
   }, [user, navigate, isError, isSuccess, isLoading, message, dispatch]);
 
   const onChange = (e) => {
@@ -59,9 +55,14 @@ export default function EditProfile() {
         password,
         profilePicture: profilePic
       };
-
-      dispatch(updateUser(userData));
-      alert("User updated successfully.")
+      if(userData.password !== "" || userData.profilePicture !== ""){
+        dispatch(updateUser(userData));
+        alert("User updated successfully.")
+        if (isSuccess) {
+          dispatch(logout());
+          navigate("/login");
+        }
+      }
     }
     if (isSuccess && !isError) {
       setMsg("User updated successfully!");
@@ -173,7 +174,7 @@ export default function EditProfile() {
                       name="password"
                       value={password}
                       onChange={onChange}
-                      required
+                      // required
                     />
                     <label
                       for="floating_filled5"
@@ -191,7 +192,7 @@ export default function EditProfile() {
                       name="confirmPassword"
                       value={confirmPassword}
                       onChange={onChange}
-                      required
+                      // required
                     />
                     <label
                       for="floating_filled6"

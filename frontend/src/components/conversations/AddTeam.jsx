@@ -42,19 +42,16 @@ export default function AddTeam({currentUser}) {
   }, [dispatch, users]);
 
   return (
-    <div>
+    <div className="mx-1 hs-dropdown relative sm:inline-flex z-30 [--auto-close:inside]">
       <button
-        id="dropdownSearchButton"
-        data-dropdown-toggle="dropdownSearch"
-        data-dropdown-placement="bottom"
-        className=" px-1 rounded-md hover:bg-slate-300 text-gray-600 hover:text-gray-800"
+        id="hs-dropdown-auto-close-inside"
+        className=" px-1 rounded-md hover:bg-slate-400 text-gray-600 hover:text-gray-800"
       >
         <i className="fas fa-plus"></i>
       </button>
       {/* Dropdown Menu */}
       <div
-        id="dropdownSearch"
-        className="hidden z-10 w-60 bg-white rounded shadow dark:bg-gray-700"
+        className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mt-2 bg-white shadow-md rounded-lg" aria-labelledby="hs-dropdown-auto-close-inside"
       >
         <div className="px-3 pt-3">
           <label htmlFor="input-group-search" className="sr-only">

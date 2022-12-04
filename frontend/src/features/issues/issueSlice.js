@@ -2,12 +2,32 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import issueService from "./issueService";
 
 const initialState = {
+  issue: [],
   issues: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: "",
 };
+
+// get Issue
+export const getIssue = createAsyncThunk(
+  "issues/getOne",
+  async (issueId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await issueService.getIssue(issueId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // get Issues
 export const getIssues = createAsyncThunk(
@@ -49,41 +69,64 @@ export const createIssue = createAsyncThunk(
 
 // update Issue
 export const updateIssue = createAsyncThunk(
-    "issues/update",
-    async ({IssueId, IssueData}, thunkAPI) => {
-      try {
-        const token = thunkAPI.getState().auth.user.token;
-        return await issueService.updateIssue(IssueId, IssueData, token);
-      } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        return thunkAPI.rejectWithValue(message);
-      }
+  "issues/update",
+  async ({ IssueId, IssueData }, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await issueService.updateIssue(IssueId, IssueData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
-  );
+  }
+);
 
-  // delete Issue
-export const deleteIssue = createAsyncThunk(
-    "issues/delete",
-    async (IssueId, thunkAPI) => {
-      try {
-        const token = thunkAPI.getState().auth.user.token;
-        return await issueService.deleteIssue(IssueId, token);
-      } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        return thunkAPI.rejectWithValue(message);
-      }
+// update Issue
+export const updateIssueAttachments = createAsyncThunk(
+  "issues/updateAttachments",
+  async ({ IssueId, IssueData }, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await issueService.updateIssueAttachments(
+        IssueId,
+        IssueData,
+        token
+      );
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
-  );
+  }
+);
+
+// delete Issue
+export const deleteIssue = createAsyncThunk(
+  "issues/delete",
+  async (IssueId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await issueService.deleteIssue(IssueId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 export const issueSlice = createSlice({
   name: "issues",
@@ -93,6 +136,19 @@ export const issueSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getIssue.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getIssue.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.issue = action.payload;
+      })
+      .addCase(getIssue.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
       .addCase(getIssues.pending, (state) => {
         state.isLoading = true;
       })
@@ -120,32 +176,58 @@ export const issueSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(updateIssue.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(updateIssue.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.issues.forEach((issue, index) => {
+          // console.log(index)
+          // console.log(action.payload)
+          if (issue._id === action.payload._id) {
+            state.issues[index] = action.payload
+          }
+        });
       })
       .addCase(updateIssue.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(updateIssueAttachments.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateIssueAttachments.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.issues.forEach((issue, index) => {
+          // console.log(index)
+          // console.log(action.payload)
+          if (issue._id === action.payload._id) {
+            state.issues[index] = action.payload 
+          }
+        });
+      })
+      .addCase(updateIssueAttachments.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(deleteIssue.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(deleteIssue.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.isLoading = false;
+        state.isSuccess = true;
         state.issues = state.issues.filter(
           (Issue) => Issue._id !== action.payload.id
-        )
+        );
       })
       .addCase(deleteIssue.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
-      })
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      });
   },
 });
 

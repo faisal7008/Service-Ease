@@ -18,7 +18,7 @@ export default function Followings({user, followingId}) {
       }, [followingId, user]);
   return (
     <div className=" p-3 ">
-        <div className="flex border-b-2 pb-3 items-center space-x-4">
+        <div className="flex items-center space-x-4">
           <div className="flex-shrink-0">
             <img
               className="w-10 h-10 rounded-full"

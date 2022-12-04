@@ -1,34 +1,32 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createComment } from "../../features/comments/commentSlice";
+import { updateIssue } from "../../features/issues/issueSlice";
 
-export default function CommentBox({user, issue}) {
+
+export default function DescriptionBox({issue}) {
     const [focus, setFocus] = useState(false)
-    const [comment, setComment] = useState("")
+    const [desc, setDesc] = useState("")
     const dispatch = useDispatch()
     const handleSubmit = (e) => {
         e.preventDefault();
-        setFocus(true)
-        const commentData = {
-            user_id: user._id,
-            issue_id: issue._id,
-            comment: comment
+        const descData = {
+            description: desc
         }
-        dispatch(createComment(commentData))
-        setComment("")
+        console.log(desc)
+        dispatch(updateIssue({IssueId: issue._id, IssueData: descData}))
+        setFocus(false)
     }
   return (
-<form tabIndex={0} onFocus={() => setFocus(true)} onSubmit={handleSubmit}> 
-{/* onBlur={() => setFocus(false)} onBlur={() => {setTimeout(() => setFocus(false), 100)}} */}
-    <div className={focus ? "w-full border border-gray-200 rounded bg-gray-50" : "w-full"}>
+    <form tabIndex={0} onFocus={() => setFocus(true)} onSubmit={handleSubmit}> 
+   <div className={focus ? "w-full border border-gray-200 rounded bg-gray-50" : "w-full"}>
        <div className={focus ? "px-2 py-2 bg-white" : "px-0 py-1 bg-white"}>
-           <label for="comment" className="sr-only">Your comment</label>
-           <textarea id="comment" onChange={(e) => setComment(e.target.value)} rows={focus ? "2" : "1"}  className={focus ? "w-full px-2 resize-none text-sm text-gray-900 bg-white border-0 focus:ring-0" : "w-full px-3 resize-none text-sm rounded text-gray-900 border-0 bg-gray-200"} value={comment} placeholder="Add a comment..." required></textarea>
+           <label for="description" className="sr-only">Your Description</label>
+           <textarea id="description" onChange={(e) => setDesc(e.target.value)} rows={focus ? "2" : "1"}  className={focus ? "w-full px-2 resize-none text-sm text-gray-900 bg-white border-0 focus:ring-0" : "w-full px-2 resize-none text-sm rounded text-gray-900 bg-white border-0 transition duration-200 ease-in hover:bg-gray-200"} defaultValue={issue?.description} placeholder="Add a description..." required></textarea>
        </div>
        <div className={focus ? "flex items-center justify-between px-3 py-2 border-t dark:border-gray-600" : "hidden"}>
-            <div className="flex gap-2">
+       <div className="flex gap-2">
            <button type="submit" className="inline-flex items-center py-2 px-4 text-xs font-medium text-center text-white bg-teal-700 rounded focus:ring-4 focus:ring-teal-200 dark:focus:ring-teal-900 hover:bg-teal-800">
-               Post
+               Save
            </button>
            <button onClick={() => setFocus(false)} type="button" className="inline-flex items-center py-2 px-4 text-xs font-medium text-center text-white bg-teal-700 rounded focus:ring-4 focus:ring-teal-200 dark:focus:ring-teal-900 hover:bg-teal-800">
                Cancel
@@ -51,6 +49,5 @@ export default function CommentBox({user, issue}) {
        </div>
    </div>
 </form>
-
   )
 }

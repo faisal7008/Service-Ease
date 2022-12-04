@@ -33,7 +33,7 @@ const registerUser = asyncHandler( async (req, res) => {
     const user = await User.create({
         name,
         id_no,
-        profilePicture: url + "/uploads/profile/" + req.file.filename,
+        // profilePicture: url + "/uploads/profile/" + req.file.filename,
         email,
         role,
         password: hashedPassword
@@ -44,7 +44,7 @@ const registerUser = asyncHandler( async (req, res) => {
             _id: user.id,
             name: user.name,
             id_no: user.id_no,
-            profilePicture: user.profilePicture,
+            // profilePicture: user.profilePicture,
             email: user.email,
             role: user.role,
             token: generateToken(user._id)
@@ -219,7 +219,7 @@ const follow = asyncHandler(async (req, res) => {
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: '300d',
+        expiresIn: '1d',
     })
 }
 

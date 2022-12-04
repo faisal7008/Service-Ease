@@ -25,7 +25,7 @@ export default function Comment({comment}) {
           <p className="text-sm font-semibold text-gray-900 truncate ">
             {commentor?.name}{" "}
             <span className="ml-2 text-xs font-mono text-gray-500">
-              {moment(comment.createdAt).startOf('hour').fromNow()}
+              {moment(comment.createdAt).startOf('minute').fromNow()}
             </span>
           </p>
           <p className="text-sm font-medium text-gray-600">{comment.comment}</p>

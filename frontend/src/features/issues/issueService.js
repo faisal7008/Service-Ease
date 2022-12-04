@@ -30,9 +30,10 @@ const createIssue = async (IssueData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
+      // "Content-Type": "multipart/form-data",
     },
   }
-
+  console.log(IssueData);
   const response = await axios.post(API_URL, IssueData, config)
   return response.data
 }
@@ -44,9 +45,22 @@ const updateIssue = async (IssueId, IssueData, token) => {
         Authorization: `Bearer ${token}`,
       },
     }
-  
+    // console.log(IssueData)
     const response = await axios.put(API_URL + IssueId, IssueData, config)
     return response.data
+}
+
+// update a Issue
+const updateIssueAttachments = async (IssueId, IssueData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  }
+  // console.log(IssueData)
+  const response = await axios.put(API_URL + "updateAttachments/" + IssueId, IssueData, config)
+  return response.data
 }
 
 // delete a Issue
@@ -64,6 +78,7 @@ const deleteIssue = async (IssueId, token) => {
 const issueService = {
   getIssues,
   getIssue,
+  updateIssueAttachments,
   updateIssue,
   createIssue,
   deleteIssue

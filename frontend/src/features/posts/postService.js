@@ -58,7 +58,7 @@ const createPost = async (postData, token) => {
       "Content-Type": "multipart/form-data",
     },
   }
-
+  console.log(postData)
   const response = await axios.post(API_URL, postData, config)
   return response.data
 }

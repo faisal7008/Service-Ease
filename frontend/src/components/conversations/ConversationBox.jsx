@@ -49,7 +49,7 @@ export default function ConversationBox(props) {
           
           <AddTeam currentUser={user} />
         </div>
-        <div id="hs-basic-collapse-heading" className="hs-collapse hidden mx-1 overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-collapse" onClick={() => setHeading("Teams")} >
+        <div id="hs-basic-collapse-heading" className="hs-collapse hidden mx-2 overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-collapse" onClick={() => setHeading("Teams")} >
           <ul className=" space-y-1 overflow-auto capitalize">
             {teams.map((c) => (
               <div key={c._id} onClick={() => setCurrentChat(c)}>

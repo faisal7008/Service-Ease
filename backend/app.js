@@ -24,6 +24,7 @@ const posts = require("./routes/postRoutes")
 const projects = require("./routes/projectRoutes")
 const issues = require("./routes/issueRoutes")
 const comments = require("./routes/commentRoutes")
+const attachments = require("./routes/attachmentRoutes")
 
 // use Routes
 app.use('/api/users', users);
@@ -33,6 +34,7 @@ app.use('/api/comments', comments);
 app.use('/api/projects', projects);
 app.use('/api/messages', messages);
 app.use('/api/conversations', conversations);
+app.use('/api/attachments', attachments);
 app.use('/uploads/posts', express.static('uploads/posts'))
 app.use('/uploads/profile', express.static('uploads/profile'))
 app.use('/uploads/issues', express.static('uploads/issues'))

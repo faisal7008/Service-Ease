@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import { useEffect } from "react";
@@ -33,10 +33,10 @@ export default function Employee(props) {
   };
 
   const navigation = [
-    { name: "Dashboard", href: "/employee/dashboard", icon: <AiFillHome size={18}/>, current: props.dashboard },
-    { name: 'Projects', href: '/employee/projects', icon: <BsFolderFill size={18}/>, current: props.projects },
-    { name: 'Teams', href: '/employee/teams', icon: <FaHandshake size={18}/>, current: props.teams },
-    { name: 'Community', href: '/employee/community', icon: <FaUsers size={18}/>, current: props.community },
+    { name: "Dashboard", href: "/employee/dashboard", icon: <AiFillHome size={18}/>},
+    { name: 'Projects', href: '/employee/projects', icon: <BsFolderFill size={18}/>},
+    { name: 'Teams', href: '/employee/teams', icon: <FaHandshake size={18}/>},
+    { name: 'Community', href: '/employee/community', icon: <FaUsers size={18}/>},
   ];
 
   const userNavigation = [
@@ -55,7 +55,10 @@ export default function Employee(props) {
     <>
       <div className="min-h-full">
         <Navbar {...childProps} />
-        <div className="component min-h-full">{props.EmployeeComponent}</div>
+        <div className="component min-h-full">
+          {/* {props.ManagerComponent} */}
+          <Outlet />
+        </div>
       </div>
     </>
   );

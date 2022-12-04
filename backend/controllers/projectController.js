@@ -6,10 +6,10 @@ const Project = require('../models/Project')
 // @access  Manager
 
 const createProject = asyncHandler( async (req, res) => {
-    const {name, key, members, admins} = req.body
+    const {name, key, createdBy, desc, members, admins} = req.body
 
     const project = await Project.create({
-        name, key, members, admins
+        name, key, createdBy, desc, members, admins
     })
 
     if(project){

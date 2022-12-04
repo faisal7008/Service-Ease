@@ -22,7 +22,7 @@ const protect = asyncHandler(async (req, res, next) => {
       req.user = await User.findById(decoded.id).select("-password");
       next();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.status(401);
       throw new Error("Not Authorized");
       // next(error)
@@ -62,7 +62,7 @@ const leaderProtect = asyncHandler(async (req, res, next) => {
         throw new Error("Access denied. Contact Leader");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.status(401);
       throw new Error(error.message);
     }
@@ -100,7 +100,7 @@ const managerProtect = asyncHandler(async (req, res, next) => {
         throw new Error("Access denied. Contact Manager");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.status(401);
       throw new Error(error.message);
     }
