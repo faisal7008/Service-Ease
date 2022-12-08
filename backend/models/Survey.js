@@ -6,14 +6,16 @@ const SurveySchema = new mongoose.Schema(
       type: String,
       required: [true, "Please add survey name"],
     },
-    type: {
-      type: String,
-      required: [true, "Please select type"],
+    questions: {
+      type: [{
+        type: String,
+        unique: true
+    }]
     },
     expirydate: {
       type: Date,
       required: [true, "Please add a due date"],
-    },
+    }
   },
   {
     timestamps: true,

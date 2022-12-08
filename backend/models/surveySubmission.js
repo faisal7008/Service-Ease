@@ -1,61 +1,26 @@
 const mongoose = require('mongoose');
 
 const SubmissionSchema = new mongoose.Schema({
-  name: {
+  surveyName: {
     type: String,
-    required: [true, 'Please add your name']
+    required: [true, "Please add survey name"],
   },
-  id_no: {
+  surveyId: {
     type: String,
-    required: [true, 'Please add your id no']
   },
-  ans1: {
+  employeeId: {
     type: String,
-    required: [true, "This is a required question"]
   },
-  ans2: {
-    type: String,
-    required: [true, "This is a required question"]
-  },
-  ans3: {
-    type: String,
-    required: [true, "This is a required question"]
-  },
-  ans4: {
-    type: String,
-    required: [true, "This is a required question"]
-  },
-  ans5: {
-    type: String,
-    required: [true, "This is a required question"]
-  },
-  ans6: {
-    type: String,
-    required: [true, "This is a required question"]
-  },
-  ans7: {
-    type: String,
-    required: [true, "This is a required question"]
-  },
-  ans8: {
-    type: String,
-    required: [true, "This is a required question"]
-  },
-  rating: {
-    type: String,
-    required: [true, "This is a required question"]
-  },
-  desc1: {
-    type: String,
-    required: [true, "This is a required question"]
-  },
-  desc2: {
-    type: String,
-    required: [true, "This is a required question"]
-  },
-  desc3: {
-    type: String,
-    required: [true, "This is a required question"]
+  responses: {
+    type: [{
+      question: {
+        type: String
+      },
+      answer: {
+        type: String,
+        required: [true, "Required field"]
+      }
+   }]
   }
 }, 
 {
