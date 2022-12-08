@@ -10,6 +10,12 @@ const ProjectSchema = new mongoose.Schema({
         required: [true, 'Please add project key'],
         unique: true
     },
+    project_type: {
+        type: String,
+    },
+    project_status: {
+        type: String,
+    },
     createdBy: {
         type: String,
         required: [true, 'Please add the creator of this project'],

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { BsFillCircleFill } from "react-icons/bs";
+import { FiArrowDown, FiArrowUp } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { updateIssue } from "../../features/issues/issueSlice";
 
@@ -20,21 +21,21 @@ export default function PriorityBox({issue}) {
       <button
         id="hs-dropdown-default"
         type="button"
-        className="hs-dropdown-toggle bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-semibold rounded text-xs px-4 py-2 text-center inline-flex items-center gap-2 uppercase transition-all"
+        className="hs-dropdown-toggle bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-semibold rounded text-xs px-4 py-2 text-center inline-flex items-center gap-2 uppercase transition-all"
       >
         {current === "High" && (
           <span className="text-rose-600 inline-flex items-center gap-2">
-            <BsFillCircleFill /> High{" "}
+            <FiArrowUp size={17}/> High{" "}
           </span>
         )}
         {current === "Medium" && (
           <span className="text-yellow-500 inline-flex items-center gap-2">
-            <BsFillCircleFill /> Medium{" "}
+            <FiArrowUp size={17} /> Medium{" "}
           </span>
         )}
         {current === "Low" && (
           <span className="text-green-600 inline-flex items-center gap-2">
-            <BsFillCircleFill /> Low{" "}
+            <FiArrowDown size={17} /> Low{" "}
           </span>
         )}
         <svg
@@ -74,17 +75,17 @@ export default function PriorityBox({issue}) {
             >
               {priority === "High" && (
                 <span className="text-rose-600 inline-flex items-center gap-2">
-                  <BsFillCircleFill /> High{" "}
+                  <FiArrowUp size={17} /> High{" "}
                 </span>
               )}
               {priority === "Medium" && (
                 <span className="text-yellow-500 inline-flex items-center gap-2">
-                  <BsFillCircleFill /> Medium{" "}
+                  <FiArrowUp size={17} /> Medium{" "}
                 </span>
               )}
               {priority === "Low" && (
                 <span className="text-green-600 inline-flex items-center gap-2">
-                  <BsFillCircleFill /> Low{" "}
+                  <FiArrowDown size={17} /> Low{" "}
                 </span>
         )}
             </a>

@@ -4,20 +4,20 @@ const io = require("socket.io")(9010, {
   },
 });
 
-let users = [];
+// let users = [];
 
-const addUser = (userId, socketId) => {
-  !users.some((user) => user.userId === userId) &&
-    users.push({ userId, socketId });
-};
+// const addUser = (userId, socketId) => {
+//   !users.some((user) => user.userId === userId) &&
+//     users.push({ userId, socketId });
+// };
 
-const removeUser = (socketId) => {
-  users = users.filter((user) => user.socketId !== socketId);
-};
+// const removeUser = (socketId) => {
+//   users = users.filter((user) => user.socketId !== socketId);
+// };
 
-const getUser = (userId) => {
-  return users.find((user) => user.userId === userId);
-};
+// const getUser = (userId) => {
+//   return users.find((user) => user.userId === userId);
+// };
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
@@ -29,7 +29,7 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", (data) => {
     // console.log("sending msg to " + data.conversationId );
-    socket.to(data.conversationId).emit("receive_message", data);
+    io.in(data.conversationId).emit("receive_message", data);
   });
 
   socket.on("disconnect", () => {

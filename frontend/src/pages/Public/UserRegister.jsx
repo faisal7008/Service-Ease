@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Alert, Spinner } from "flowbite-react";
+import { Alert } from "@material-tailwind/react";
 import { LockClosedIcon, ArrowLeftCircleIcon } from "@heroicons/react/20/solid";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -58,6 +58,14 @@ export default function UserRegister() {
       dispatch(reset());
     }
   };
+
+  const Loader = () => {
+    return (
+      <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full" role="status" aria-label="loading">
+        <span class="sr-only">Loading...</span>
+      </div>    
+    )
+  }
 
   const ErrorContainer = () => {
     return (
@@ -221,7 +229,7 @@ export default function UserRegister() {
                   />
                 </span>
                 {isLoading ? (
-                  <Spinner aria-label="Default status example" />
+                  <Loader/>
                 ) : (
                   <>Register</>
                 )}

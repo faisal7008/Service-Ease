@@ -42,7 +42,7 @@ export default function Community() {
       </button>
       <div
         id="hs-overlay-example"
-        className="hs-overlay hs-overlay-open:translate-x-0  -translate-x-full fixed top-0 left-0 transition-all duration-300 transform h-full mt-16 max-w-xs w-full z-[60] bg-white border-r dark:bg-gray-800 dark:border-gray-700 hidden"
+        className="hs-overlay hs-overlay-open:translate-x-0  -translate-x-full fixed top-0 left-0 transition-all duration-300 transform h-full mt-14 max-w-xs w-full z-[60] bg-white border-r dark:bg-gray-800 dark:border-gray-700 hidden"
         tabIndex="-1"
       >
         <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
@@ -74,6 +74,7 @@ export default function Community() {
             user={user}
             currentChat={currentChat}
             setHeading={setHeading}
+            heading={heading}
             setCurrentChat={setCurrentChat}
           />
         </div>
@@ -90,7 +91,7 @@ export default function Community() {
             </div>
           )}
           {(heading === "Direct Messages" || heading === "Teams") && (
-            <MessageBox currentUser={user} currentChat={currentChat} />
+            <MessageBox setHeading={setHeading} currentUser={user} currentChat={currentChat} />
           )}
           {heading === "Announcements" && <Announcements />}
           {heading === "General" && <General />}

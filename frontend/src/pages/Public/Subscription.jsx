@@ -1,47 +1,21 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { BoltIcon, ChatBubbleBottomCenterTextIcon, GlobeAltIcon, ScaleIcon } from '@heroicons/react/24/outline'
 
-const features = [
-  {
-    name: 'Competitive exchange rates',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: GlobeAltIcon,
-  },
-  {
-    name: 'No hidden fees',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: ScaleIcon,
-  },
-  {
-    name: 'Transfers are instant',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: BoltIcon,
-  },
-  {
-    name: 'Mobile notifications',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: ChatBubbleBottomCenterTextIcon,
-  },
-]
 
 export default function Subscription() {
   return (
-    <div className="bg-white px-4 py-12 min-h-screen items-center sm:px-6 lg:px-8">
+    <div className=" bg-white px-4 py-12 min-h-screen items-center sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-lg font-semibold text-teal-600">Subscription</h2>
           <p className="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
           Enhance your Bussiness
           </p>
-          <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          <p className="mt-4 max-w-2xl text-lg text-gray-500 lg:mx-auto">
           Hurry up! and Choose your plan
           </p>
         </div>
-      <div className="mx-auto mt-6 grid md:flex gap-10 max-w-7xl">
-    <div class="p-4 w-full max-w-sm bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <div className="mx-auto mt-6 grid justify-center md:flex gap-10 max-w-7xl">
+    <div class="p-4 w-full max-w-xs bg-white rounded-lg border shadow-md sm:p-8 ">
         <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Standard plan</h5>
         <div class="flex items-baseline text-gray-900 dark:text-white">
             <span class="text-3xl font-semibold">$</span>
@@ -88,7 +62,7 @@ export default function Subscription() {
         </ul>
         <button type="button" class="text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-200 dark:focus:ring-teal-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Choose plan</button>
     </div>
-    <div class="p-4 w-full max-w-sm bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div class="p-4 w-full max-w-xs bg-white rounded-lg border shadow-md sm:p-8 ">
         <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Bussiness plan</h5>
         <div class="flex items-baseline text-gray-900 dark:text-white">
             <span class="text-3xl font-semibold">$</span>
@@ -135,7 +109,7 @@ export default function Subscription() {
         </ul>
         <button type="button" class="text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-200 dark:focus:ring-teal-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Choose plan</button>
     </div>
-    <div class="p-4 w-full max-w-sm bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div class="p-4 w-full max-w-xs bg-white rounded-lg border shadow-md sm:p-8 ">
         <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Premium plan</h5>
         <div class="flex items-baseline text-gray-900 dark:text-white">
             <span class="text-3xl font-semibold">$</span>

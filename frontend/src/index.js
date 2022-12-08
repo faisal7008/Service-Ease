@@ -7,7 +7,6 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import('preline')
 import('flowbite')
-// import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 
 const container = document.getElementById('root');
 const root = createRoot(container);

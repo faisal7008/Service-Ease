@@ -5,6 +5,8 @@ import Features from "./Features";
 import Subscription from "./Subscription";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import FAQs from "./FAQs";
+import Footer from "./Footer";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -186,6 +188,8 @@ export default function Home() {
       </div>
       <div id="features"><Features /></div>
       <div id="subscription"><Subscription/></div>
+      <div id="faqs"><FAQs/></div>
+      <div id="footer"><Footer/></div>
     </>
   );
 }

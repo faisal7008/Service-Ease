@@ -9,23 +9,27 @@ export default function Message({ prevMessage, message, currentUser }) {
   useEffect(() => {
     // console.log(nextMessage?.text)
     // console.log(message.text)
-    // try {
-    //   userService
-    //     .getUser(message.sender, currentUser.token)
-    //     .then((res) => setUser(res));
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      userService
+        .getUser(message.sender, currentUser.token)
+        .then((res) => setUser(res));
+    } catch (error) {
+      console.log(error);
+    }
   }, [message, currentUser.token, prevMessage]);
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <div className="message w-full px-3 hover:bg-slate-200">
-      {prevMessage?.senderName !== message?.senderName ? (
+      {prevMessage?.senderName !== message?.senderName && moment(message?.createdAt).diff(moment(prevMessage?.createdAt), "hour") < 1 ? (
       <div className="flex items-start space-x-2 w-full">
         <div className="flex-shrink-0 mt-1">
           <img
             className="w-8 h-8 rounded-full"
-            src={UserLogo}
+            src={user.profilePicture ? user.profilePicture : UserLogo}
             alt="Neil image"
           />
         </div>

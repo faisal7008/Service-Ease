@@ -61,7 +61,7 @@ export default function Post({ post }) {
           <div className="flex-shrink-0">
             <img
               className="w-10 h-10 rounded-full"
-              src={UserPic}
+              src={friendUser?.profilePicture ? friendUser?.profilePicture : UserPic}
               alt="Neil image"
             />
           </div>
@@ -82,9 +82,9 @@ export default function Post({ post }) {
             {/* onClick={() => handleDelete(post?._id)} */}
           </div>
         </div>
-        <a href="#">
-          <img className="" src={post?.image} alt="" />
-        </a>
+        <div>
+          <img className="" src={post?.image} loading="lazy" alt="" />
+        </div>
         <div className="p-5">
           <div className="desc mb-4">{post?.desc}</div>
           <div className="flex gap-4 mb-2 text-rose-600">

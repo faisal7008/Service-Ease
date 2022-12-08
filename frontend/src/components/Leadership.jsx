@@ -35,7 +35,7 @@ export default function Leadership(props) {
   const navigation = [
     { name: "Dashboard", href: "/leadership/dashboard", icon: <AiFillHome size={18}/>},
     { name: 'Projects', href: '/leadership/projects', icon: <BsFolderFill size={18}/>},
-    { name: 'Teams', href: '/leadership/teams', icon: <FaHandshake size={18}/>},
+    { name: 'Users', href: '/leadership/users', icon: <FaHandshake size={18}/>},
     { name: 'Community', href: '/leadership/community', icon: <FaUsers size={18}/>},
   ];
 

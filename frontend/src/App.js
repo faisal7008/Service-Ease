@@ -24,7 +24,11 @@ import NewDashboard from "./pages/Public/NewDashboard";
 import Project from "./pages/Projects/Project";
 import Task from "./pages/Projects/Task";
 import IssueDetails from "./components/issues/IssueDetails";
-import Team from "./pages/teams/Team";
+import Feedback from "./pages/Manager/Feedback";
+import AllTasks from "./components/issues/AllTasks";
+import ProjectSettings from "./components/projects/ProjectSettings"
+import AllProjects from "./pages/Projects/AllProjects";
+import AllUsers from "./pages/Leadership/AllUsers";
 
 const PublicLayout = () => (
   <div>
@@ -44,6 +48,10 @@ function App() {
             element={user ? <Leadership /> : <Navigate replace to="/login" />}
           >
             <Route path="dashboard" element={<LeaderDashboard/>}
+            />
+            <Route path="projects" element={<AllProjects/>}
+            />
+            <Route path="users" element={<AllUsers/>}
             />
             <Route path="profile" element={<Profile />}
             />
@@ -66,7 +74,7 @@ function App() {
                   <Route path=":issueId" element={<IssueDetails/>} />
               </Route>
             </Route>
-            <Route path="teams" element={<Team />}
+            <Route path="feedback" element={<Feedback />}
             />
             <Route path="community" element={<Community />}
             />
@@ -77,14 +85,22 @@ function App() {
             />
             <Route path="profile" element={<Profile />}
             />
+            {/* <Route path="projects">
+              <Route index element={<Project />} />
+              <Route path=":projectId">
+                  <Route index element={<Task/>} />
+                  <Route path=":issueId" element={<IssueDetails/>} />
+                  <Route path="settings" element={<ProjectSettings/>} />
+              </Route>
+            </Route> */}
             <Route path="projects">
               <Route index element={<Project />} />
               <Route path=":projectId" element={<Task />}>
                   <Route path=":issueId" element={<IssueDetails/>} />
               </Route>
             </Route>
-            <Route path="teams" element={<Team />}
-            />
+            {/* <Route path="teams" element={<Team />} */}
+            {/* /> */}
             <Route path="community" element={<Community />}
             />
           </Route>

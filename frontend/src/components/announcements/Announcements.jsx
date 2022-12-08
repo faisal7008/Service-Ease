@@ -1,4 +1,5 @@
 import React from "react";
+import AddAnnouncement from "./AddAnnouncement";
 
 export default function Announcements() {
   return (
@@ -11,6 +12,7 @@ export default function Announcements() {
           <button
             type="button"
             className="hs-tooltip-toggle flex justify-center items-center ml-auto w-14 h-14 text-white bg-teal-700 rounded-full hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-700 focus:ring-4 focus:ring-teal-300 focus:outline-none dark:focus:ring-teal-800"
+            data-hs-overlay="#add-announcement"
           >
             <svg
               aria-hidden="true"
@@ -25,6 +27,8 @@ export default function Announcements() {
           </button>
           </div>
       </div>
+
+      <AddAnnouncement/>
     </div>
   );
 }

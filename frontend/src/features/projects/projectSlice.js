@@ -125,6 +125,11 @@ export const projectSlice = createSlice({
       .addCase(updateProject.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
+        state.projects.forEach((issue, index) => {
+          if (issue._id === action.payload._id) {
+            state.projects[index] = action.payload
+          }
+        });
       })
       .addCase(updateProject.rejected, (state, action) => {
         state.isLoading = false

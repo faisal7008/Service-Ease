@@ -34,10 +34,10 @@ export default function PostMessage(props) {
         <label htmlFor="chat" className="sr-only">
           Your message
         </label>
-        <div className="flex items-center py-2 px-3 bg-slate-200 rounded-b-xl dark:bg-gray-700">
+        <div className="flex items-center py-2 px-3 bg-slate-200 rounded-b-xl ">
           <button
             type="button"
-            className="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
+            className="px-3 py-2 text-gray-500 rounded-full cursor-pointer hover:text-gray-900 hover:bg-green-50"
           >
             <i className="fas fa-paperclip fa-lg"></i>
             <span className="sr-only">Add file</span>
@@ -46,14 +46,14 @@ export default function PostMessage(props) {
             // type="text"
             id="chat"
             rows="1"
-            className="block mx-4 p-2.5 w-full text-sm text-gray-900 resize-none bg-white rounded-lg border border-gray-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+            className="block mx-4 p-3 w-full text-sm border shadow text-gray-900 resize-none bg-white rounded-lg border-none border-gray-300 focus:ring-teal-500 focus:ring-2 focus:border-teal-500"
             placeholder="Your message..."
             onChange={(e) => setNewMessage(e.target.value)}
             value={newMessage}
           />
           <button
             type="submit"
-            className="inline-flex justify-center p-2 text-teal-600 rounded-full cursor-pointer hover:bg-emerald-50 dark:text-teal-500 dark:hover:bg-gray-600"
+            className="inline-flex justify-center p-2 text-teal-50 rounded-full cursor-pointer bg-teal-600 hover:bg-teal-700"
             disabled={newMessage === ""}
           >
             <svg

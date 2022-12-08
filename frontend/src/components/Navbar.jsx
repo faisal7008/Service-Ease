@@ -20,19 +20,10 @@ export default function Navbar({ userNavigation, navigation, user }) {
   {/* <!-- ========== HEADER ========== --> */}
   <header className=" top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-3 lg:pl-0">
     <nav className="flex basis-full items-center w-full mx-auto px-4 sm:px-6 md:px-8" aria-label="Global">
-      <div className="mr-5 lg:mr-0 lg:hidden">
+      {/* <div className="mr-5 lg:mr-0 lg:hidden">
         <a className="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">Brand</a>
-      </div>
-
-      <div className="w-full flex items-center justify-end ml-auto sm:justify-between sm:gap-x-2 sm:order-2">
-        <div className="sm:hidden">
-          <button type="button" className="inline-flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] rounded-full font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-xs">
-            <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg>
-          </button>
-        </div>
-        <button type="button" className="inline-flex items-center text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar" aria-controls="application-sidebar" aria-label="Toggle navigation">
+      </div> */}
+      <button type="button" className="inline-flex sm:hidden items-center text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar" aria-controls="application-sidebar" aria-label="Toggle navigation">
         <span className="sr-only">Toggle Navigation</span>
         <svg className="w-6 h-6" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
           <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
@@ -40,6 +31,28 @@ export default function Navbar({ userNavigation, navigation, user }) {
         {/* <span className='ml-2 text-slate-900 font-mono font-semibold text-xl'>{heading}</span> */}
         <span className=" ml-2 -mt-1 text-2xl font-medium text-slate-900">Service<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>Ease</span>
       </button>
+
+      <div className="w-full flex items-center justify-end ml-auto sm:justify-between sm:gap-x-2 sm:order-2">
+        <div className='hidden sm:block'>
+        <button type="button" className="inline-flex items-center text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar" aria-controls="application-sidebar" aria-label="Toggle navigation">
+        <span className="sr-only">Toggle Navigation</span>
+        <svg className="w-6 h-6" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        {/* <span className='ml-2 text-slate-900 font-mono font-semibold text-xl'>{heading}</span> */}
+        
+        {current === "community" ? <span className=" ml-2 -mt-1 text-2xl font-medium text-slate-900">Service<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>Ease <span className=' font-light ml-1'> Community </span></span> :
+        <span className=" ml-2 -mt-1 text-2xl font-medium text-slate-900">Service<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>Ease</span>
+        }
+      </button>
+      </div>
+      <div className="sm:hidden">
+          <button type="button" className="inline-flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] rounded-full font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-xs">
+            <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+          </button>
+        </div>
         <div className="hidden w-1/4 sm:block">
           <label htmlFor="icon" className="sr-only">Search</label>
           <div className="relative">
@@ -96,7 +109,8 @@ export default function Navbar({ userNavigation, navigation, user }) {
 
   <div id="application-sidebar" className="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[60] w-64 bg-white border-r border-gray-200 pt-7 pb-10 overflow-y-auto scrollbar-y" >
     <div className="px-6">
-      <a className="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">Brand</a>
+    <span className="text-lg font-mono font-medium text-slate-900">Service<span className="text-xl ml-1 mr-1 text-teal-500">@</span>Ease</span>
+    
     </div>
 
     <nav className="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>

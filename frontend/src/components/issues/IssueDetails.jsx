@@ -6,19 +6,19 @@ import AllComments from "../issues/AllComments";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { getComments } from "../../features/comments/commentSlice";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { deleteIssue } from "../../features/issues/issueSlice";
 import { addAttachment } from "../../features/attachments/attachmentSlice";
 import AttachmentBox from "./AttachmentBox";
 import StatusBox from "./StatusBox";
 import PriorityBox from "./PriorityBox";
 import { BiShareAlt } from "react-icons/bi";
-import { AiOutlineDelete } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 export default function IssueDetails() {
   const [issue, project] = useOutletContext()
   const {issueId} = useParams()
+  const navigate = useNavigate()
   const {user} = useSelector(state => state.auth)
   const [modalId, setModalId] = useState("")
   const imageRef = useRef();
@@ -37,9 +37,9 @@ export default function IssueDetails() {
     }
   }
 
-  useEffect(() => {
-    dispatch(getComments(issueId)) 
-  }, [issueId, dispatch])
+  // useEffect(() => {
+  //   dispatch(getComments(issueId)) 
+  // }, [issueId, dispatch])
 
   return (
     <div>
@@ -57,23 +57,24 @@ export default function IssueDetails() {
               <div className=" flex gap-2 items-center">
               <button
                 type="button"
-                className="text-gray-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="text-gray-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                 onClick={() => handleDelete()}
                 data-hs-overlay={modalId}
               >
                 <RiDeleteBin6Line size={18}/>
-                <span className="sr-only">Close modal</span>
+                <span className="sr-only">delete issue</span>
               </button>
               <button
                 type="button"
-                className="text-gray-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="text-gray-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
               >
               <BiShareAlt size={18}/>
-                <span className="sr-only">Close modal</span>
+                <span className="sr-only">share</span>
               </button>
               <button
                 type="button"
-                className="text-gray-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="text-gray-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1 ml-auto inline-flex items-center"
+                onClick={() => navigate(-1)}
                 data-hs-overlay="#hs-vertically-centered-modal"
               >
                 <svg
@@ -131,7 +132,7 @@ export default function IssueDetails() {
                   <div className="flex space-x-1">
                     <img
                       className="inline-block h-8 w-8 mr-2 mt-1 rounded-full ring-2 ring-white dark:ring-gray-800"
-                      src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                      src={user?.profilePicture ? user?.profilePicture : "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"}
                       alt="Image Description"
                     />
                     <div className="w-full">
@@ -139,7 +140,7 @@ export default function IssueDetails() {
                     </div>
                   </div>
                   <div className="mt-2">
-                    <AllComments issue={issue}/>
+                    <AllComments issueId={issueId}/>
                   </div>
                 </div>
               </div>
@@ -162,7 +163,7 @@ export default function IssueDetails() {
                     Created {moment(issue?.createdAt).startOf('day').fromNow()}
                   </h1>
                   <h1 className=" text-xs font-medium text-gray-500">
-                    Updated {moment(issue?.updatedAt).startOf('day').fromNow()}
+                    Updated {moment(issue?.updatedAt).startOf('hour').fromNow()}
                   </h1>
                 </div>
                 </div>

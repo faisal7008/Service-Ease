@@ -7,6 +7,7 @@ import UserBox from "./UserBox";
 import { createIssue } from "../../features/issues/issueSlice";
 import { useParams } from "react-router-dom";
 import projectService from "../../features/projects/projectService";
+import { addAttachment } from "../../features/attachments/attachmentSlice";
 
 export default function CreateIssue({project}) {
   const dispatch = useDispatch();
@@ -47,6 +48,13 @@ export default function CreateIssue({project}) {
     setAssignee(null);
     setModalId("#create-issue");
   };
+
+  // const onImageChange = (e) => {
+  //   if (e.target.files.length > 0) {
+  //     const attachmentData = {issue_id: issueId, user_id: user._id, attachments: e.target.files[0]}
+  //     dispatch(addAttachment(attachmentData))
+  //   }
+  // };
 
   const filteredUsers = users.filter((user) => user.role === "Employee");
 
@@ -387,6 +395,7 @@ export default function CreateIssue({project}) {
                           <input
                             id="dropzone-file"
                             type="file"
+                            // onChange={(e) => onImageChange(e)}
                             className="hidden"
                           />
                         </label>

@@ -35,7 +35,7 @@ export default function Manager(props) {
   const navigation = [
     { name: "Dashboard", href: "/manager/dashboard", icon: <AiFillHome size={18}/>},
     { name: 'Projects', href: '/manager/projects', icon: <BsFolderFill size={18}/>},
-    { name: 'Teams', href: '/manager/teams', icon: <FaHandshake size={18}/>},
+    { name: 'Feedback', href: '/manager/feedback', icon: <FaHandshake size={18}/>},
     { name: 'Community', href: '/manager/community', icon: <FaUsers size={18}/>},
   ];
   

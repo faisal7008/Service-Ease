@@ -17,6 +17,10 @@ export default function MessageBox(props) {
     socket.current = io.connect("http://localhost:9010")
   },[])
 
+  // useEffect(() => {
+  //   console.log(currentChat);
+  // }, [currentChat])
+
   useEffect(() => {
     currentChat && socket.current.emit("join_room", currentChat._id);
   }, [currentChat])

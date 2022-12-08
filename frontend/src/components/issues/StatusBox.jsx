@@ -15,7 +15,7 @@ export default function StatusBox({issue}) {
     <div className="status hs-dropdown">
       { current === "To Do" && <button
         id="hs-dropdown-default"
-        className="hs-dropdown-toggle font-semibold text-gray-900 bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 hover:bg-gray-400 rounded text-xs px-4 py-2 text-center inline-flex items-center uppercase"
+        className="hs-dropdown-toggle font-semibold text-gray-900 bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 hover:bg-gray-300 rounded text-xs px-4 py-2 text-center inline-flex items-center uppercase"
         type="button"
       >
         {current}{" "}
@@ -79,42 +79,6 @@ export default function StatusBox({issue}) {
           ></path>
         </svg>
       </button>}
-      {/* <button
-        id="hs-dropdown-default"
-        type="button"
-        className="hs-dropdown-toggle font-semibold gray-300 rounded text-xs px-4 py-2 text-center inline-flex items-center uppercase"
-      >
-        {current === "To Do" && (
-          <span className="text-gray-900 bg-gray-300 hover:bg-gray-400">
-            To do{" "}
-          </span>
-        )}
-        {current === "In Progress" && (
-          <span className="text-white bg-blue-700 hover:bg-blue-800">
-            In progress{" "}
-          </span>
-        )}
-        {current === "Done" && (
-          <span className="text-white bg-green-700 hover:bg-green-800">
-            done{" "}
-          </span>
-        )}
-        <svg
-          className="hs-dropdown-open:rotate-180 w-2.5 h-2.5 text-gray-600"
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </svg>
-      </button> */}
       {/* <!-- Dropdown menu --> */}
       <div
         className="hs-dropdown-menu hidden transition-[opacity,margin] duration-[0.1ms] hs-dropdown-open:opacity-100 opacity-0 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700"

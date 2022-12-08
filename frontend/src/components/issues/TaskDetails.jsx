@@ -43,7 +43,7 @@ export default function TaskDetails({issue}) {
                     <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                       <img
                         className="inline-block h-6 w-6 mr-2 rounded-full ring-2 ring-white dark:ring-gray-800"
-                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                        src={assignee?.profilePicture ? assignee?.profilePicture : "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"}
                         alt="Image Description"
                       />
                       {assignee?.name}
@@ -59,7 +59,7 @@ export default function TaskDetails({issue}) {
                     <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                       <img
                         className="inline-block h-6 w-6 mr-2 rounded-full ring-2 ring-white dark:ring-gray-800"
-                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                        src={reporter?.profilePicture ? reporter?.profilePicture : "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"}
                         alt="Image Description"
                       />
                       {reporter?.name}

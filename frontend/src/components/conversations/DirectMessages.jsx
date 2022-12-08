@@ -28,7 +28,7 @@ export default function DirectMessages(props) {
   }, [currentUser, conversation]);
 
   return (
-    <li className="px-3 py-1 rounded-md group-hover:bg-slate-200 cursor-pointer sm:py-2">
+    <li className="px-3 py-1 rounded-md hover:shadow-sm group-hover:bg-slate-200 cursor-pointer sm:py-2">
       <div className="flex items-center space-x-4">
         <div className="flex-shrink-0">
           <img

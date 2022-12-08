@@ -2,9 +2,9 @@ import {HiOutlineViewBoards} from 'react-icons/hi'
 import {FiDatabase, FiSettings} from 'react-icons/fi'
 import projectlogo from "../../assets/project-logo.webp"
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-export default function TaskSidebar({project}) {
-  const [current, setCurrent] = useState("Board")
+export default function TaskSidebar({project, setCurrent, current}) {
   return (
     <div className='mx-2 my-4 px-1 py-2'>
         <div className="flex items-start max-w-sm space-x-4">
@@ -27,19 +27,19 @@ export default function TaskSidebar({project}) {
         <div className='mt-4'>
         <ul className="space-y-1.5">
           <li>
-            <a className="flex items-center cursor-pointer gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm font-medium text-slate-700 rounded-md hover:bg-gray-200">
+            <Link className="flex items-center cursor-pointer gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm font-medium text-slate-700 rounded-md hover:bg-gray-200">
               <FiDatabase size={16}/> Roadmap
-            </a>
+            </Link>
           </li>
           <li>
-            <a onClick={() => setCurrent("Board")} className={"flex items-center cursor-pointer gap-x-3.5 py-2 px-2.5 bg-gray-200 text-sm font-medium text-teal-600 rounded-md hover:bg-gray-200"}>
+            <Link onClick={() => setCurrent("Board")} className={current === "Board" ? "flex items-center cursor-pointer gap-x-3.5 py-2 px-2.5 bg-gray-200 text-sm font-medium text-teal-600 rounded-md hover:bg-gray-200" : "flex items-center cursor-pointer gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm font-medium text-slate-700 rounded-md hover:bg-gray-200"}>
               <HiOutlineViewBoards size={18}/> Board
-            </a>
+            </Link>
           </li>
           <li>
-            <a onClick={() => setCurrent("Settings")} className="flex items-center cursor-pointer gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm font-medium text-slate-700 rounded-md hover:bg-gray-200">
+            <Link onClick={() => setCurrent("Settings")} className={current === "Settings" ? "flex items-center cursor-pointer gap-x-3.5 py-2 px-2.5 bg-gray-200 text-sm font-medium text-teal-600 rounded-md hover:bg-gray-200" : "flex items-center cursor-pointer gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm font-medium text-slate-700 rounded-md hover:bg-gray-200"}>
               <FiSettings size={16}/> Project Settings
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
