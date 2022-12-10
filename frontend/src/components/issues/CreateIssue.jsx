@@ -4,7 +4,7 @@ import { BsFillCircleFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../features/users/userSlice";
 import UserBox from "./UserBox";
-import { createIssue } from "../../features/issues/issueSlice";
+import { createIssue, reset } from "../../features/issues/issueSlice";
 import { useParams } from "react-router-dom";
 import projectService from "../../features/projects/projectService";
 import { addAttachment } from "../../features/attachments/attachmentSlice";
@@ -31,14 +31,15 @@ export default function CreateIssue({project}) {
   // console.log(initialState)
   const [issueData, setIssueData] = useState(initialState);
 
-  useEffect(() => {
-    dispatch(getAllUsers());
-    // projectService.getProject(projectId, user.token).then(res => setProject(res)).catch(err => console.log(err))
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllUsers());
+  //   // projectService.getProject(projectId, user.token).then(res => setProject(res)).catch(err => console.log(err))
+  // }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createIssue(issueData))
+    dispatch(reset())
     setModalId("#create-issue")
     onClose()
   };
@@ -78,7 +79,7 @@ export default function CreateIssue({project}) {
               {/* <!-- Modal body --> */}
               <div className="relative mt-2 w-full h-full max-h-[75vh] overflow-y-auto flex ">
                 <form
-                  onSubmit={handleSubmit}
+                  // onSubmit={handleSubmit}
                   className="w-full grid grid-cols-1"
                 >
                   <div className="max-h-[75vh] px-1 my-4 overflow-auto">
@@ -414,6 +415,7 @@ export default function CreateIssue({project}) {
                     </button>
                     <button
                       type="submit"
+                      onClick={handleSubmit}
                       className="text-white bg-teal-700 hover:bg-teal-800 font-medium rounded text-sm px-5 py-2.5 mr-2"
                       data-hs-overlay={modalId}
                     >

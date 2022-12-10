@@ -41,7 +41,7 @@ export default function Login() {
     }
 
     dispatch(reset());
-  }, [user, isError, isSuccess, isLoading, message, msg, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, msg, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({

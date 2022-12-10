@@ -24,7 +24,7 @@ export default function Manager(props) {
     if (user.role !== "Manager") {
       navigate("/login");
     }
-  }, [user, isSuccess, isLoading, isError, message, navigate, dispatch]);
+  }, [user, isSuccess, isError, message, navigate, dispatch]);
 
   const onLogout = () => {
     dispatch(logout());

@@ -6,14 +6,14 @@ import { getUserPosts } from '../../features/posts/postSlice';
 
 export default function UserPosts({userId}) {
   const dispatch = useDispatch()
-  const {userPosts, isSuccess, isError} = useSelector(state => state.posts)
+  const {userPosts, isSuccess} = useSelector(state => state.posts)
   
   useEffect(() => {
     dispatch(getUserPosts({userId: userId}))
-  }, [dispatch, isSuccess, isError])
+  }, [dispatch, isSuccess])
 
   return (
-    <div className='grid gap-4 p-4 sm:pl-10 h-full w-full overflow-auto bg-slate-50 shadow-slate-300 shadow-inner'>
+    <div className='grid grid-cols-2 gap-4 p-4 h-full w-full overflow-auto bg-slate-50 shadow-slate-300 shadow-inner'>
       {userPosts?.map(post => (
         <Post key={post._id} post={post} />
       ))}

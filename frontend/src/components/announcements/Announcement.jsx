@@ -55,10 +55,34 @@ export default function Announcement({ announcement }) {
 //   }
 
   return (
+    <div >
+      <div className="flex flex-col bg-white border shadow-sm rounded-lg">
+  <div className="p-6">
+    <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+      Announcement title
+    </h3>
+    <p className="mt-2 text-gray-800 dark:text-gray-400">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident molestiae fuga, animi ad id expedita molestias, odit aspernatur voluptas odio recusandae corrupti sint iste enim, doloremque est vel? Tempore magnam ea, inventore illum doloremque quam modi quo vero, beatae facere quasi nesciunt maxime! Itaque dolores quo similique ab obcaecati sapiente veritatis nulla laudantium asperiores voluptas. Corporis quibusdam id exercitationem numquam dolorum, praesentium quia repellat. Expedita totam repellat eligendi hic adipisci libero aspernatur asperiores, optio est soluta nulla recusandae harum quia maiores quasi tempora temporibus repudiandae dolorum architecto! Laboriosam corrupti perferendis modi aliquid placeat voluptatibus saepe autem rerum, repellat quod magni?
+    </p>
+    <div className=" grid grid-cols-1">
+    <a className=" inline-flex items-center gap-2 mt-5 text-sm font-medium text-blue-500 hover:text-blue-700" href="#">
+      Card link
+      <svg className="w-2.5 h-auto" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
+    <a className=" inline-flex items-center gap-2 mt-5 text-sm font-medium text-blue-500 hover:text-blue-700" href="#">
+      Card link
+      <svg className="w-2.5 h-auto" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
+    </div>
     <div>
-      <div className="max-w-md bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
         
-      </div>
+    </div>
+  </div>
+</div>
     </div>
   );
 }

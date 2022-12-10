@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { Select, Option } from "@material-tailwind/react";
 import {FaFolderPlus, FaTimes} from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { createProject, updateProject } from '../../features/projects/projectSlice'
@@ -83,6 +84,14 @@ export default function ProjectSettings({project}) {
       <div className="mb-4">
          <label for="title" className="block mb-2 text-xs font-semibold text-gray-900 dark:text-white">Project title <span className=' text-rose-600'>*</span></label>
          <input type="text" id="title" onChange={(e) => setName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5" placeholder="Project title" defaultValue={project.name} required />
+      </div>
+      <div className="mb-4">
+         <label for="type" className="block mb-2 text-xs font-semibold text-gray-900 dark:text-white">Project type <span className=' text-rose-600'>*</span></label>
+        <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-1 focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5'>
+          <option>Software</option>
+          <option>Bussiness</option>
+          <option>Marketing</option>
+        </select>
       </div>
       <div className="mb-4">
          <label for="description" className="block mb-2 text-xs font-semibold text-gray-900 dark:text-white">Project description <span className=' text-rose-600'>*</span></label>

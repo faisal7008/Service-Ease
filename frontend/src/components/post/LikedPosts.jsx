@@ -13,7 +13,7 @@ export default function LikedPosts({userId}) {
   }, [dispatch, isSuccess, isError])
 
   return (
-    <div className='grid gap-4 p-4 sm:pl-10 h-full w-full overflow-auto bg-slate-50 shadow-slate-300 shadow-inner'>
+    <div className='grid gap-4 grid-cols-2 p-4 h-full w-full overflow-auto bg-slate-50 shadow-slate-300 shadow-inner'>
       {likedPosts?.map(post => (
         <Post key={post._id} post={post} />
       ))}

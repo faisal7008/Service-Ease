@@ -54,7 +54,7 @@ export default function MessageBox(props) {
 
   return (
     <div className=" h-full">
-      <div className="display grow overflow-auto h-[calc(100vh-173px)] bg-gray-50 shadow-inner shadow-gray-400 rounded-none border-gray-900 p-2">
+      <div className="display grow overflow-auto h-[calc(100vh-173px)] bg-slate-100 shadow-inner shadow-gray-400 rounded-none border-gray-900 p-2">
         <div className="grid space-y-1">
           {currentChat ? (
             <>

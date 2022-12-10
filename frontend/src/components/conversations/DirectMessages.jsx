@@ -28,7 +28,7 @@ export default function DirectMessages(props) {
   }, [currentUser, conversation]);
 
   return (
-    <li className="px-3 py-1 rounded-md hover:shadow-sm group-hover:bg-slate-200 cursor-pointer sm:py-2">
+    <div className="px-3 py-1 rounded-md hover:shadow-sm group-hover:bg-slate-200 cursor-pointer sm:py-2">
       <div className="flex items-center space-x-4">
         <div className="flex-shrink-0">
           <img
@@ -39,7 +39,7 @@ export default function DirectMessages(props) {
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-gray-900 truncate ">
-            {friendUser.name}
+            {friendUser?.name}
           </p>
           {/* <p className="text-sm text-gray-500 truncate dark:text-gray-400">
             {friendUser.role}
@@ -51,6 +51,6 @@ export default function DirectMessages(props) {
           </button>
         </div>
       </div>
-    </li>
+    </div>
   );
 }

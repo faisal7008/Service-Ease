@@ -9,7 +9,7 @@ export default function PriorityBox({issue}) {
     const dispatch = useDispatch()
     const [current, setCurrent] = useState(issue?.priority)
     // console.log(issue?.priority);
-    console.log(current)
+    // console.log(current)
     const priorityArray = ["High", "Low", "Medium"]
 
     useEffect(() => {
@@ -61,7 +61,7 @@ export default function PriorityBox({issue}) {
       >
         <ul className="py-1 text-xs text-gray-700 dark:text-gray-200">
           {priorityArray.filter(priority => priority !== current).map(priority => ( 
-          <li onClick={() => setCurrent(priority)}>
+          <li key={priority} onClick={() => setCurrent(priority)}>
             <a
               onClick={() =>
                 dispatch(

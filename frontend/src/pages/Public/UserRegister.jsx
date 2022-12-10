@@ -79,7 +79,7 @@ export default function UserRegister() {
 
   return (
     <>
-      <a onClick={() => navigate("/login")}>
+      <a onClick={() => navigate(-1)}>
         <ArrowLeftCircleIcon
           className="h-10 w-10 absolute m-4 text-teal-500 hover:text-teal-600 cursor-pointer"
           aria-hidden="true"

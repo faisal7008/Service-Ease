@@ -42,13 +42,13 @@ export default function ConversationBox(props) {
         <div
           onClick={() => setHeading("Announcements")}
           className={
-            current === "Announcements"
+            heading === "Announcements"
               ? "p-3 mb-2 mx-2 shadow-sm bg-slate-200 rounded-md flex justify-between"
               : "p-3 mb-2 mx-2 hover:bg-slate-200 rounded-md flex justify-between"
           }
         >
           <Link
-            onClick={() => setCurrent("Announcements")}
+            // onClick={() => setCurrent("Announcements")}
             className="w-full font-semibold tracking-wider font-mono text-md uppercase"
           >
             <i class="fas fa-hashtag"></i> Announcements
@@ -57,13 +57,13 @@ export default function ConversationBox(props) {
         <div
           onClick={() => setHeading("General")}
           className={
-            current === "General"
+            heading === "General"
               ? "p-3 mb-2 mx-2 bg-slate-200 shadow-sm rounded-md flex justify-between"
               : "p-3 mb-2 mx-2 hover:bg-slate-200 rounded-md flex justify-between"
           }
         >
           <Link
-            onClick={() => setCurrent("General")}
+            // onClick={() => setCurrent("General")}
             className="w-full font-semibold tracking-wider font-mono text-md uppercase"
           >
             <i class="fas fa-hashtag"></i> General
@@ -104,8 +104,8 @@ export default function ConversationBox(props) {
         >
           <ul className=" space-y-1 overflow-auto capitalize">
             {teams.map((c) => (
-              <li>
-                <Link key={c._id} onClick={() => setCurrentChat(c)}>
+              <li key={c._id}>
+                <Link  onClick={() => setCurrentChat(c)}>
                   <div
                     className={
                       currentChat && currentChat._id === c._id
@@ -158,8 +158,8 @@ export default function ConversationBox(props) {
         >
           <ul className=" space-y-1 overflow-auto capitalize">
             {conversations.map((c) => (
-              <li>
-                <Link key={c._id} onClick={() => setCurrentChat(c)}>
+              <li key={c._id}>
+                <Link  onClick={() => setCurrentChat(c)}>
                   <div
                     className={
                       currentChat && currentChat._id === c._id

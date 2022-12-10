@@ -29,6 +29,7 @@ import AllTasks from "./components/issues/AllTasks";
 import ProjectSettings from "./components/projects/ProjectSettings"
 import AllProjects from "./pages/Projects/AllProjects";
 import AllUsers from "./pages/Leadership/AllUsers";
+import Survey from "./pages/Employee/Survey";
 
 const PublicLayout = () => (
   <div>
@@ -99,8 +100,8 @@ function App() {
                   <Route path=":issueId" element={<IssueDetails/>} />
               </Route>
             </Route>
-            {/* <Route path="teams" element={<Team />} */}
-            {/* /> */}
+            <Route path="survey" element={<Survey />}
+            />
             <Route path="community" element={<Community />}
             />
           </Route>

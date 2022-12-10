@@ -8,13 +8,14 @@ import CreateIssue from "../../components/issues/CreateIssue";
 import AllTasks from "../../components/issues/AllTasks";
 import ProjectSettings from "../../components/projects/ProjectSettings"
 import { getProjects } from "../../features/projects/projectSlice";
+import Roadmap from "../../components/issues/Roadmap";
 
 export default function Task() {
   const dispatch = useDispatch()
   const {user} = useSelector(state => state.auth)
   const {projectId} = useParams()
   const [project, setProject] = useState({})
-  const {projects, isSuccess, isLoading, isError} = useSelector(state => state.projects)
+  const {projects, isSuccess, isError} = useSelector(state => state.projects)
   const [current, setCurrent] = useState("Board")
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function Task() {
   useEffect(() => {
     // projectService.getProject(projectId, user.token).then(res => setProject(res)).catch(err => console.log(err))
     projects.filter(project => project._id === projectId).map(project => setProject(project))
-  }, [projectId, isSuccess, isLoading, isError])
+  }, [projectId, isSuccess, isError])
 
 
   return (
@@ -50,8 +51,9 @@ export default function Task() {
       <div className="w-1/5 border-r-[1px] bg-gray-100 border-gray-200">
         <TaskSidebar project={project} current={current} setCurrent={setCurrent}/>
       </div>
-      <main className="flex w-4/5 justify-left">
+      <main className="flex w-4/5 overflow-auto bg-white justify-left">
         {/* <AllTasks /> */}
+        {current === "Roadmap" && <Roadmap/>}
         {current === "Board" && <AllTasks/>}
         {current === "Settings" && <ProjectSettings project={project}/>}
       </main>

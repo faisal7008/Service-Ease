@@ -8,7 +8,7 @@ const User = require('../models/User')
 // @access  Public
 
 const registerUser = asyncHandler( async (req, res) => {
-    const {name, id_no, profilePicture, email, role, password} = req.body
+    const {name, id_no, username, email, role, password} = req.body
     if(!name || !id_no || !email || !role || !password){
         res.status(400)
         throw new Error('Please enter all fields')
@@ -97,29 +97,30 @@ const updateUser = asyncHandler(
             throw new Error('User not found')
         }
 
-        // Check for profile pci
-        if(!req.file){
-            res.status(401)
-            throw new Error('No file')
+        // Check for profile picture
+        // if(!req.file){
+        //     res.status(401)
+        //     throw new Error('No file')
+        // }
+        if(req.body.password){
+            // Hash password
+           const salt = await bcrypt.genSalt(10)
+           const hashedPassword = await bcrypt.hash(req.body.password, salt)
+           req.body.password = hashedPassword
+        }
+        if(req.file){
+            // Profile picture
+            const url = req.protocol + "://" + req.get("host");
+            const uploadProfilePic = await user.updateOne({ $set: {
+                profilePicture: url + "/uploads/profile/" + req.file.filename,
+            }});
         }
 
-         // Hash password
-        const salt = await bcrypt.genSalt(10)
-        const hashedPassword = await bcrypt.hash(req.body.password, salt)
-        req.body.password = hashedPassword
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        })
 
-        // Profile picture
-        const url = req.protocol + "://" + req.get("host");
-
-        const uploadProfilePic = await user.updateOne({ $set: {
-            profilePicture: url + "/uploads/profile/" + req.file.filename,
-        }});
-
-        // const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-        //     new: true,
-        // })
-
-        res.status(200).json(uploadProfilePic)
+        res.status(200).json(updatedUser)
     }
 )
 

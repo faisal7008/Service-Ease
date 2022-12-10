@@ -24,7 +24,7 @@ export default function Employee(props) {
     if (user.role !== "Employee") {
       navigate("/login");
     }
-  }, [user, isSuccess, isLoading, isError, message, navigate, dispatch]);
+  }, [user, isSuccess, isError, message, navigate, dispatch]);
 
   const onLogout = function(){
     dispatch(logout());
@@ -35,7 +35,7 @@ export default function Employee(props) {
   const navigation = [
     { name: "Dashboard", href: "/employee/dashboard", icon: <AiFillHome size={18}/>},
     { name: 'Projects', href: '/employee/projects', icon: <BsFolderFill size={18}/>},
-    { name: 'Teams', href: '/employee/teams', icon: <FaHandshake size={18}/>},
+    { name: 'Feedback', href: '/employee/survey', icon: <FaHandshake size={18}/>},
     { name: 'Community', href: '/employee/community', icon: <FaUsers size={18}/>},
   ];
 

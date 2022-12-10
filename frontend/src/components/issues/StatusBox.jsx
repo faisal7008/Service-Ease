@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateIssue } from "../../features/issues/issueSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { updateIssue, reset } from "../../features/issues/issueSlice";
 
 export default function StatusBox({issue}) {
     const dispatch = useDispatch()
+    const {isLoading} = useSelector(state => state.issues)
     const [current, setCurrent] = useState(issue?.status)
     const statusArray = ["To Do", "In Progress", "Done"]
 
@@ -11,8 +12,12 @@ export default function StatusBox({issue}) {
       setCurrent(issue.status)
     }, [issue])
 
+    useEffect(() => {
+      dispatch(reset())
+    }, [current])
+
   return (
-    <div className="status hs-dropdown">
+    <div className="status inline-flex items-center gap-2 hs-dropdown">
       { current === "To Do" && <button
         id="hs-dropdown-default"
         className="hs-dropdown-toggle font-semibold text-gray-900 bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 hover:bg-gray-300 rounded text-xs px-4 py-2 text-center inline-flex items-center uppercase"
@@ -79,6 +84,9 @@ export default function StatusBox({issue}) {
           ></path>
         </svg>
       </button>}
+      {/* {isLoading ? <div class="animate-spin inline-block w-5 h-5 border-[3px] border-current border-t-transparent text-blue-600 rounded-full" role="status" aria-label="loading">
+  <span class="sr-only">Loading...</span>
+</div> : <></>} */}
       {/* <!-- Dropdown menu --> */}
       <div
         className="hs-dropdown-menu hidden transition-[opacity,margin] duration-[0.1ms] hs-dropdown-open:opacity-100 opacity-0 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700"
@@ -86,7 +94,7 @@ export default function StatusBox({issue}) {
       >
         <ul className="py-1 text-xs font-medium text-gray-700 dark:text-gray-200">
           {statusArray.filter(status => status !== current).map(status => ( 
-          <li onClick={() => setCurrent(status)}>
+          <li key={status} onClick={() => setCurrent(status)}>
             <a
               onClick={() =>
                 dispatch(

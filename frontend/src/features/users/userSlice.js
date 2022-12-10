@@ -163,6 +163,25 @@ export const followUser = createAsyncThunk(
   }
 )
 
+export const updateProfile = createAsyncThunk(
+  'auth/update',
+  async (userData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      const id = thunkAPI.getState().auth.user._id
+      return await userService.updateProfile(userData, token, id)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const userSlice = createSlice({
   name: 'users',
   initialState,

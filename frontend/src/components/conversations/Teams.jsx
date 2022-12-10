@@ -20,7 +20,7 @@ export default function Teams(props) {
   // }, [conversations])
 
   return (
-    <li className="px-3 py-1 rounded-md group-hover:bg-slate-200 cursor-pointer sm:py-2">
+    <div className="px-3 py-1 rounded-md group-hover:bg-slate-200 cursor-pointer sm:py-2">
       <div className="flex items-center space-x-4">
         <div className="flex-shrink-0">
           <img className="w-7 h-7 rounded-full" src={UserLogo} alt="Neil image" />
@@ -39,6 +39,6 @@ export default function Teams(props) {
           </button>
         </div>
       </div>
-    </li>
+    </div>
   );
 }

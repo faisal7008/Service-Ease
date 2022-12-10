@@ -1,9 +1,13 @@
 import React from "react";
 import AddAnnouncement from "./AddAnnouncement";
+import Announcement from "./Announcement";
 
 export default function Announcements() {
   return (
-    <div className="h-full w-full bg-slate-50 shadow-slate-300 shadow-inner">
+    <div className="h-full w-full sm:pl-5 bg-slate-100 shadow-slate-300 shadow-inner">
+      <div className="grid w-[40rem] m-4 grid-cols-1 gap-4">
+        <Announcement/>
+      </div>
       <div className="hs-tooltip flex justify-end">
         <div className=" hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 m-5 bottom-0 group">
           <h1 className="mb-2 p-2 font-medium text-sm mr-6 bg-teal-100 rounded shadow text-teal-600">New Announcement</h1>

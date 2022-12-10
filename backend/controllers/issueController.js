@@ -27,13 +27,30 @@ const createIssue = asyncHandler( async (req, res) => {
     }
 })
 
-// @desc    get all issues
+// @desc    get all issues of a project
 // @route   POST /api/issues
 // @access  private
 
 const getIssues = asyncHandler( async (req, res) => {
     const {projectId} = req.params
     const issues = await Issue.find({project_id: projectId})
+
+    if(issues){
+        res.status(201).json(issues)
+    }
+    else{
+        res.status(400)
+        throw new Error('Not found')
+    }
+})
+
+
+// @desc    get all issues
+// @route   POST /api/issues
+// @access  private
+
+const getAllIssues = asyncHandler( async (req, res) => {
+    const issues = await Issue.find()
 
     if(issues){
         res.status(201).json(issues)
@@ -128,5 +145,5 @@ const deleteIssue = asyncHandler(
 )
 
 module.exports = {
-    createIssue, updateIssue, deleteIssue,  getIssue, getIssues, updateIssueAttachments
+    createIssue, updateIssue, deleteIssue,  getIssue, getIssues, getAllIssues, updateIssueAttachments
 }

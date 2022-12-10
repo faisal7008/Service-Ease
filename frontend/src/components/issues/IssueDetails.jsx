@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { getComments } from "../../features/comments/commentSlice";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
-import { deleteIssue } from "../../features/issues/issueSlice";
+import { deleteIssue, reset } from "../../features/issues/issueSlice";
 import { addAttachment } from "../../features/attachments/attachmentSlice";
 import AttachmentBox from "./AttachmentBox";
 import StatusBox from "./StatusBox";
@@ -33,6 +33,7 @@ export default function IssueDetails() {
     const result = window.confirm("Are you sure you want to delete the issue?")
     if(result){
       dispatch(deleteIssue(issueId))
+      // dispatch(reset())
       setModalId("#hs-vertically-centered-modal")
     }
   }
@@ -74,7 +75,7 @@ export default function IssueDetails() {
               <button
                 type="button"
                 className="text-gray-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1 ml-auto inline-flex items-center"
-                onClick={() => navigate(-1)}
+                // onClick={() => navigate(-1)}
                 data-hs-overlay="#hs-vertically-centered-modal"
               >
                 <svg

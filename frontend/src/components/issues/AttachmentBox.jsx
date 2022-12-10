@@ -7,7 +7,7 @@ export default function AttachmentBox({ issueId, imageRef }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAttachments(issueId));
-    console.log(attachments);
+    // console.log(attachments);
   }, [issueId, dispatch]);
   return (
     <>

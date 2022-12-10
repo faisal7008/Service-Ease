@@ -6,20 +6,25 @@ import UserPic from "../../assets/user.webp";
 import postService from "../../features/posts/postService";
 import { deletePost } from "../../features/posts/postSlice";
 import userService from "../../features/users/userService";
-import { followUser, getMyProfile, getUser } from "../../features/users/userSlice";
+import {
+  followUser,
+  getMyProfile,
+  getUser,
+} from "../../features/users/userSlice";
+import moment from "moment"
 
 export default function Post({ post }) {
   const { user } = useSelector((state) => state.auth);
-  const { profile } = useSelector((state) => state.users);
+  const { profile, isSuccess, isError } = useSelector((state) => state.users);
   const [friendUser, setFriendUser] = useState();
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMyProfile())
-  },[isFollowing])
+    dispatch(getMyProfile());
+  }, [dispatch, isSuccess, isError]);
 
   useEffect(() => {
     setIsLiked(post.likes.includes(user._id));
@@ -35,49 +40,69 @@ export default function Post({ post }) {
 
   useEffect(() => {
     setIsFollowing(profile?.followings?.includes(friendUser?._id));
-  }, [friendUser?._id, profile?.followings]);
+  }, [friendUser?._id, profile]);
 
   const likeHandler = () => {
     try {
-      postService.likePost(post._id, {userId: user._id}, user.token)
+      postService.likePost(post._id, { userId: user._id }, user.token);
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
 
   const handleDelete = (postId) => {
-    dispatch(deletePost({postId, userId: user._id}))
+    dispatch(deletePost({ postId, userId: user._id }));
   };
 
-  const handleFollow = () => {
-    dispatch(followUser({userId: friendUser?._id}))
-    setIsFollowing(!isFollowing)
-  }
+  // useEffect(() => {
+  //   dispatch(followUser({ userId: friendUser?._id }));   
+  // }, [friendUser, isFollowing])
+
+  const followHandler = () => {
+    // try {
+    //   userService.followUser(profile._id, { userId: profile._id }, user.token);
+    // } catch (err) {}
+    dispatch(followUser({ userId: friendUser?._id })); 
+    setIsFollowing(!isFollowing);
+  };
+
+  // const handleFollow = () => {
+  //   setIsFollowing(!isFollowing);
+  // };
+
 
   return (
     <div>
-      <div className="max-w-md bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <div className="max-w-md bg-white rounded-lg border border-gray-100 shadow-md dark:bg-gray-800 dark:border-gray-700">
         <div className="flex p-3 items-center space-x-4">
           <div className="flex-shrink-0">
             <img
               className="w-10 h-10 rounded-full"
-              src={friendUser?.profilePicture ? friendUser?.profilePicture : UserPic}
+              src={
+                friendUser?.profilePicture
+                  ? friendUser?.profilePicture
+                  : UserPic
+              }
               alt="Neil image"
             />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-              {friendUser?.name}
+            <p className="text-sm font-semibold inline-flex items-center text-gray-900 truncate dark:text-white">
+              {friendUser?.name}{" "}
+              <span className="ml-2 text-xs font-medium font-mono text-gray-500">
+                {moment(post.createdAt).endOf('hour').fromNow()}
+              </span>
             </p>
             <p className="text-sm text-gray-500 truncate dark:text-gray-400">
               {friendUser?.email}
             </p>
           </div>
           <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-            <button onClick={() => handleFollow()} className=" bg-teal-500 p-2 rounded text-sm text-white">
-              { !isFollowing ? 
-              <>Follow</> : <>Following</>
-            }
+            <button
+              onClick={followHandler}
+              className=" bg-teal-500 p-2 rounded text-sm text-white"
+            >
+              {!isFollowing ? <>Follow</> : <>Following</>}
             </button>
             {/* onClick={() => handleDelete(post?._id)} */}
           </div>
@@ -89,34 +114,35 @@ export default function Post({ post }) {
           <div className="desc mb-4">{post?.desc}</div>
           <div className="flex gap-4 mb-2 text-rose-600">
             <button onClick={likeHandler} className="heart">
-              {!isLiked ? 
-              (<svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>) :
-              (<svg
-                className="w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                  clipRule="evenodd"
-                />
-              </svg>)
-              }
+              {!isLiked ? (
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              )}
             </button>
             <button>
               <svg

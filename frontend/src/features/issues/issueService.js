@@ -13,6 +13,17 @@ const getIssues = async (projectId, token) => {
   return response.data
 }
 
+// get all issues
+const getAllIssues = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const response = await axios.get(API_URL, config)
+  return response.data
+}
+
 // get a Issue
 const getIssue = async (IssueId, token) => {
     const config = {
@@ -77,6 +88,7 @@ const deleteIssue = async (IssueId, token) => {
 
 const issueService = {
   getIssues,
+  getAllIssues,
   getIssue,
   updateIssueAttachments,
   updateIssue,

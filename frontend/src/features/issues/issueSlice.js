@@ -4,8 +4,11 @@ import issueService from "./issueService";
 const initialState = {
   issue: [],
   issues: [],
+  manager_issues: [],
+  employee_issues: [],
   isError: false,
   isSuccess: false,
+  isUpdated: false,
   isLoading: false,
   message: "",
 };
@@ -35,7 +38,28 @@ export const getIssues = createAsyncThunk(
   async (projectId, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
+      // console.log(token)
       return await issueService.getIssues(projectId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// get Issues
+export const getAllIssues = createAsyncThunk(
+  "issues/get",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      // console.log(token)
+      return await issueService.getAllIssues(token);
     } catch (error) {
       const message =
         (error.response &&
@@ -132,8 +156,13 @@ export const issueSlice = createSlice({
   name: "issues",
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    reset: (state) => {
+      state.isLoading = false
+      state.isSuccess = false
+      state.isError = false
+      state.message = ''
   },
+},
   extraReducers: (builder) => {
     builder
       .addCase(getIssue.pending, (state) => {
@@ -162,6 +191,20 @@ export const issueSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+
+      .addCase(getAllIssues.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllIssues.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.issues = action.payload;
+      })
+      .addCase(getAllIssues.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
       .addCase(createIssue.pending, (state) => {
         state.isLoading = true;
       })
@@ -181,13 +224,14 @@ export const issueSlice = createSlice({
       .addCase(updateIssue.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        // state.isUpdated = true;
         state.issues.forEach((issue, index) => {
           // console.log(index)
           // console.log(action.payload)
           if (issue._id === action.payload._id) {
             state.issues[index] = action.payload
           }
-        });
+        })
       })
       .addCase(updateIssue.rejected, (state, action) => {
         state.isLoading = false;
@@ -206,7 +250,7 @@ export const issueSlice = createSlice({
           if (issue._id === action.payload._id) {
             state.issues[index] = action.payload 
           }
-        });
+        })
       })
       .addCase(updateIssueAttachments.rejected, (state, action) => {
         state.isLoading = false;

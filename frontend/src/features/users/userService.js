@@ -105,6 +105,18 @@ const getMyProfile = async (token) => {
   return response.data
 }
 
+// Update profile
+const updateProfile = async (userData, token, id) => {
+  const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+  }
+  const response = await axios.put(API_URL + id, userData, config)
+  return response.data
+}
+
 
 const userService = {
   addUser,
@@ -115,6 +127,7 @@ const userService = {
   getManagers,
   deleteUser,
   followUser,
+  updateProfile
 }
 
 export default userService
