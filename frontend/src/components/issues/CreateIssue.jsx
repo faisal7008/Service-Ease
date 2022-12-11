@@ -8,6 +8,7 @@ import { createIssue, reset } from "../../features/issues/issueSlice";
 import { useParams } from "react-router-dom";
 import projectService from "../../features/projects/projectService";
 import { addAttachment } from "../../features/attachments/attachmentSlice";
+import { createNotification } from "../../features/notifications/notificationSlice";
 
 export default function CreateIssue({project}) {
   const dispatch = useDispatch();
@@ -39,6 +40,13 @@ export default function CreateIssue({project}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createIssue(issueData))
+    const notificationData = {
+      toUser: issueData.assignee_id,
+      fromUser: issueData.creator_id,
+      message: `Task - ${issueData.summary} due on ${issueData.duedate}`
+    }
+    console.log(notificationData)
+    dispatch(createNotification(notificationData))
     dispatch(reset())
     setModalId("#create-issue")
     onClose()

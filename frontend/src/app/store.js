@@ -8,6 +8,7 @@ import projectReducer from "../features/projects/projectSlice"
 import issueReducer from "../features/issues/issueSlice"
 import commentReducer from "../features/comments/commentSlice"
 import attachmentReducer from "../features/attachments/attachmentSlice"
+import notificationReducer from "../features/notifications/notificationSlice"
 
 
 export const store = configureStore({
@@ -21,5 +22,6 @@ export const store = configureStore({
     issues: issueReducer,
     comments: commentReducer,
     attachments: attachmentReducer,
+    notifications: notificationReducer,
   },
 });

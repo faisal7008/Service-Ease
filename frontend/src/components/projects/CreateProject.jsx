@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import {FaFolderPlus, FaTimes} from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
+import { createNotification } from '../../features/notifications/notificationSlice'
 import { createProject } from '../../features/projects/projectSlice'
 import {getAllUsers} from "../../features/users/userSlice"
 import SearchUsers from './SearchUsers'
@@ -32,6 +33,14 @@ export default function CreateProject() {
     const projectData = {name, desc, createdBy, key, members, admins}
     // console.log(projectData)
     dispatch(createProject(projectData))
+    members.forEach(member => {
+      let notificationData = {
+        fromUser: user._id,
+        toUser: member._id,
+        message: `You've been assigned to project - ${name} `
+      }
+      dispatch(createNotification(notificationData))
+    });
   }
 
   const [searchField, setSearchField] = useState("");

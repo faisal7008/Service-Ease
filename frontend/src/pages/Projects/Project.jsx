@@ -7,7 +7,8 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { BsTrash } from "react-icons/bs";
 import CreateProject from "../../components/projects/CreateProject";
-import { FaArrowRight, FaBackward, FaFolderPlus } from "react-icons/fa";
+import { FaArrowRight, FaBackward, FaEdit, FaFolderPlus } from "react-icons/fa";
+import { FiEdit } from "react-icons/fi";
 import projectlogo from "../../assets/coder.jpeg";
 import { getAllUsers } from "../../features/users/userSlice";
 import {
@@ -30,6 +31,7 @@ export default function Project() {
   const { users } = useSelector((state) => state.users);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getProjects());
     dispatch(getAllUsers());
@@ -116,8 +118,7 @@ export default function Project() {
                   <Menu>
                     <MenuHandler>
                       <Button
-                        color="white"
-                        className=" shadow-none px-1 py-2 rounded-md hover:shadow hover:bg-slate-100 transition-all text-sm"
+                        className="bg-transparent shadow-none px-1 py-2 rounded-md hover:bg-slate-200 transition-all text-sm"
                       >
                         <svg
                           className="w-4 h-4 text-gray-600"
@@ -131,10 +132,16 @@ export default function Project() {
                         </svg>
                       </Button>
                     </MenuHandler>
-                    <MenuList className="p-0 ml-8">
+                    <MenuList className="p-1 ml-8">
+                      <MenuItem
+                          onClick={() => navigate(`${project._id}/settings`)}
+                          className="flex w-full justify-left items-center gap-2 px-4 py-2 rounded-md text-sm text-gray-800 hover:bg-slate-200 hover:font-medium"
+                        >
+                          <FiEdit /> edit
+                        </MenuItem>
                       <MenuItem
                         onClick={() => dispatch(deleteProject(project._id))}
-                        className="flex w-full justify-center items-center gap-2 px-3 py-2 rounded-md text-sm text-gray-800 hover:bg-slate-100 hover:font-medium"
+                        className="flex w-full justify-left items-center gap-2 px-4 py-2 rounded-md text-sm text-gray-800 hover:bg-slate-200 hover:font-medium"
                       >
                         <BsTrash /> delete
                       </MenuItem>

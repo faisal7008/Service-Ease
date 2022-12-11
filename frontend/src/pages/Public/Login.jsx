@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login, reset } from "../../features/auth/authSlice";
 import ErrorBox from "../../utilities/ErrorBox"
+import { getNotifications, resetNotifications } from "../../features/notifications/notificationSlice";
 // import MainLogo from "../assets/main-logo.png";
 
 export default function Login() {
@@ -38,6 +39,8 @@ export default function Login() {
       else {
         navigate("/employee/dashboard");
       }
+      dispatch(resetNotifications())
+      dispatch(getNotifications(user?._id))
     }
 
     dispatch(reset());
