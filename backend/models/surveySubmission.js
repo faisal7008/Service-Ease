@@ -20,12 +20,12 @@ const SubmissionSchema = new mongoose.Schema({
         type: String,
         required: [true, "Required field"]
       }
-   }]
+    }]
   }
-}, 
-{
-  timestamps: true
-}
+},
+  {
+    timestamps: true
+  }
 );
 
 module.exports = surveySubmission = mongoose.model('submission', SubmissionSchema);
