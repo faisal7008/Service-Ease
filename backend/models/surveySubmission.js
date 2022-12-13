@@ -11,8 +11,7 @@ const SubmissionSchema = new mongoose.Schema({
   employeeId: {
     type: String,
   },
-  responses: {
-    type: [{
+  responses: [{
       question: {
         type: String
       },
@@ -21,7 +20,6 @@ const SubmissionSchema = new mongoose.Schema({
         required: [true, "Required field"]
       }
     }]
-  }
 },
   {
     timestamps: true
