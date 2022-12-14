@@ -3,21 +3,28 @@ const router = express.Router();
 const {
   getSurveys,
   addSurvey,
+  editSurvey,
+  removeSurvey,
   getSubmissions,
   addSubmission,
 } = require("../controllers/surveyController");
-const { protect } = require("../middlewares/authMiddleware");
+const { protect, leaderProtect } = require("../middlewares/authMiddleware");
 
 
 router
   .route("/")
-  .get(protect, getSurveys)
-  .post(protect, addSurvey);
+  .get(leaderProtect, getSurveys)
+  .post(leaderProtect, addSurvey);
+
+router
+  .route("/:id")
+  .put(leaderProtect, editSurvey)
+  .delete(leaderProtect, removeSurvey);
 
 router
   .route("/submit")
   .get(protect, getSubmissions)
-  .post(protect, addSubmission)
+  .post(protect, addSubmission);
 
 
 module.exports = router;
