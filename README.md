@@ -2,7 +2,7 @@
 Service@Ease - An Engagement Platform
 
 
-By 
-Ansh 
-Aquib
+By
 Faisal
+Aquib
+Ansh
