@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import userService from './userService'
 
 const initialState = {
+  profile: [],
   users: [],
   employees: [],
   managers: [],
@@ -16,8 +17,65 @@ export const addUser = createAsyncThunk(
   'users/add',
   async (userData, thunkAPI) => {
     try {
-      // const token = thunkAPI.getState().auth.user.token
-      return await userService.addUser(userData)
+      const token = thunkAPI.getState().auth.user.token
+      return await userService.addUser(userData, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// get user
+export const getAllUsers = createAsyncThunk(
+  'users/getAll',
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await userService.getAllUsers(token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// get user
+export const getUser = createAsyncThunk(
+  'users/getOther',
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await userService.getUser(id, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// get me
+export const getMyProfile = createAsyncThunk(
+  'users/getMe',
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await userService.getMyProfile(token)
     } catch (error) {
       const message =
         (error.response &&
@@ -85,6 +143,44 @@ export const deleteUser = createAsyncThunk(
     }
   }
 )
+// follow user
+export const followUser = createAsyncThunk(
+  'users/follow',
+  async (userData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      const id = thunkAPI.getState().auth.user._id
+      return await userService.followUser(id, userData, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+export const updateProfile = createAsyncThunk(
+  'auth/update',
+  async (userData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      const id = thunkAPI.getState().auth.user._id
+      return await userService.updateProfile(userData, token, id)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
 
 export const userSlice = createSlice({
   name: 'users',
@@ -107,13 +203,52 @@ export const userSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
+      .addCase(getAllUsers.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.users = action.payload
+      })
+      .addCase(getAllUsers.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(getUser.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.profile = action.payload
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(getMyProfile.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getMyProfile.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.profile = action.payload
+      })
+      .addCase(getMyProfile.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
       .addCase(getManagers.pending, (state) => {
         state.isLoading = true
       })
       .addCase(getManagers.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.employees = action.payload
+        state.managers = action.payload
       })
       .addCase(getManagers.rejected, (state, action) => {
         state.isLoading = false
@@ -126,7 +261,7 @@ export const userSlice = createSlice({
       .addCase(getEmployees.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.managers = action.payload
+        state.employees = action.payload
       })
       .addCase(getEmployees.rejected, (state, action) => {
         state.isLoading = false
@@ -150,6 +285,19 @@ export const userSlice = createSlice({
         )
       })
       .addCase(deleteUser.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(followUser.pending, (state, action) => {
+        state.isLoading = true
+      })
+      .addCase(followUser.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.message = action.payload
+      })
+      .addCase(followUser.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

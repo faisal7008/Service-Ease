@@ -1,15 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const { registerUser, loginUser, updateUser, deleteUser, getMe, getManagers, getEmployees } = require('../controllers/userController')
+const { registerUser, loginUser, updateUser, deleteUser, getMe, getOther, getManagers, getEmployees, follow, getAllUsers } = require('../controllers/userController')
 const { protect, leaderProtect, managerProtect } = require('../middlewares/authMiddleware')
+const { uploadProfile } = require('../middlewares/uploadMiddleware')
 
-// http://localhost:9000/
+// http://localhost:9000/api/users
 
-router.post('/', registerUser )
+router.route('/').post(uploadProfile.single('profilePicture'),leaderProtect, registerUser).get(protect, getAllUsers)
 router.post('/login', loginUser )
 router.get('/me', protect, getMe )
-router.get('/managers', leaderProtect, getManagers)
-router.get('/employees', managerProtect, getEmployees)
-router.route('/:id').delete(leaderProtect, deleteUser).put(protect, updateUser)
+router.get('/managers', protect, getManagers)
+router.get('/employees', protect, getEmployees)
+router.route('/:id').delete(leaderProtect, deleteUser).put(uploadProfile.single('profilePicture'), updateUser).get(protect, getOther)
+router.put('/follow/:id', protect, follow)
 
 module.exports = router;

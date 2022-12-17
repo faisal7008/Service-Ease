@@ -16,7 +16,7 @@ const updateUser = async (userData, token, id) => {
     const config = {
         headers: {
           Authorization: `Bearer ${token}`,
-        //   "Content-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data",
         },
     }
     const response = await axios.put(API_URL + id, userData, config)

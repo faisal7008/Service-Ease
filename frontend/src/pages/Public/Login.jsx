@@ -1,9 +1,11 @@
 import { LockClosedIcon, ArrowLeftCircleIcon } from "@heroicons/react/20/solid";
 import { useState, useEffect } from "react";
-import { Alert, Spinner } from "flowbite-react";
+import { Alert } from "@material-tailwind/react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login, reset } from "../../features/auth/authSlice";
+import ErrorBox from "../../utilities/ErrorBox"
+import { getNotifications, resetNotifications } from "../../features/notifications/notificationSlice";
 // import MainLogo from "../assets/main-logo.png";
 
 export default function Login() {
@@ -37,10 +39,12 @@ export default function Login() {
       else {
         navigate("/employee/dashboard");
       }
+      dispatch(resetNotifications())
+      dispatch(getNotifications(user?._id))
     }
 
     dispatch(reset());
-  }, [user, isError, isSuccess, isLoading, message, msg, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, msg, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -60,25 +64,35 @@ export default function Login() {
     dispatch(login(userData));
   };
 
+  const Loader = () => {
+    return (
+      <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-teal-100 rounded-full" role="status" aria-label="loading">
+        <span class="sr-only">Loading...</span>
+      </div>    
+    )
+  }
+
   const ErrorContainer = () => {
     return (
-      <Alert color="failure">
+      // <div className="">
+      <Alert show={error !== null} variant="filled" className=" bg-orange-600">
         <span>
           <span className="font-medium">Error!</span> {error}
         </span>
       </Alert>
+      // </div>
     );
   };
 
-  const SuccessContainer = () => {
-    return (
-      <Alert color="success">
-        <span>
-          <span className="font-medium">Success!</span> {msg}
-        </span>
-      </Alert>
-    );
-  };
+  // const SuccessContainer = () => {
+  //   return (
+  //     <Alert color="success">
+  //       <span>
+  //         <span className="font-medium">Success!</span> {msg}
+  //       </span>
+  //     </Alert>
+  //   );
+  // };
 
   return (
     <>
@@ -89,23 +103,25 @@ export default function Login() {
         />
       </a>
       <div className="flex min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md space-y-8">
+        <div className="w-full max-w-md space-y-4">
           <div>
             <h1 className="font-mono text-center text-slate-900 text-2xl font-semibold">Service<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>Ease</h1>
-            <h2 className="mt-3 mb-3 text-center text-3xl font-bold tracking-normal text-gray-900">
+            <h2 className="mt-3 mb-6 text-center text-3xl font-bold tracking-normal text-gray-900">
               Sign in to your account
             </h2>
-            <p className="mb-3 text-center text-sm text-gray-600">
+            {/* <p className="text-center text-sm text-gray-600">
               Or{' '}
-              <a href="/register" className="font-medium text-teal-600 hover:text-teal-500">
+              <Link to={"/register"} className="font-medium text-teal-600 hover:text-teal-500">
                 New here
-              </a>
-            </p>
-            {error ? <ErrorContainer /> : <></>}
-            {message ? <SuccessContainer /> : <></>}
+              </Link>
+            </p> */}
+            
           </div>
           <form className=" space-y-6" onSubmit={onSubmit}>
             {/* <input type="hidden" name="remember" defaultValue="true" /> */}
+            {error ? <ErrorContainer /> : <></>}
+            {/* {message ? <SuccessContainer /> : <></>} */}
+            {/* <ErrorBox message={error}/> */}
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
                 <label htmlFor="email-address" className="sr-only">
@@ -178,7 +194,7 @@ export default function Login() {
                     aria-hidden="true"
                   />
                 </span>
-                {isLoading ? <Spinner aria-label="Default status example" /> :  "Sign in"}
+                {isLoading ? <Loader/> :  "Sign in"}
               </button>
             </div>
 

@@ -23,14 +23,14 @@ const features = [
 
 export default function Features() {
   return (
-    <div className="bg-white py-12 min-h-screen flex items-center">
+    <div className=" py-12 min-h-screen flex items-center">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-lg font-semibold text-teal-600">Features</h2>
           <p className="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
           For a business to thrive
           </p>
-          <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          <p className="mt-4 max-w-2xl text-lg text-gray-500 lg:mx-auto">
           it is imperative for them not only to continuously engage with their client but also their employees. Constant effective and efficient engagement with all stakeholders in a company are what drive a business to succeed.
           </p>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,43 +6,31 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Home from "./pages/Public/Home";
 import Footer from "./pages/Public/Footer";
 import Login from "./pages/Public/Login";
 import UserRegister from "./pages/Public/UserRegister";
 import PageNotFound from "./pages/Public/PageNotFound";
-import Leadership from "./components/Leadership"
-import Manager from "./components/Manager"
-import Employee from "./components/Employee"
+import Leadership from "./components/Leadership";
+import Manager from "./components/Manager";
+import Employee from "./components/Employee";
 import LeaderDashboard from "./pages/Leadership/Dashboard";
-import ManagerDashboard from "./pages/Manager/Dashboard"
-import EmployeeDashboard from "./pages/Employee/Dashboard"
-import LeaderProfile from "./pages/Leadership/LeaderProfile"
-import ManagerProfile from "./pages/Manager/ManagerProfile"
-import EmployeeProfile from "./pages/Employee/EmployeeProfile"
-
-const LeadershipLayout = () => (
-  <div>
-    <h1 className="hidden">Leadership Layout</h1>
-    {/* <AdminDashboard /> */}
-    <Outlet />
-  </div>
-);
-
-const ManagerLayout = () => (
-  <div>
-    <h1 className="hidden">Manager Layout</h1>
-    <Outlet />
-  </div>
-);
-
-const EmployeeLayout = () => (
-  <div>
-    <h1 className="hidden">Employee Layout</h1>
-    <Outlet />
-  </div>
-);
+import ManagerDashboard from "./pages/Manager/Dashboard";
+import EmployeeDashboard from "./pages/Employee/Dashboard";
+import Community from "./pages/Community/Community";
+import Profile from "./components/profile/Profile";
+import NewDashboard from "./pages/Public/NewDashboard";
+import Project from "./pages/Projects/Project";
+import Task from "./pages/Projects/Task";
+import IssueDetails from "./components/issues/IssueDetails";
+import Feedback from "./pages/Manager/Feedback";
+import AllTasks from "./components/issues/AllTasks";
+import ProjectSettings from "./components/projects/ProjectSettings"
+import AllProjects from "./pages/Projects/AllProjects";
+import AllUsers from "./pages/Leadership/AllUsers";
+import Survey from "./pages/Employee/Survey";
+import { getMyProfile } from "./features/users/userSlice";
 
 const PublicLayout = () => (
   <div>
@@ -53,66 +41,84 @@ const PublicLayout = () => (
 
 function App() {
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getMyProfile())
+  }, [])
   return (
     <div className="app min-h-screen">
       <Router>
         <Routes>
-          {/* Admin Routes */}
-          <Route element={<LeadershipLayout />}>
-            {/* Admin Routes */}
-            <Route
-              path="leadership/dashboard"
-              element={
-                user ? <Leadership LeaderComponent={<LeaderDashboard />} dashboard={true} /> : <Navigate replace to="/login" /> 
-              }
+          {/* Leader Routes */}
+          <Route path="leadership"
+            element={user ? <Leadership /> : <Navigate replace to="/login" />}
+          >
+            <Route path="dashboard" element={<LeaderDashboard/>}
             />
-            <Route
-              path="leadership/profile"
-              element={
-                user ? <Leadership LeaderComponent={<LeaderProfile />} /> : <Navigate replace to="/login" /> 
-              }
+            <Route path="projects" element={<AllProjects/>}
             />
-          </Route>
-          {/* Student Routes */}
-          <Route element={<ManagerLayout />}>
-            <Route
-              path="manager/dashboard"
-              element={
-                user ? <Manager ManagerComponent={<ManagerDashboard/>} dashboard={true}/> : <Navigate replace to="/login" />
-              }
+            <Route path="users" element={<AllUsers/>}
             />
-            <Route
-              path="manager/profile"
-              element={
-                user ? <Manager ManagerComponent={<ManagerProfile />} /> : <Navigate replace to="/login" /> 
-              }
+            <Route path="profile" element={<Profile />}
+            />
+            <Route path="community" element={<Community />}
             />
           </Route>
-          {/* Teacher Routes */}
-          <Route element={<EmployeeLayout />}>
-            <Route
-              path="employee/dashboard"
-              element={
-                user ? <Employee EmployeeComponent={<EmployeeDashboard/>} dashboard={true} /> : <Navigate replace to="/login" />
-              }
+          {/* Manager Routes */}
+          <Route path="manager"
+            element={user ? <Manager /> : <Navigate replace to="/login" />}
+          >
+            <Route path="dashboard" element={<ManagerDashboard />}
             />
-            <Route
-              path="employee/profile"
-              element={
-                user ? <Employee EmployeeComponent={<EmployeeProfile />} /> : <Navigate replace to="/login" /> 
-              }
+            <Route path="profile" element={<Profile />}
+            />
+            <Route path="projects">
+              <Route index element={<Project />} />
+              <Route path=":projectId" element={<Task />}>
+                  <Route path=":issueId" element={<IssueDetails/>} />
+              </Route>
+            </Route>
+            <Route path="feedback" element={<Feedback />}
+            />
+            <Route path="community" element={<Community />}
+            />
+          </Route>
+          {/* Employee Routes */}
+          <Route path="employee" element={user ? <Employee /> : <Navigate replace to="/login" />}>
+            <Route path="dashboard" element={<EmployeeDashboard/>}
+            />
+            <Route path="profile" element={<Profile />}
+            />
+            {/* <Route path="projects">
+              <Route index element={<Project />} />
+              <Route path=":projectId">
+                  <Route index element={<Task/>} />
+                  <Route path=":issueId" element={<IssueDetails/>} />
+                  <Route path="settings" element={<ProjectSettings/>} />
+              </Route>
+            </Route> */}
+            <Route path="projects">
+              <Route index element={<Project />} />
+              <Route path=":projectId" element={<Task />}>
+                  <Route path=":issueId" element={<IssueDetails/>} />
+              </Route>
+            </Route>
+            <Route path="survey" element={<Survey />}
+            />
+            <Route path="community" element={<Community />}
             />
           </Route>
           {/* Public Routes */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<UserRegister />} />
+            <Route path="/register" element={user ? <UserRegister /> : <Navigate replace to={'/login'} />} />
+            <Route path="/dashboard" element={<NewDashboard />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
       </Router>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

@@ -5,6 +5,8 @@ import Features from "./Features";
 import Subscription from "./Subscription";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import FAQs from "./FAQs";
+import Footer from "./Footer";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -16,20 +18,6 @@ const navigation = [
 export default function Home() {
   const navigate = useNavigate()
   const {user} = useSelector((state) => state.auth)
-
-  useEffect(() => {
-    if(user){
-      if (user.role === "Leader"){
-        navigate("/leadership/dashboard");
-      }
-      else if (user.role === "Manager"){
-        navigate("/manager/dashboard");
-      }
-      else {
-        navigate("/employee/dashboard");
-      }
-    }
-  },[user, navigate])
 
   return (
     <>
@@ -186,6 +174,8 @@ export default function Home() {
       </div>
       <div id="features"><Features /></div>
       <div id="subscription"><Subscription/></div>
+      <div id="faqs"><FAQs/></div>
+      <div id="footer"><Footer/></div>
     </>
   );
 }

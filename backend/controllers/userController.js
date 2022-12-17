@@ -8,7 +8,7 @@ const User = require('../models/User')
 // @access  Public
 
 const registerUser = asyncHandler( async (req, res) => {
-    const {name, id_no, email, role, password} = req.body
+    const {name, id_no, username, desc, location, email, role, password} = req.body
     if(!name || !id_no || !email || !role || !password){
         res.status(400)
         throw new Error('Please enter all fields')
@@ -26,10 +26,17 @@ const registerUser = asyncHandler( async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt)
 
+
+  const url = req.protocol + "://" + req.get("host");
+
     // Create user
     const user = await User.create({
         name,
         id_no,
+        username,
+        desc,
+        location,
+        // profilePicture: url + "/uploads/profile/" + req.file.filename,
         email,
         role,
         password: hashedPassword
@@ -40,6 +47,7 @@ const registerUser = asyncHandler( async (req, res) => {
             _id: user.id,
             name: user.name,
             id_no: user.id_no,
+            // profilePicture: user.profilePicture,
             email: user.email,
             role: user.role,
             token: generateToken(user._id)
@@ -66,6 +74,9 @@ const loginUser = asyncHandler( async (req, res) => {
             _id: user.id,
             name: user.name,
             id_no: user.id_no,
+            profilePicture: user.profilePicture,
+            followers: user.followers,
+            followings: user.followings,
             email: user.email,
             role: user.role,
             token: generateToken(user._id)
@@ -89,16 +100,24 @@ const updateUser = asyncHandler(
             throw new Error('User not found')
         }
 
-        // Check for user
-        if(!req.user){
-            res.status(401)
-            throw new Error('Not Authenticated')
+        // Check for profile picture
+        // if(!req.file){
+        //     res.status(401)
+        //     throw new Error('No file')
+        // }
+        if(req.body.password){
+            // Hash password
+           const salt = await bcrypt.genSalt(10)
+           const hashedPassword = await bcrypt.hash(req.body.password, salt)
+           req.body.password = hashedPassword
         }
-
-         // Hash password
-        const salt = await bcrypt.genSalt(10)
-        const hashedPassword = await bcrypt.hash(req.body.password, salt)
-        req.body.password = hashedPassword
+        if(req.file){
+            // Profile picture
+            const url = req.protocol + "://" + req.get("host");
+            const uploadProfilePic = await user.updateOne({ $set: {
+                profilePicture: url + "/uploads/profile/" + req.file.filename,
+            }});
+        }
 
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
@@ -133,6 +152,16 @@ const deleteUser = asyncHandler(
     }
 )
 
+// @desc    Get all users
+// @route   GET /api/users
+// @access  Admin
+
+const getAllUsers = asyncHandler( async (req, res) => {
+    const users = await User.find()
+    res.status(200).json(users)
+})
+
+
 // @desc    Get user data
 // @route   GET /api/users/students
 // @access  Admin
@@ -151,6 +180,15 @@ const getEmployees = asyncHandler( async (req, res) => {
     res.status(200).json(employees)
 })
 
+// @desc    Get other user data
+// @route   GET /api/users/me
+// @access  Private
+
+const getOther = asyncHandler( async (req, res) => {
+    const user = await User.findById(req.params.id)
+    res.status(200).json(user)
+})
+
 // @desc    Get user data
 // @route   GET /api/users/me
 // @access  Private
@@ -159,14 +197,36 @@ const getMe = asyncHandler( async (req, res) => {
     res.status(200).json(req.user)
 })
 
+// follow/unfollow a user
+const follow = asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const { userId } = req.body;
+  
+    try {
+      const user = await User.findById(id);
+      const followedUser = await User.findById(userId)
+      if (!user.followings.includes(userId)) {
+        await user.updateOne({ $push: { followings: userId } });
+        await followedUser.updateOne({ $push: { followers: id } });
+        res.status(200).json("Followed");
+      } else {
+        await user.updateOne({ $pull: { followings: userId } });
+        await followedUser.updateOne({ $pull: { followers: id } });
+        res.status(200).json("Unfollowed");
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
+
 // Generate JWT
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: '300d',
+        expiresIn: '1d',
     })
 }
 
 module.exports = {
-    registerUser, loginUser, updateUser, deleteUser, getMe, getEmployees, getManagers
+    registerUser, loginUser, updateUser, deleteUser, getMe, getOther, getAllUsers, getEmployees, getManagers, follow
 }

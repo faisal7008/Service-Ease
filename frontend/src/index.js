@@ -5,7 +5,8 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-// import 'mdb-react-ui-kit/dist/css/mdb.min.css'
+import('preline')
+import('flowbite')
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -13,7 +14,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <App/>
     </Provider>
   </React.StrictMode>
 );
