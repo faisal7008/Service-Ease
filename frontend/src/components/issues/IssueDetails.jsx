@@ -137,11 +137,11 @@ export default function IssueDetails() {
                       alt="Image Description"
                     />
                     <div className="w-full">
-                      <CommentBox user={user} issue={issue}/>
+                      {issueId && <CommentBox user={user} issue={issue}/>}
                     </div>
                   </div>
                   <div className="mt-2">
-                    <AllComments issueId={issueId}/>
+                    {issueId && <AllComments issueId={issueId}/>}
                   </div>
                 </div>
               </div>

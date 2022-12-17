@@ -25,13 +25,13 @@ export default function AllTasks() {
   const [project, setProject] = useState({})
   let currentIssues = []
   if(user.role === "Manager"){
-    currentIssues = issues.filter(issue => issue.creator_id === user._id)
+    currentIssues = issues?.filter(issue => issue?.creator_id === user._id)
   } else if(user.role === "Employee"){
-    currentIssues = issues.filter(issue => issue.assignee_id === user._id)
+    currentIssues = issues?.filter(issue => issue?.assignee_id === user._id)
   }
-  const todo_issues = currentIssues.filter(issue => issue.status === "To Do")
-  const inprogress_issues = currentIssues.filter(issue => issue.status === "In Progress")
-  const done_issues = currentIssues.filter(issue => issue.status === "Done")
+  const todo_issues = currentIssues?.filter(issue => issue?.status === "To Do")
+  const inprogress_issues = currentIssues?.filter(issue => issue?.status === "In Progress")
+  const done_issues = currentIssues?.filter(issue => issue?.status === "Done")
 
   useEffect(() => {
     projectService.getProject(projectId, user.token).then(res => setProject(res)).catch(err => console.log(err))
@@ -41,11 +41,11 @@ export default function AllTasks() {
     dispatch(getIssues(projectId));
 
     // if(user.role === "Manager"){
-    //   const currentIssues = issues.filter(issue => issue.creator_id === user._id)
+    //   const currentIssues = issues.filter(issue => issue?.creator_id === user._id)
     //   setMyIssues(currentIssues)
     // }
     // else if(user.role === "Employee"){
-    //   const currentIssues = issues.filter(issue => issue.assignee_id === user._id)
+    //   const currentIssues = issues.filter(issue => issue?.assignee_id === user._id)
     //   setMyIssues(currentIssues)
     // }
   }, [user,projectId, dispatch,  isSuccess])
@@ -134,13 +134,13 @@ export default function AllTasks() {
         <div className=" grid grid-cols-1 gap-2">
           {todo_issues?.map(issue => (
             // <Draggable>
-          <Link to={issue._id} key={issue._id} onClick={() => setIssue(issue)} className="block min-w-full cursor-pointer p-3 bg-white border border-gray-200 rounded shadow-sm shadow-gray-300 hover:bg-gray-200" data-hs-overlay="#hs-vertically-centered-modal">
+          <Link to={issue?._id} key={issue?._id} onClick={() => setIssue(issue)} className="block min-w-full cursor-pointer p-3 bg-white border border-gray-200 rounded shadow-sm shadow-gray-300 hover:bg-gray-200" data-hs-overlay="#hs-vertically-centered-modal">
             <div className="flex items-center space-x-4">
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-medium  text-gray-500 truncate">
                   Due on
                 </p>
-                <p className="text-sm text-gray-900 truncate">{moment(issue.duedate).format("MMM DD")}</p>
+                <p className="text-sm text-gray-900 truncate">{moment(issue?.duedate).format("MMM DD")}</p>
               </div>
               <div className="flex-shrink-0">
                 <img
@@ -151,7 +151,7 @@ export default function AllTasks() {
               </div>
             </div>
             <div className="flex pt-2 font-mono text-sm items-center">
-              {issue.summary}
+              {issue?.summary}
             </div>
           </Link>
           // </Draggable>
@@ -169,13 +169,13 @@ export default function AllTasks() {
         </div>
         <div className=" grid grid-cols-1 gap-2">
         {inprogress_issues?.map(issue => (
-          <Link to={issue._id} key={issue._id} onClick={() => setIssue(issue)} className="block min-w-full cursor-pointer p-3 bg-white border border-gray-200 rounded shadow-sm shadow-gray-300 hover:bg-gray-200" data-hs-overlay="#hs-vertically-centered-modal">
+          <Link to={issue?._id} key={issue?._id} onClick={() => setIssue(issue)} className="block min-w-full cursor-pointer p-3 bg-white border border-gray-200 rounded shadow-sm shadow-gray-300 hover:bg-gray-200" data-hs-overlay="#hs-vertically-centered-modal">
             <div className="flex items-center space-x-4">
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-medium  text-gray-500 truncate">
                   Due on
                 </p>
-                <p className="text-sm text-gray-900 truncate">{moment(issue.duedate).format("MMM DD")}</p>
+                <p className="text-sm text-gray-900 truncate">{moment(issue?.duedate).format("MMM DD")}</p>
               </div>
               <div className="flex-shrink-0">
                 <img
@@ -186,7 +186,7 @@ export default function AllTasks() {
               </div>
             </div>
             <div className="flex pt-2 font-mono text-sm items-center">
-              {issue.summary}
+              {issue?.summary}
             </div>
           </Link>
           ))}
@@ -203,13 +203,13 @@ export default function AllTasks() {
         </div>
         <div className=" grid grid-cols-1 gap-2">
         {done_issues?.map(issue => (
-          <Link to={issue._id} key={issue._id} onClick={() => setIssue(issue)} className="block min-w-full cursor-pointer p-3 bg-white border border-gray-200 rounded shadow-sm shadow-gray-300 hover:bg-gray-200" data-hs-overlay="#hs-vertically-centered-modal">
+          <Link to={issue?._id} key={issue?._id} onClick={() => setIssue(issue)} className="block min-w-full cursor-pointer p-3 bg-white border border-gray-200 rounded shadow-sm shadow-gray-300 hover:bg-gray-200" data-hs-overlay="#hs-vertically-centered-modal">
             <div className="flex items-center space-x-4">
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-medium  text-gray-500 truncate">
                   Due on
                 </p>
-                <p className="text-sm text-gray-900 truncate">{moment(issue.duedate).format("MMM DD")}</p>
+                <p className="text-sm text-gray-900 truncate">{moment(issue?.duedate).format("MMM DD")}</p>
               </div>
               <div className="flex-shrink-0">
                 <img
@@ -220,7 +220,7 @@ export default function AllTasks() {
               </div>
             </div>
             <div className="flex pt-2 font-mono text-sm items-center">
-              {issue.summary}
+              {issue?.summary}
             </div>
           </Link>
           ))}
@@ -228,7 +228,7 @@ export default function AllTasks() {
       </div>
     </div>
   </div>
-  <Outlet context={[issue, project]}/>
+  {issue && <Outlet context={[issue, project]}/>}
   </div>
   )
 }

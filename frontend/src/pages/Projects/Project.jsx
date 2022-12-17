@@ -39,9 +39,8 @@ export default function Project() {
 
   let myProjects = projects?.filter(
     (project) =>
-      project.admins.includes(user?._id) || project.members.includes(user?._id)
+      project?.admins?.includes(user?._id) || project?.members?.includes(user?._id)
   );
-
   // const members =  users.filter(user => project.members?.includes(user._id))
   return (
     <>
@@ -91,7 +90,7 @@ export default function Project() {
         )}
       </div>
       {/* <!-- End Breadcrumb --> */}
-      <main className="grid p-2 mx-4 md:mx-20 mt-2">
+      <main className="grid p-2 mb-8 mx-4 md:mx-20 mt-2">
         <div className="grid w-full grid-cols-3 gap-6">
           {myProjects?.map((project) => (
             <Card key={project._id} color="transparent" shadow={false}>
@@ -132,7 +131,7 @@ export default function Project() {
                         </svg>
                       </Button>
                     </MenuHandler>
-                    <MenuList className="p-1 ml-8">
+                    <MenuList className="p-1 w-32 ml-8">
                       <MenuItem
                           onClick={() => navigate(`${project._id}/settings`)}
                           className="flex w-full justify-left items-center gap-2 px-4 py-2 rounded-md text-sm text-gray-800 hover:bg-slate-200 hover:font-medium"
@@ -176,7 +175,7 @@ export default function Project() {
                   {users
                     .filter((user) => project.members?.includes(user._id))
                     .map((member, key) => (
-                      <Tooltip key={member._id} className="bg-slate-900" content={member.name}>
+                      <Tooltip key={member._id} className="rounded bg-slate-900" content={member.name}>
                         <Avatar
                           src={projectlogo}
                           alt={"project member"}

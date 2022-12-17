@@ -7,8 +7,10 @@ import postReducer from "../features/posts/postSlice"
 import projectReducer from "../features/projects/projectSlice"
 import issueReducer from "../features/issues/issueSlice"
 import commentReducer from "../features/comments/commentSlice"
+import surveyReducer from "../features/surveys/surveySlice"
 import attachmentReducer from "../features/attachments/attachmentSlice"
 import notificationReducer from "../features/notifications/notificationSlice"
+import announcementReducer from "../features/announcements/announcementSlice"
 
 
 export const store = configureStore({
@@ -23,5 +25,7 @@ export const store = configureStore({
     comments: commentReducer,
     attachments: attachmentReducer,
     notifications: notificationReducer,
+    announcements: announcementReducer,
+    surveys: surveyReducer,
   },
 });

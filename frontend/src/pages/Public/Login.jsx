@@ -2,7 +2,7 @@ import { LockClosedIcon, ArrowLeftCircleIcon } from "@heroicons/react/20/solid";
 import { useState, useEffect } from "react";
 import { Alert } from "@material-tailwind/react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login, reset } from "../../features/auth/authSlice";
 import ErrorBox from "../../utilities/ErrorBox"
 import { getNotifications, resetNotifications } from "../../features/notifications/notificationSlice";
@@ -66,7 +66,7 @@ export default function Login() {
 
   const Loader = () => {
     return (
-      <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full" role="status" aria-label="loading">
+      <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-teal-100 rounded-full" role="status" aria-label="loading">
         <span class="sr-only">Loading...</span>
       </div>    
     )
@@ -106,15 +106,15 @@ export default function Login() {
         <div className="w-full max-w-md space-y-4">
           <div>
             <h1 className="font-mono text-center text-slate-900 text-2xl font-semibold">Service<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>Ease</h1>
-            <h2 className="mt-3 mb-3 text-center text-3xl font-bold tracking-normal text-gray-900">
+            <h2 className="mt-3 mb-6 text-center text-3xl font-bold tracking-normal text-gray-900">
               Sign in to your account
             </h2>
-            <p className="text-center text-sm text-gray-600">
+            {/* <p className="text-center text-sm text-gray-600">
               Or{' '}
-              <a href="/register" className="font-medium text-teal-600 hover:text-teal-500">
+              <Link to={"/register"} className="font-medium text-teal-600 hover:text-teal-500">
                 New here
-              </a>
-            </p>
+              </Link>
+            </p> */}
             
           </div>
           <form className=" space-y-6" onSubmit={onSubmit}>

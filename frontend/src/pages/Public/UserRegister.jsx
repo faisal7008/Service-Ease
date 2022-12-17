@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { Alert } from "@material-tailwind/react";
 import { LockClosedIcon, ArrowLeftCircleIcon } from "@heroicons/react/20/solid";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addUser, reset } from "../../features/users/userSlice";
 
 export default function UserRegister() {
+  const {user} = useSelector(state => state.auth)
   const [formData, setFormData] = useState({
     name: "",
     id_no: "",
@@ -15,6 +16,7 @@ export default function UserRegister() {
     confirmPassword: "",
   });
   const [error, setError] = useState(null);
+  const [msg, setMsg] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,9 +31,9 @@ export default function UserRegister() {
     if (isError) {
       setError(message);
     }
-    if (isSuccess) {
-      navigate("/login");
-    }
+    // if (isSuccess) {
+    //   navigate("/login");
+    // }
   }, [users, isError, isSuccess, message, navigate, dispatch, error]);
 
   const onChange = (e) => {
@@ -55,6 +57,7 @@ export default function UserRegister() {
         password,
       };
       dispatch(addUser(userData));
+      setMsg("User added successfully.")
       dispatch(reset());
     }
   };
@@ -69,9 +72,19 @@ export default function UserRegister() {
 
   const ErrorContainer = () => {
     return (
-      <Alert color="failure">
+      <Alert className="bg-rose-600">
         <span>
           <span className="font-medium">Error!</span> {error}
+        </span>
+      </Alert>
+    );
+  };
+
+  const SuccessContainer = () => {
+    return (
+      <Alert className="bg-green-500">
+        <span>
+          <span className="font-medium">Success!</span> {msg}
         </span>
       </Alert>
     );
@@ -86,7 +99,7 @@ export default function UserRegister() {
         />
       </a>
       <div className="flex flex-col min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md space-y-8">
+        <div className="w-full max-w-md space-y-4">
           <div>
             {/* <img
               className="mx-auto h-12 w-auto"
@@ -96,16 +109,17 @@ export default function UserRegister() {
             /> */}
             <h1 className="font-mono text-center text-slate-900 text-2xl font-semibold">Service<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>Ease</h1>
             <h2 className="mt-2 text-center text-3xl font-bold tracking-normal text-gray-900">
-              Register Your Account
+              Add a new user
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
+            {/* <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
-              <a href="/login" className="font-medium text-teal-600 hover:text-teal-500">
+              <Link to={"/login"} className="font-medium text-teal-600 hover:text-teal-500">
                 Already Registered ?
-              </a>
-            </p>
+              </Link>
+            </p> */}
           </div>
           {error ? <ErrorContainer /> : <></>}
+          {msg ? <SuccessContainer /> : <></>}
           <form className="space-y-6" onSubmit={onSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">

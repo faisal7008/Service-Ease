@@ -34,8 +34,26 @@ import statisticsCardsData from "../../utilities/data/statistics-cards-data";
 import statisticsChartsData from "../../utilities/data/statistics-charts-data";
 import projectsTableData from "../../utilities/data/projects-table-data"
 import ordersOverviewData from "../../utilities/data/orders-overview-data"
+import company_logo from "../../utilities/data/img/logo-slack.svg";
+import { getProjects } from "../../features/projects/projectSlice";
+import { useEffect, useState } from "react";
+import {useSelector, useDispatch} from "react-redux"
+import { getAllUsers } from "../../features/users/userSlice";
+import { getAllIssues } from "../../features/issues/issueSlice";
+import SearchBox from "../../components/searchbox/SearchBox";
+import ProjectTable from "../Projects/ProjectTable";
+
+const pic =
+  "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80";
+
 
 export default function ManagerDashboard() {
+  const {projects} = useSelector(state => state.projects)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getProjects())
+  },[dispatch])
+
   return (
     <div>
       <div className="flex items-center ml-12 py-4">
@@ -106,7 +124,7 @@ export default function ManagerDashboard() {
         ))}
       </div>
       <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
-        <Card className="overflow-hidden shadow-sm border xl:col-span-2">
+        <Card className="overflow-hidden shadow xl:col-span-2">
           <CardHeader
             floated={false}
             shadow={false}
@@ -143,7 +161,7 @@ export default function ManagerDashboard() {
             </Menu> */}
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
-            <table className="w-full min-w-[640px] table-auto">
+            {/* <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
                   {["project name", "members", "budget", "completion"].map(
@@ -231,10 +249,11 @@ export default function ManagerDashboard() {
                   }
                 )}
               </tbody>
-            </table>
+            </table> */}
+            <ProjectTable/>
           </CardBody>
         </Card>
-        <Card className="shadow-sm border">
+        <Card className="shadow">
           <CardHeader
             floated={false}
             shadow={false}

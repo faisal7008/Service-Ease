@@ -147,7 +147,7 @@ export default function AddPost() {
                 <button
                   type="submit"
                   className="w-full text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
-                  data-modal-toggle="post-modal"
+                  data-hs-overlay={modalId}
                 >
                   Post
                 </button>

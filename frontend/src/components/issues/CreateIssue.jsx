@@ -65,7 +65,7 @@ export default function CreateIssue({project}) {
   //   }
   // };
 
-  const filteredUsers = users.filter((user) => user.role === "Employee");
+  const filteredUsers = users.filter((user) => project?.members?.includes(user._id));
 
   return (
     <div>

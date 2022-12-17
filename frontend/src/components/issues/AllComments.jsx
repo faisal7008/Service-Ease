@@ -10,11 +10,13 @@ export default function AllComments({issueId}) {
   useEffect(() => {
     dispatch(getComments(issueId)) 
   }, [issueId, dispatch])
-
-  const latestComments = comments?.map(comment => comment).reverse()
+  let latestComments = []
+  if (comments.length > 0) {
+   latestComments = comments?.map(comment => comment).reverse()
+  }  
   return (
     <div className="grid grid-cols-1 gap-3">
-      {latestComments?.map((comment) => (
+      {latestComments.length > 0 && latestComments?.map((comment) => (
         <Comment key={comment._id} comment={comment}/>
       ))}
     </div>

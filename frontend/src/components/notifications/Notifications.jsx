@@ -41,13 +41,16 @@ export default function Notifications() {
         </div>
       </MenuHandler>
       <MenuList className=" w-80 pb-0 pt-0 pr-0 pl-0 max-h-96 mt-1 z-30 -ml-28 shadow-lg">
+        <MenuItem className="pt-2 bg-teal-100 rounded-none text-teal-700 text-xs font-medium border-b-2 border-white uppercase">
+          Notifications
+        </MenuItem>
           {myNotifications?.map(notification => 
             <Notification key={notification._id} notification={notification}/>
           )}
           {myNotifications.length === 0 && <div className="w-full h-full flex justify-center font-medium items-center"><h1 className="uppercase text-xs py-8">No notifications</h1></div>}
         <button 
         onClick={() => dispatch(deleteNotifications(user._id))}
-         className="sticky bottom-0 text-sm font-semibold w-full py-3 transition-colors duration-300 ease-in-out hover:bg-teal-600 hover:text-white text-teal-700 border-t-2 border-teal-600 bg-teal-100">
+         className="sticky bottom-0 text-sm font-semibold w-full py-3 transition-colors duration-300 ease-in-out hover:bg-teal-600 hover:text-white text-teal-700 border-t-2 border-white bg-teal-100">
           clear all
         </button>
       </MenuList>

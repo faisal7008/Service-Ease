@@ -18,7 +18,7 @@ const dispatch = useDispatch()
               aria-label="Breadcrumb"
             >
               <li className="flex items-center text-sm text-gray-800 dark:text-gray-400">
-                {profile.role}
+                {profile?.role}
                 <svg
                   className="flex-shrink-0 mx-3 overflow-visible h-2.5 w-2.5 text-gray-400 dark:text-gray-600"
                   width="16"

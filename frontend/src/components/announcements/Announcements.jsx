@@ -1,14 +1,24 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllAnnouncements } from "../../features/announcements/announcementSlice";
 import AddAnnouncement from "./AddAnnouncement";
 import Announcement from "./Announcement";
 
 export default function Announcements() {
+  const {user} = useSelector(state => state.auth)
+  const {announcements, isSuccess, isError} = useSelector(state => state.announcements)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllAnnouncements())
+  }, [dispatch, isSuccess, isError])
   return (
-    <div className="h-full w-full sm:pl-5 bg-slate-100 shadow-slate-300 shadow-inner">
-      <div className="grid w-[40rem] m-4 grid-cols-1 gap-4">
-        <Announcement/>
+    <div className="h-full overflow-auto w-full sm:pl-5 bg-slate-100 shadow-slate-300 shadow-inner">
+      <div className="grid max-w-[40rem] m-4 grid-cols-1 gap-4">
+        {announcements.map(announcement => <Announcement key={announcement._id} announcement={announcement}/> )}
       </div>
-      <div className="hs-tooltip flex justify-end">
+      {user.role === "Leader" && <div className="hs-tooltip flex justify-end">
         <div className=" hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 m-5 bottom-0 group">
           <h1 className="mb-2 p-2 font-medium text-sm mr-6 bg-teal-100 rounded shadow text-teal-600">New Announcement</h1>
         </div>
@@ -30,9 +40,8 @@ export default function Announcements() {
             <span className="sr-only">Open actions menu</span>
           </button>
           </div>
-      </div>
-
-      <AddAnnouncement/>
+      </div>}
+      {user.role === "Leader" && <AddAnnouncement/>}
     </div>
   );
 }

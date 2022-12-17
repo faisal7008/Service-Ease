@@ -3,14 +3,14 @@ import axios from 'axios'
 const API_URL = 'http://localhost:9000/api/users/'
 
 // Add new user
-const addUser = async (UserData) => {
-  // const config = {
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // }
+const addUser = async (UserData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
 
-  const response = await axios.post(API_URL, UserData)
+  const response = await axios.post(API_URL, UserData, config)
 
   return response.data
 }

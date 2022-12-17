@@ -10,8 +10,8 @@ import Chart from "react-apexcharts";
 
 export function StatisticsChart({ color, chart, title, description, footer }) {
   return (
-    <Card className="shadow-sm border">
-      <CardHeader variant="gradient" className=" bg-teal-500 -mt-4" shadow={false} color={color}>
+    <Card className="shadow">
+      <CardHeader variant="gradient" className=" shadow-md shadow-teal-100 bg-teal-500 -mt-4" color={color}>
         <Chart {...chart} />
       </CardHeader>
       <CardBody className="p-6">

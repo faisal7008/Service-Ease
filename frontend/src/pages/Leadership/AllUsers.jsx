@@ -8,14 +8,55 @@ import {
   Tooltip,
   Progress,
   CardFooter,
+  Button,
 } from "@material-tailwind/react";
 import { FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux"
+import userimg from "../../assets/user.webp"
 
 import projectsTableData from "../../utilities/data/projects-table-data";
+import { useState } from "react";
+import SearchBox from "../../components/searchbox/SearchBox";
+import moment from "moment";
+import { useEffect } from "react";
+import { deleteUser, getAllUsers } from "../../features/users/userSlice";
 
 export default function AllUsers() {
-  const navigate = useNavigate();
+  const {user} = useSelector(state => state.auth)
+  const {users, isSuccess} = useSelector(state => state.users)
+  const navigate = useNavigate(); 
+  const dispatch = useDispatch(); 
+  const [searchField, setSearchField] = useState("");
+  const [allUsers, setAllUsers] = useState([])
+  useEffect(() => {
+    setAllUsers(users.filter(user => user.role !== 'Leader'))
+  },[dispatch, users])
+  
+  useEffect(() => {
+    dispatch(getAllUsers())
+  },[dispatch, isSuccess])
+
+  useEffect(() => {
+    // console.log(users);
+    const filteredUsers = users?.filter(
+      user => {
+        return (
+          user?.name.toLowerCase().includes(searchField?.toLowerCase()))
+      }
+    )
+    // console.log(filteredUsers)
+    setAllUsers(filteredUsers)
+    // console.log(allUsers)
+  }, [searchField])
+
+
+  const handleDelete = (userId) => {
+    const result = window.confirm("Are you sure you want to remove the user?")
+    if(result){
+      dispatch(deleteUser(userId, user.token))
+    }
+  }
 
   return (
     <div>
@@ -63,26 +104,29 @@ export default function AllUsers() {
       </div>
       <div className="grid p-4 justify-center">
         <div>
-          <Card className="min-w-[85rem] mt-6">
+          <Card className="min-w-[85rem] my-6">
             <CardHeader
               variant="gradient"
-              className="mb-6 -mt-6 bg-teal-500 p-6"
+              className="mb-6 -mt-6 bg-teal-500 p-6 flex items-center justify-between"
             >
               <Typography variant="h6" color="white">
                 Users Stats
               </Typography>
+              <SearchBox searchField={searchField} setSearchField={setSearchField}/>
             </CardHeader>
             <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
               <table className="w-full min-w-[640px] table-auto">
                 <thead>
                   <tr>
                     {[
-                      "project name",
-                      "members",
-                      "budget",
+                      "#",
+                      "full name",
+                      "age",
+                      "job title",
+                      "salary",
                       "status",
-                      "completion",
-                      "",
+                      "joined",
+                      "actions",
                     ].map((el) => (
                       <th
                         key={el}
@@ -99,49 +143,42 @@ export default function AllUsers() {
                   </tr>
                 </thead>
                 <tbody>
-                  {projectsTableData.map(
-                    ({ img, name, members, budget, completion }, key) => {
+                  {allUsers.length > 0 ? allUsers?.map(
+                    (member, key) => {
                       const className = `py-3 px-5 ${
-                        key === projectsTableData.length - 1
+                        key === allUsers.length - 1
                           ? ""
                           : "border-b border-blue-gray-50"
                       }`;
 
                       return (
-                        <tr key={name}>
+                        <tr key={member._id}>
+                        <td className={`${className} w-10`}>
+                        <Typography
+                            variant="small"
+                            className="text-xs font-semibold text-blue-gray-600"
+                          >
+                            {key+1}
+                          </Typography>
+                        </td>
                           <td className={className}>
                             <div className="flex items-center gap-4">
-                              <Avatar src={img} alt={name} size="sm" />
+                              <Avatar className="rounded-full" src={member.profilePicture ? member.profilePicture : userimg} alt={member.name} size="sm" />
                               <Typography
                                 variant="small"
                                 color="blue-gray"
                                 className="font-bold"
                               >
-                                {name}
+                                {member.name}
                               </Typography>
                             </div>
                           </td>
                           <td className={className}>
-                            {members.map(({ img, name }, key) => (
-                              <Tooltip key={name} content={name}>
-                                <Avatar
-                                  src={img}
-                                  alt={name}
-                                  size="xs"
-                                  variant="circular"
-                                  className={`cursor-pointer rounded-full border-2 border-white ${
-                                    key === 0 ? "" : "-ml-2.5"
-                                  }`}
-                                />
-                              </Tooltip>
-                            ))}
-                          </td>
-                          <td className={className}>
-                            <Typography
+                          <Typography
                               variant="small"
                               className="text-xs font-medium text-blue-gray-600"
                             >
-                              {budget}
+                              25
                             </Typography>
                           </td>
                           <td className={className}>
@@ -149,41 +186,48 @@ export default function AllUsers() {
                               variant="small"
                               className="text-xs font-medium text-blue-gray-600"
                             >
-                              pending
+                              {member.role}
                             </Typography>
-                          </td>
-                          <td className={className}>
-                            <div className="w-10/12">
-                              <Typography
-                                variant="small"
-                                className="mb-1 block text-xs font-medium text-blue-gray-600"
-                              >
-                                {completion}%
-                              </Typography>
-                              <Progress
-                                value={completion}
-                                variant="gradient"
-                                color={completion === 100 ? "green" : "blue"}
-                                className="h-1"
-                              />
-                            </div>
                           </td>
                           <td className={className}>
                             <Typography
-                              as="a"
-                              href="#"
-                              className="text-xs font-semibold text-blue-gray-600"
+                              variant="small"
+                              className="text-xs font-medium text-blue-gray-600"
                             >
-                              <EllipsisVerticalIcon
-                                strokeWidth={2}
-                                className="h-5 w-5 text-inherit"
-                              />
+                              $10000
                             </Typography>
+                          </td>
+                          <td className={className}>
+                            <Typography
+                              variant="small"
+                              className="text-xs font-medium text-blue-gray-600"
+                            >
+                              {key%2 == 0 ? <Button className="px-2 py-1 lowercase tracking-wide rounded bg-green-500 text-white">
+                                online
+                              </Button> :
+                              <Button className="px-2 py-1 lowercase tracking-wide rounded bg-rose-500 text-white">
+                                offline
+                              </Button>}
+                            </Typography>
+                          </td>
+                          <td className={className}>
+                            <Typography
+                              variant="small"
+                              className="text-xs font-medium text-blue-gray-600"
+                            >
+                              {moment(member.createdAt).format('ll')}
+                            </Typography>
+                          </td>
+                          <td className={`${className} w-72`}>
+                            
+                            <Button className="px-3 py-1.5 mr-2 text-xs font-medium text-gray-700 bg-gray-200 shadow-none rounded hover:text-gray-900 hover:bg-gray-300">edit</Button>
+                            <Button onClick={() => navigate('/leadership/community')} className="px-3 py-1.5 mr-2 text-xs font-medium text-gray-700 bg-gray-200 shadow-none rounded hover:text-gray-900 hover:bg-gray-300">chat</Button>
+                            <Button onClick={() => handleDelete(member._id)} className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-200 shadow-none rounded hover:text-gray-900 hover:bg-gray-300">remove</Button>
                           </td>
                         </tr>
                       );
                     }
-                  )}
+                  ) : <tr className=""><td colSpan={8}><p className="w-full flex my-6 text-lg font-semibold justify-center"> No results </p></td></tr>}
                 </tbody>
               </table>
             </CardBody>

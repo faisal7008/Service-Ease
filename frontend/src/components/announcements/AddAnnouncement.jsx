@@ -3,43 +3,29 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../features/posts/postSlice";
 import { HiPhotograph } from "react-icons/hi";
+import { createAnnouncement } from "../../features/announcements/announcementSlice";
 
 export default function AddAnnouncement() {
   const { user } = useSelector((state) => state.auth);
   const [desc, setDesc] = useState("");
-  const [image, setImage] = useState(null);
-  const imageRef = useRef();
   const dispatch = useDispatch();
   const [modalId, setModalId] = useState("");
 
   useEffect(() => {}, [modalId]);
 
-  const onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      setImage({
-        img: img,
-        image: URL.createObjectURL(img),
-      });
-    }
-  };
-
   const clearData = () => {
-    setImage(null);
     setDesc("");
     setModalId("#add-announcement");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const postData = {
+    const announcementData = {
       userId: user._id,
-      desc: desc,
-      image: image.img,
-    };
-
-    dispatch(createPost(postData));
+      desc,
+    }
+    console.log(announcementData)
+    dispatch(createAnnouncement(announcementData))
     clearData();
   };
 
@@ -49,7 +35,7 @@ export default function AddAnnouncement() {
       class="hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto"
     >
       <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
-        <div className="relative w-full max-w-md h-full md:h-auto">
+        <div className="relative w-full h-full md:h-auto">
           {/* <!-- Modal content --> */}
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div className="px-5 py-4">
@@ -86,68 +72,19 @@ export default function AddAnnouncement() {
                   </label>
                   <textarea
                     id="desc"
-                    rows="4"
+                    rows="20"
                     className="p-3 w-full text-sm text-gray-900 bg-gray-50 border-2 rounded-md focus:border-teal-500 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                    placeholder="Write about your post..."
+                    placeholder="Write announcement here..."
                     onChange={(e) => setDesc(e.target.value)}
                     value={desc}
                     required
                   ></textarea>
                 </div>
-                <div className="flex px-2 font-medium text-base font-sans justify-between">
-                  <div
-                    className="text-teal-500 inline-flex gap-2 items-center cursor-pointer"
-                    onClick={() => imageRef.current.click()}
-                  >
-                    <i className="fas fa-image"></i> Photo
-                  </div>
-                  <div className="text-teal-500 inline-flex gap-2 items-center cursor-pointer">
-                    <i className="fas fa-video"></i> Video
-                  </div>{" "}
-                  <div className="text-teal-500 inline-flex gap-2 items-center cursor-pointer">
-                    <i className="fas fa-map-marker-alt"></i> Location
-                  </div>{" "}
-                  {/* <div className="text-teal-500">
-            Shedule
-          </div> */}
-                  <div className="hidden">
-                    <input
-                      type="file"
-                      name="myImage"
-                      ref={imageRef}
-                      onChange={onImageChange}
-                    />
-                  </div>
-                </div>
-                {image && (
-                  <div className="previewImage">
-                    <div
-                      className=" absolute right-10 mt-1 cursor-pointer hover:text-teal-500"
-                      onClick={() => setImage(null)}
-                    >
-                      {" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </div>
-                    <img src={image.image} alt="" />
-                  </div>
-                )}
+                
                 <button
                   type="submit"
                   className="w-full text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
-                  data-modal-toggle="post-modal"
+                  data-hs-overlay={modalId}
                 >
                   Post
                 </button>

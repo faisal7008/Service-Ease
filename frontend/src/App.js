@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,7 +6,7 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Home from "./pages/Public/Home";
 import Footer from "./pages/Public/Footer";
 import Login from "./pages/Public/Login";
@@ -30,6 +30,7 @@ import ProjectSettings from "./components/projects/ProjectSettings"
 import AllProjects from "./pages/Projects/AllProjects";
 import AllUsers from "./pages/Leadership/AllUsers";
 import Survey from "./pages/Employee/Survey";
+import { getMyProfile } from "./features/users/userSlice";
 
 const PublicLayout = () => (
   <div>
@@ -40,6 +41,10 @@ const PublicLayout = () => (
 
 function App() {
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getMyProfile())
+  }, [])
   return (
     <div className="app min-h-screen">
       <Router>
@@ -61,9 +66,7 @@ function App() {
           </Route>
           {/* Manager Routes */}
           <Route path="manager"
-            element={
-              user ? <Manager /> : <Navigate replace to="/login" />
-            }
+            element={user ? <Manager /> : <Navigate replace to="/login" />}
           >
             <Route path="dashboard" element={<ManagerDashboard />}
             />
@@ -109,7 +112,7 @@ function App() {
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<UserRegister />} />
+            <Route path="/register" element={user ? <UserRegister /> : <Navigate replace to={'/login'} />} />
             <Route path="/dashboard" element={<NewDashboard />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>

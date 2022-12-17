@@ -5,16 +5,18 @@ import { useState } from "react";
 import userService from "../../features/users/userService";
 import moment from "moment";
 import { viewedNotification } from "../../features/notifications/notificationSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Notification({ notification }) {
-  const [fromUser, setFromUser] = useState(null);
+  const {user} = useSelector(state => state.auth)
+  const [fromUser, setFromUser] = useState();
   const dispatch = useDispatch()
   useEffect(() => {
     userService
-      .getUser(notification?.fromUser)
+      .getUser(notification?.fromUser, user.token)
       .then((res) => setFromUser(res))
       .catch((err) => console.log(err));
+    console.log(fromUser);
   }, [notification]);
 
   return (
@@ -47,11 +49,11 @@ export default function Notification({ notification }) {
         </Typography>
         <Typography
           variant="small"
-          color="blue-gray"
-          className="flex items-center gap-1 text-xs font-normal opacity-60"
+          className="flex justify-between pr-1 items-center gap-1 text-xs font-normal opacity-60"
         >
-          <ClockIcon className="h-3.5 w-3.5" />{" "}
-          {moment(notification?.createdAt).fromNow("hour")}
+              <p className="flex gap-1 items-center"><ClockIcon className="h-3.5 w-3.5" />{" "}
+              {moment(notification?.createdAt).fromNow("hour")}</p>
+            <p className="font-semibold text-slate-900">- {fromUser?.name}</p>
         </Typography>
       </div></button>
     </MenuItem>

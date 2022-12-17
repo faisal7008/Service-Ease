@@ -16,7 +16,7 @@ import MyProjects from "./MyProjects";
       {
         label: "Edit Profile",
         value: "Edit Profile",
-        component: <EditProfile/>,
+        component: <EditProfile profile={profile}/>,
       },
       {
         label: "Your Projects",

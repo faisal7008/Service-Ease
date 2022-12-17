@@ -81,13 +81,13 @@ export default function Community() {
       </div>
       <div className="chatBox w-full h-full border-gray-200 sm:w-9/12">
         <div className="chatBoxWrapper flex flex-col h-full">
-          {heading && (heading === "Announcements" || heading === "General") && (
+          {heading && (
             <div className=" flex justify-between bg-teal-500 text-white w-full shadow-sm shadow-teal-700">
               <h1 className="px-4 m-3 ml-7 sm:m-3 font-mono font-semibold capitalize">
                 {" "}
-                {<> <i class="fas fa-hashtag"></i> {heading} </> 
-                }
+                {heading === "Announcements" || heading === "General" ? <> <i class="fas fa-hashtag"></i> {heading} </> : <> {heading} </>}
               </h1>
+             {/* <button type="button" className={heading === "General" ? " px-4 py-0 my-2 mx-4 rounded border text-sm bg-teal-50 text-teal-600" : "hidden"}  data-hs-overlay="#create-post">Add Post</button>  */}
             </div>
           )}
           {(heading === "Direct Messages" || heading === "Teams") && (

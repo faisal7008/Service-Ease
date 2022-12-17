@@ -12,6 +12,10 @@ import {
   getUser,
 } from "../../features/users/userSlice";
 import moment from "moment"
+import { HiDotsVertical } from "react-icons/hi";
+import { Button, Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwind/react";
+import { FiEdit } from "react-icons/fi";
+import { BsTrash } from "react-icons/bs";
 
 export default function Post({ post }) {
   const { user } = useSelector((state) => state.auth);
@@ -50,10 +54,6 @@ export default function Post({ post }) {
     setIsLiked(!isLiked);
   };
 
-  const handleDelete = (postId) => {
-    dispatch(deletePost({ postId, userId: user._id }));
-  };
-
   // useEffect(() => {
   //   dispatch(followUser({ userId: friendUser?._id }));   
   // }, [friendUser, isFollowing])
@@ -66,14 +66,22 @@ export default function Post({ post }) {
     setIsFollowing(!isFollowing);
   };
 
+  const handleDelete = (postId) => {
+    const result = window.confirm("Are you sure you want to delete the post?")
+    if(result){
+      dispatch(deletePost({ postId, userId: user._id }));
+    }
+  }
+
   // const handleFollow = () => {
   //   setIsFollowing(!isFollowing);
   // };
-
+  const description = post?.desc.split(/\n/g)
+  // console.log(description)
 
   return (
     <div>
-      <div className="max-w-md bg-white rounded-lg border border-gray-100 shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <div className="max-w-md bg-white rounded-lg border border-gray-100 shadow-md">
         <div className="flex p-3 items-center space-x-4">
           <div className="flex-shrink-0">
             <img
@@ -90,28 +98,58 @@ export default function Post({ post }) {
             <p className="text-sm font-semibold inline-flex items-center text-gray-900 truncate dark:text-white">
               {friendUser?.name}{" "}
               <span className="ml-2 text-xs font-medium font-mono text-gray-500">
-                {moment(post.createdAt).endOf('hour').fromNow()}
+                {moment(post.createdAt).endOf('minutes').fromNow()}
               </span>
             </p>
             <p className="text-sm text-gray-500 truncate dark:text-gray-400">
               {friendUser?.email}
             </p>
           </div>
-          <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+          <div className="inline-flex items-center gap-2 text-base font-semibold text-gray-900 dark:text-white">
             <button
               onClick={followHandler}
               className=" bg-teal-500 p-2 rounded text-sm text-white"
             >
               {!isFollowing ? <>Follow</> : <>Following</>}
             </button>
-            {/* onClick={() => handleDelete(post?._id)} */}
+           {post.userId === user._id && <Menu>
+                    <MenuHandler>
+                      <Button
+                        className="bg-transparent shadow-none px-0 py-2 rounded-md hover:bg-slate-200 transition-all text-sm"
+                      >
+                        <svg
+                          className="w-4 h-4 text-gray-600"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                        </svg>
+                      </Button>
+                    </MenuHandler>
+                    <MenuList className="p-1 z-10 w-32 ml-14">
+                      <MenuItem
+                          className="flex w-full justify-left items-center gap-2 px-4 py-2 rounded-md text-sm text-gray-800 hover:bg-slate-200 hover:font-medium"
+                        >
+                          <FiEdit /> edit
+                        </MenuItem>
+                      <MenuItem
+                        onClick={() => handleDelete(post._id)}
+                        className="flex w-full justify-left items-center gap-2 px-4 py-2 rounded-md text-sm text-gray-800 hover:bg-slate-200 hover:font-medium"
+                      >
+                        <BsTrash /> delete
+                      </MenuItem>
+                    </MenuList>
+            </Menu>}
           </div>
         </div>
         <div>
           <img className="" src={post?.image} loading="lazy" alt="" />
         </div>
         <div className="p-5">
-          <div className="desc mb-4">{post?.desc}</div>
+          <p className="desc mb-4">{description.map(str => <> {str}<br/> </>)}</p>
           <div className="flex gap-4 mb-2 text-rose-600">
             <button onClick={likeHandler} className="heart">
               {!isLiked ? (

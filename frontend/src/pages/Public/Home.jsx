@@ -19,20 +19,6 @@ export default function Home() {
   const navigate = useNavigate()
   const {user} = useSelector((state) => state.auth)
 
-  useEffect(() => {
-    if(user){
-      if (user.role === "Leader"){
-        navigate("/leadership/dashboard");
-      }
-      else if (user.role === "Manager"){
-        navigate("/manager/dashboard");
-      }
-      else {
-        navigate("/employee/dashboard");
-      }
-    }
-  },[user, navigate])
-
   return (
     <>
       <div className="relative overflow-hidden bg-white">

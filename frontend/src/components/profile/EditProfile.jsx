@@ -12,7 +12,11 @@ export default function EditProfile() {
   );
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
+  useEffect(() => {
+    dispatch(getMyProfile())
+  }, [dispatch, isError, isSuccess])
+
+  const initialState = {
     name: profile.name,
     id_no: profile.id_no,
     email: profile.email,
@@ -21,7 +25,9 @@ export default function EditProfile() {
     desc: profile.desc ? profile.desc : "",
     password: "",
     confirmPassword: "",
-  });
+  }
+
+  const [formData, setFormData] = useState(initialState);
   const [profilePic, setProfilePic] = useState("");
   const [error, setError] = useState(null);
   const [msg, setMsg] = useState(null);
@@ -50,27 +56,34 @@ export default function EditProfile() {
       desc,
       location,
       username,
-      password,
-      profilePicture: profilePic,
     };
     // console.log(userData)
-      
-    if (userData.password !== "" || userData.profilePicture !== "") {
-      if (password !== confirmPassword) {
-      setError("Password do not match");
-      } else {
-        dispatch(updateProfile(userData));
-        alert("To reflect changes, please login again.");
-        if (isSuccess) {
-          dispatch(logout());
-          dispatch(reset())
-          // navigate("/login");
-        }
-      }
-    } else{
-      dispatch(updateProfile(userData));
-      setMsg("Profile edited successfully!");
+    if(profilePic !== ""){
+      userData.profilePicture = profilePic
     }
+    if(password !== ""){
+      userData.password = password
+    }
+      
+    // if (userData.password !== "") {  // || userData.profilePicture !== ""
+      if (password && password !== confirmPassword) {
+        setError("Password do not match");
+      } else {
+        console.log(userData);
+        dispatch(updateProfile(userData));
+        window.location.reload(false)
+        // alert("To reflect changes, please login again.");
+        // if (isSuccess) {
+        //   // dispatch(logout());
+        //   dispatch(reset())
+        //   // navigate("/login");
+        // }
+      }
+    // } else{
+    //   console.log(userData)
+    //   // dispatch(updateProfile(userData));
+    //   setMsg("Profile edited successfully!");
+    // }
   };
 
   if (isLoading) {
@@ -115,7 +128,7 @@ export default function EditProfile() {
                   name="name"
                   value={name}
                   onChange={onChange}
-                  className="py-3 px-4 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
+                  className="py-3 px-4 block w-full text-gray-900 font-medium border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
                   placeholder="first name"
                 />
               </div>
@@ -129,7 +142,7 @@ export default function EditProfile() {
                   type="text"
                   id="lname"
                   name="lname"
-                  className="py-3 px-4 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
+                  className="py-3 px-4 block w-full text-gray-900 font-medium border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
                   placeholder="last name"
                 />
               </div>
@@ -145,7 +158,7 @@ export default function EditProfile() {
                   name="username"
                   value={username}
                   onChange={onChange}
-                  className="py-3 px-4 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
+                  className="py-3 px-4 block w-full text-gray-900 font-medium border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
                   placeholder="username"
                 />
               </div>
@@ -161,7 +174,7 @@ export default function EditProfile() {
                   name="email"
                   value={email}
                   onChange={onChange}
-                  className="py-3 px-4 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
+                  className="py-3 px-4 block w-full text-gray-900 font-medium border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
                   placeholder="you@site.com"
                 />
               </div>
@@ -175,7 +188,7 @@ export default function EditProfile() {
                 name="profilepic"
                 id="profilepic"
                 onChange={(e) => setProfilePic(e.target.files[0])}
-                className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500 file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4"
+                className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500 file:bg-transparent file:rounded-l-md file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4"
               />
             </div>
             <div>
@@ -206,7 +219,7 @@ export default function EditProfile() {
                   name="location"
                   value={location}
                   onChange={onChange}
-                  className="py-3 px-4 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
+                  className="py-3 px-4 block w-full text-gray-900 font-medium border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
                   placeholder="Write your address here"
                 />
               </div>
@@ -223,7 +236,7 @@ export default function EditProfile() {
                   name="desc"
                   value={desc}
                   onChange={onChange}
-                  className="py-3 px-4 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
+                  className="py-3 px-4 block w-full text-gray-900 font-medium border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
                   placeholder="Write about yourself"
                 />
               </div>
@@ -241,7 +254,7 @@ export default function EditProfile() {
                   name="password"
                   value={password}
                   onChange={onChange}
-                  className="py-3 px-4 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
+                  className="py-3 px-4 block w-full text-gray-900 font-medium border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
                   placeholder="********"
                 />
               </div>
@@ -260,7 +273,7 @@ export default function EditProfile() {
                   name="confirmPassword"
                   value={confirmPassword}
                   onChange={onChange}
-                  className="py-3 px-4 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
+                  className="py-3 px-4 block w-full text-gray-900 font-medium border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500"
                   placeholder="********"
                 />
               </div>
