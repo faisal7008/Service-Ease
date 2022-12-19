@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:9000/api/notifications/'
+// const API_URL = 'http://localhost:9000/api/notifications/'
+const API_URL = `${process.env.REACT_APP_BACKEND_API}/notifications/`
 
 // get all notifications
 const getNotifications = async (toUserId, token) => {

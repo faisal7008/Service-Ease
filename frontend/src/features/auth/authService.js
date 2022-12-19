@@ -1,11 +1,13 @@
 import axios from 'axios'
 
 // const API_URL = 'http://localhost:9000/api/users/'
-const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/users/'
+// const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/users/'
+const API_URL = `${process.env.REACT_APP_BACKEND_API}/users/`
 
 // Login user
 const login = async (userData) => {
     const response = await axios.post(API_URL + 'login', userData)
+    console.log(API_URL);
     if(response.data){
         localStorage.setItem('user', JSON.stringify(response.data))
     }

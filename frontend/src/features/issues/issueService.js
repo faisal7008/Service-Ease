@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:9000/api/issues/'
+// const API_URL = 'http://localhost:9000/api/issues/'
+const API_URL = `${process.env.REACT_APP_BACKEND_API}/issues/`
 
 // get all Issues related to a project
 const getIssues = async (projectId, token) => {

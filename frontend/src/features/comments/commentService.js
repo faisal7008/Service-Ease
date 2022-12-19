@@ -1,7 +1,8 @@
 import axios from 'axios'
 
-const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/comments/'
+// const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/comments/'
 // const API_URL = 'http://localhost:9000/api/comments/'
+const API_URL = `${process.env.REACT_APP_BACKEND_API}/comments/`
 
 // get all Comments
 const getComments = async (issueId, token) => {

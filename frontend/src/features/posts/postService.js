@@ -1,7 +1,8 @@
 import axios from 'axios'
 
-const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/posts/'
+// const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/posts/'
 // const API_URL = 'http://localhost:9000/api/posts/'
+const API_URL = `${process.env.REACT_APP_BACKEND_API}/posts/`
 
 // get all posts
 const getAllPosts = async (token) => {
