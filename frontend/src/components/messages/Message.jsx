@@ -26,7 +26,8 @@ export default function Message({ prevMessage, message, currentUser }) {
 
   return (
     <div className="message w-full px-3 hover:bg-slate-200">
-      {prevMessage?.senderName !== message?.senderName && moment(message?.createdAt).diff(moment(prevMessage?.createdAt), "hour") < 1 ? (
+      
+      {prevMessage?.senderName !== message?.senderName ? (
       <div className="flex items-start space-x-2 w-full">
         <div className="flex-shrink-0 mt-1">
           <img
@@ -51,6 +52,8 @@ export default function Message({ prevMessage, message, currentUser }) {
         {moment(message.createdAt).format('LT')}
       </span></p></div>
       )}
+
+      
     </div>
   );
 }

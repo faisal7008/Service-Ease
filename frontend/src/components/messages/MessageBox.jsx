@@ -9,6 +9,7 @@ import { UsersIcon } from "@heroicons/react/24/solid";
 import { UserIcon } from "@heroicons/react/24/solid";
 import GroupIcon from "../../assets/group.png"
 import { Avatar } from "@material-tailwind/react";
+import moment from "moment";
 
 // const socket = io.connect("http://localhost:9010");
 
@@ -84,6 +85,7 @@ export default function MessageBox(props) {
             <>
               {messages?.map((m, i, arr) => (
                 <div key={m._id} className="py-2" ref={scrollRef}>
+                  {/* { moment(m?.createdAt).diff(moment((i > 0 && arr[i-1])?.createdAt), "days") < 1 && <p className="my-1 text-center font-mono text-xs font-semibold" >{moment(m?.createdAt).format('ll')}</p>} */}
                   <Message
                     prevMessage={i > 0 && arr[i - 1]}
                     message={m}

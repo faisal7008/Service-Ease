@@ -18,7 +18,7 @@ export default function General() {
     <div className='grid gap-4 p-4 sm:pl-10 h-full w-full overflow-auto bg-slate-100 shadow-slate-300 shadow-inner'>
       {posts?.map(post => (
         <Post key={post._id} post={post} />
-      ))}
+      )).reverse()}
       <div className="hs-tooltip flex justify-end">
         <div className=" hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 m-5 bottom-0 group">
           <h1 className="mb-2 p-2 font-medium text-sm mr-6 bg-teal-100 rounded shadow text-teal-600">New Post</h1>

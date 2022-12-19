@@ -14,8 +14,6 @@ import { FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux"
 // import userimg from "../../assets/user.webp"
-
-import projectsTableData from "../../utilities/data/projects-table-data";
 import { useState } from "react";
 import SearchBox from "../../components/searchbox/SearchBox";
 import moment from "moment";
@@ -44,7 +42,7 @@ export default function AllUsers() {
     const filteredUsers = users?.filter(
       user => {
         return (
-          user?.name.toLowerCase().includes(searchField?.toLowerCase()))
+          user.role !== 'Leader' && user?.name.toLowerCase().includes(searchField?.toLowerCase()))
       }
     )
     // console.log(filteredUsers)
