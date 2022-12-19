@@ -96,12 +96,12 @@ export default function Login() {
 
   return (
     <>
-      <a href="/">
+      <Link to="/">
         <ArrowLeftCircleIcon
           className="h-10 w-10 absolute m-4 text-teal-500 hover:text-teal-600"
           aria-hidden="true"
         />
-      </a>
+      </Link>
       <div className="flex min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-4">
           <div>
