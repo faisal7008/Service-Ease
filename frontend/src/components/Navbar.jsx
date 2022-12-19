@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Link, useParams, useLocation } from 'react-router-dom'
-import UserPic from '../assets/user.webp'
+// import UserPic from '../assets/user.webp'
 import Notifications from './notifications/Notifications'
+
+const UserPic = "https://res.cloudinary.com/dopuxe0m5/image/upload/v1671447572/service%40ease%20project%20assets/user_ufjgmf.webp"
 
 export default function Navbar({ userNavigation, navigation, user }) {
   // const { userNavigation, navigation, user } = props;

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:9000/api/conversations/'
+const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/conversations/'
 
 const getDMs = async (userId, token) => {
   const config = {

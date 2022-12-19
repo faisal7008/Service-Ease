@@ -8,6 +8,7 @@ export default function AddPost() {
   const { user } = useSelector((state) => state.auth);
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState(null);
+  const [postImg, setPostImg] = useState(null);
   const imageRef = useRef();
   const dispatch = useDispatch();
   const [modalId, setModalId] = useState("");
@@ -21,6 +22,12 @@ export default function AddPost() {
         img: img,
         image: URL.createObjectURL(img),
       });
+      const reader = new FileReader()
+      reader.readAsDataURL(img)
+      reader.onloadend = () => {
+        setPostImg(reader.result)
+      }
+      console.log(postImg);
     }
   };
 
@@ -36,6 +43,7 @@ export default function AddPost() {
     const postData = {
       userId: user._id,
       desc: desc,
+      // image: postImg
       image: image.img,
     };
 

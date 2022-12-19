@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:9000/api/announcements/'
+// const API_URL = 'http://localhost:9000/api/announcements/'
+const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/announcements/'
 
 // get all Announcements
 const getAllAnnouncements = async (token) => {

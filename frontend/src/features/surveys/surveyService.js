@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:9000/api/surveys/'
+const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/surveys/'
+// const API_URL = 'http://localhost:9000/api/surveys/'
 
 // get all Surveys
 const getSurveys = async (token) => {

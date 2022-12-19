@@ -13,7 +13,7 @@ import {
 import { FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux"
-import userimg from "../../assets/user.webp"
+// import userimg from "../../assets/user.webp"
 
 import projectsTableData from "../../utilities/data/projects-table-data";
 import { useState } from "react";
@@ -21,6 +21,8 @@ import SearchBox from "../../components/searchbox/SearchBox";
 import moment from "moment";
 import { useEffect } from "react";
 import { deleteUser, getAllUsers } from "../../features/users/userSlice";
+
+const userimg = "https://res.cloudinary.com/dopuxe0m5/image/upload/v1671447572/service%40ease%20project%20assets/user_ufjgmf.webp"
 
 export default function AllUsers() {
   const {user} = useSelector(state => state.auth)

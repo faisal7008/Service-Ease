@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PostPic from "../../assets/coder.jpeg";
-import UserPic from "../../assets/user.webp";
+// import UserPic from "../../assets/user.webp";
 import postService from "../../features/posts/postService";
 import { deletePost } from "../../features/posts/postSlice";
 import userService from "../../features/users/userService";
@@ -17,11 +17,13 @@ import { Button, Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwin
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
+const UserPic = "https://res.cloudinary.com/dopuxe0m5/image/upload/v1671447572/service%40ease%20project%20assets/user_ufjgmf.webp"
+
 export default function Post({ post }) {
   const { user } = useSelector((state) => state.auth);
   const { profile, isSuccess, isError } = useSelector((state) => state.users);
   const [friendUser, setFriendUser] = useState();
-  const [like, setLike] = useState(post.likes.length);
+  const [like, setLike] = useState(post?.likes?.length);
   const [isLiked, setIsLiked] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const dispatch = useDispatch();
@@ -31,13 +33,13 @@ export default function Post({ post }) {
   }, [dispatch, isSuccess, isError]);
 
   useEffect(() => {
-    setIsLiked(post.likes.includes(user._id));
-  }, [user._id, post.likes]);
+    setIsLiked(post?.likes?.includes(user._id));
+  }, [user._id, post?.likes]);
 
   useEffect(() => {
     // dispatch(getUser(post.userId))
     userService
-      .getUser(post.userId, user.token)
+      .getUser(post?.userId, user.token)
       .then((res) => setFriendUser(res))
       .catch((err) => console.log(err.message));
   }, [post]);
@@ -48,7 +50,7 @@ export default function Post({ post }) {
 
   const likeHandler = () => {
     try {
-      postService.likePost(post._id, { userId: user._id }, user.token);
+      postService.likePost(post?._id, { userId: user._id }, user.token);
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
@@ -98,7 +100,7 @@ export default function Post({ post }) {
             <p className="text-sm font-semibold inline-flex items-center text-gray-900 truncate dark:text-white">
               {friendUser?.name}{" "}
               <span className="ml-2 text-xs font-medium font-mono text-gray-500">
-                {moment(post.createdAt).endOf('minutes').fromNow()}
+                {moment(post?.createdAt).endOf('minutes').fromNow()}
               </span>
             </p>
             <p className="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -149,7 +151,7 @@ export default function Post({ post }) {
           <img className="" src={post?.image} loading="lazy" alt="" />
         </div>
         <div className="p-5">
-          <p className="desc mb-4">{description.map(str => <> {str}<br/> </>)}</p>
+          <p className="desc mb-4">{description?.map(str => <> {str}<br/> </>)}</p>
           <div className="flex gap-4 mb-2 text-rose-600">
             <button onClick={likeHandler} className="heart">
               {!isLiked ? (

@@ -1,7 +1,9 @@
-import UserLogo from "../../assets/user.webp";
+// import UserLogo from "../../assets/user.webp";
 import { useDispatch } from "react-redux";
 import { deleteConversation } from "../../features/conversations/conversationSlice";
 import { useEffect } from "react";
+
+const UserLogo = "https://res.cloudinary.com/dopuxe0m5/image/upload/v1671447572/service%40ease%20project%20assets/user_ufjgmf.webp"
 
 export default function Teams(props) {
   const { conversation, conversations, currentUser } = props;

@@ -10,7 +10,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
-import company_logo from "../../utilities/data/img/logo-slack.svg";
+import project_logo from "../../utilities/data/img/logo-slack.svg";
 import { getProjects } from "../../features/projects/projectSlice";
 
 import projectsTableData from "../../utilities/data/projects-table-data";
@@ -18,6 +18,8 @@ import { useEffect, useState } from "react";
 import { getAllUsers } from "../../features/users/userSlice";
 import { getAllIssues } from "../../features/issues/issueSlice";
 import SearchBox from "../../components/searchbox/SearchBox";
+
+project_logo = "https://res.cloudinary.com/dopuxe0m5/image/upload/v1671447572/service%40ease%20project%20assets/project_logo_xiitzw.png"
 
 const pic =
   "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80";
@@ -147,7 +149,7 @@ export default function AllProjects() {
                         <tr key={project._id}>
                           <td className={className}>
                             <div className="flex items-center gap-4">
-                              <Avatar src={company_logo} alt={project.name} size="sm" />
+                              <Avatar src={project_logo} alt={project.name} size="sm" />
                               <Typography
                                 variant="small"
                                 color="blue-gray"

@@ -29,7 +29,7 @@ export default function Login() {
     if (isError) {
       setError(message);
     }
-    if (isSuccess && user) {
+    if (user) {
       if (user.role === "Leader"){
         navigate("/leadership/dashboard");
       }

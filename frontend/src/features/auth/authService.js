@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:9000/api/users/'
+// const API_URL = 'http://localhost:9000/api/users/'
+const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/users/'
 
 // Login user
 const login = async (userData) => {

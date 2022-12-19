@@ -1,9 +1,11 @@
 import {BsKanban} from 'react-icons/bs'
 import {IoMdMap, IoMdSettings} from 'react-icons/io'
 import {FiDatabase, FiMap, FiSettings} from 'react-icons/fi'
-import projectlogo from "../../assets/project_logo.png"
+// import projectlogo from "../../assets/project_logo.png"
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+
+const projectlogo = "https://res.cloudinary.com/dopuxe0m5/image/upload/v1671447572/service%40ease%20project%20assets/project_logo_xiitzw.png"
 
 export default function TaskSidebar({project, setCurrent, current}) {
   return (

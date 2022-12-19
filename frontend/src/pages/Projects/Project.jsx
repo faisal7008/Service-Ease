@@ -9,7 +9,7 @@ import { BsTrash } from "react-icons/bs";
 import CreateProject from "../../components/projects/CreateProject";
 import { FaArrowRight, FaBackward, FaEdit, FaFolderPlus } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
-import projectlogo from "../../assets/coder.jpeg";
+// import projectlogo from "../../assets/coder.jpeg";
 import { getAllUsers } from "../../features/users/userSlice";
 import {
   Card,
@@ -25,6 +25,8 @@ import {
   MenuList,
   MenuItem,
 } from "@material-tailwind/react";
+
+const projectlogo = "https://res.cloudinary.com/dopuxe0m5/image/upload/v1671447574/service%40ease%20project%20assets/coder_hjkju8.jpg"
 
 export default function Project() {
   const { projects } = useSelector((state) => state.projects);

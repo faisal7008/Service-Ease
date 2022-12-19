@@ -1,8 +1,10 @@
 import { useEffect } from "react";
-import UserLogo from "../../assets/user.webp";
+// import UserLogo from "../../assets/user.webp";
 import moment from "moment";
 import userService from "../../features/users/userService";
 import { useState } from "react";
+
+const UserLogo = "https://res.cloudinary.com/dopuxe0m5/image/upload/v1671447572/service%40ease%20project%20assets/user_ufjgmf.webp"
 
 export default function Message({ prevMessage, message, currentUser }) {
   const [user, setUser] = useState("");

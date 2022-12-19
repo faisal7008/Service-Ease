@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:9000/api/messages/'
+// const API_URL = 'http://localhost:9000/api/messages/'
+const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/messages/'
 
 // get all messages
 const getMessages = async (conversationId, token) => {

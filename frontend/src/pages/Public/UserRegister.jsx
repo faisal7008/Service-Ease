@@ -27,14 +27,12 @@ export default function UserRegister() {
     (state) => state.users
   );
 
-  useEffect(() => {
-    if (isError) {
-      setError(message);
-    }
-    // if (isSuccess) {
-    //   navigate("/login");
-    // }
-  }, [users, isError, isSuccess, message, navigate, dispatch, error]);
+  // useEffect(() => {
+    
+  //   // if (isSuccess) {
+  //   //   navigate("/login");
+  //   // }
+  // }, [users, isError, isSuccess, message, navigate, dispatch, error]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -45,7 +43,9 @@ export default function UserRegister() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
+    if (isError) {
+      setError(message);
+    }
     if (password !== confirmPassword) {
       setError("Password do not match");
     } else {
@@ -58,7 +58,7 @@ export default function UserRegister() {
       };
       dispatch(addUser(userData));
       setMsg("User added successfully.")
-      dispatch(reset());
+      // dispatch(reset());
     }
   };
 

@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:9000/api/attachments/'
+const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/attachments/'
+// const API_URL = 'http://localhost:9000/api/attachments/'
 
 // get all Attachments
 const getAttachments = async (issueId, token) => {

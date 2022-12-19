@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import UserLogo from "../../assets/user.webp";
+// import UserLogo from "../../assets/user.webp";
 import { useDispatch } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import userService from "../../features/users/userService";
 import {deleteConversation} from "../../features/conversations/conversationSlice"
+
+const UserLogo = "https://res.cloudinary.com/dopuxe0m5/image/upload/v1671447572/service%40ease%20project%20assets/user_ufjgmf.webp"
 
 export default function DirectMessages(props) {
   const { conversation, currentUser } = props;
