@@ -3,7 +3,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Features from "./Features";
 import Subscription from "./Subscription";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import FAQs from "./FAQs";
 import Footer from "./Footer";
@@ -68,12 +68,12 @@ export default function Home() {
                         {item.name}
                       </a>
                     ))}
-                    <a
-                      href="/login"
+                    <Link
+                      to="/login"
                       className="font-medium text-teal-600 hover:text-teal-500"
                     >
                       Log in
-                    </a>
+                    </Link>
                   </div>
                 </nav>
               </div>
