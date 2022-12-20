@@ -39,12 +39,13 @@ export default function AddPost() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(postImg)
 
     const postData = {
       userId: user._id,
       desc: desc,
-      // image: postImg
-      image: image.img,
+      image: postImg
+      // image: image.img,
     };
 
     dispatch(createPost(postData));

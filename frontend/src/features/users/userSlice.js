@@ -268,6 +268,19 @@ export const userSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
+      .addCase(updateProfile.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.profile = action.payload
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
       .addCase(deleteUser.pending, (state) => {
         state.isLoading = true
       })

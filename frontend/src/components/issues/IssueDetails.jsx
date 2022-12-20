@@ -20,15 +20,30 @@ export default function IssueDetails() {
   const {issueId} = useParams()
   const navigate = useNavigate()
   const {user} = useSelector(state => state.auth)
+  const [postImg, setPostImg] = useState(null);
   const [modalId, setModalId] = useState("")
   const imageRef = useRef();
   const dispatch = useDispatch()
   const onImageChange = (e) => {
-    if (e.target.files.length > 0) {
-      const attachmentData = {issue_id: issueId, user_id: user._id, attachments: e.target.files[0]}
+    if (e.target.files && e.target.files[0]) {
+      const img = e.target.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(img)
+      reader.onloadend = () => {
+        setPostImg(reader.result)
+      }
+      // console.log(postImg);
+      console.log(postImg)
+    }
+    
+  };
+
+  useEffect(() => {
+    if (postImg !== null) {
+      const attachmentData = {issue_id: issueId, user_id: user._id, attachments: postImg}
       dispatch(addAttachment(attachmentData))
     }
-  };
+  }, [postImg])
   const handleDelete = () => {
     const result = window.confirm("Are you sure you want to delete the issue?")
     if(result){

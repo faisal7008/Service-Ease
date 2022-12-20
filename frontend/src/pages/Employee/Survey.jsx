@@ -175,12 +175,12 @@ console.log(responses)
             </tr>)}
           </tbody>
         </table>
-        
-    </div>
-    <div className="flex justify-end my-4 w-full">
+        <div className="flex justify-end my-4 w-full">
         <Button type="submit" className=" bg-teal-600 text-white hover:bg-teal-700 rounded px-5 py-3">
           submit
         </Button></div>
+    </div>
+    
         </form>
     </div>
     </div>

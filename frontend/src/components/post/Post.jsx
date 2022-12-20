@@ -78,7 +78,7 @@ export default function Post({ post }) {
   // const handleFollow = () => {
   //   setIsFollowing(!isFollowing);
   // };
-  const description = post?.desc.split(/\n/g)
+  const description = post?.desc?.split(/\n/g)
   // console.log(description)
 
   return (

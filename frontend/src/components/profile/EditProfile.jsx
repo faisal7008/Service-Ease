@@ -11,6 +11,7 @@ export default function EditProfile() {
     (state) => state.users
   );
   const dispatch = useDispatch();
+  const [postImg, setPostImg] = useState(null);
 
   useEffect(() => {
     dispatch(getMyProfile())
@@ -47,6 +48,15 @@ export default function EditProfile() {
     }));
   };
 
+  const onProfileUpload = (e) => {
+    const img = e.target.files[0]
+    const reader = new FileReader()
+    reader.readAsDataURL(img)
+    reader.onloadend = () => {
+      setPostImg(reader.result)
+    }
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
     const userData = {
@@ -58,8 +68,9 @@ export default function EditProfile() {
       username,
     };
     // console.log(userData)
-    if(profilePic !== ""){
-      userData.profilePicture = profilePic
+    if(postImg !== null){
+      console.log(postImg);
+      userData.profilePicture = postImg
     }
     if(password !== ""){
       userData.password = password
@@ -69,9 +80,9 @@ export default function EditProfile() {
       if (password && password !== confirmPassword) {
         setError("Password do not match");
       } else {
-        console.log(userData);
+        // console.log(userData);
         dispatch(updateProfile(userData));
-        window.location.reload(false)
+        // window.location.reload(false)
         // alert("To reflect changes, please login again.");
         // if (isSuccess) {
         //   // dispatch(logout());
@@ -187,7 +198,7 @@ export default function EditProfile() {
                 type="file"
                 name="profilepic"
                 id="profilepic"
-                onChange={(e) => setProfilePic(e.target.files[0])}
+                onChange={(e) => onProfileUpload(e)}
                 className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-teal-500 focus:ring-teal-500 file:bg-transparent file:rounded-l-md file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4"
               />
             </div>

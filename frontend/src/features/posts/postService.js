@@ -57,10 +57,10 @@ const createPost = async (postData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
+      // "Content-Type": "multipart/form-data",
     },
   }
-  console.log(postData)
+  // console.log(postData)
   const response = await axios.post(API_URL, postData, config)
   return response.data
 }
