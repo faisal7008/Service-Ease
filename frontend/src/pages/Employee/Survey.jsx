@@ -94,7 +94,7 @@ console.log(responses)
 
   return (
     <>
-    <div className="flex justify-between items-center mx-12 py-4">
+    <div className="flex justify-between items-center mx-2 sm:mx-12 py-4">
         <ol
           className="ml-3 flex items-center whitespace-nowrap min-w-0"
           aria-label="Breadcrumb"
@@ -125,7 +125,7 @@ console.log(responses)
           </li>
         </ol>
       </div>
-      <main className="mx-28 my-6">
+      <main className="mx-2 sm:mx-28 my-6">
       <Tabs value="Ongoing Surveys">
         <TabsHeader className="bg-slate-200 rounded-b-none">
             <Tab className="text-teal-700 font-medium p-1" value={"Ongoing Surveys"}>
@@ -152,11 +152,11 @@ console.log(responses)
       </svg>
       </div>
     </button>
-    <div id={`collapsed-${key+1}`} className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby={`streched-${key+1}`}>
-    
     <div className="">
     <form className=" " onSubmit={(e) => handleSubmit(e, survey)}>
-      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+    <div id={`collapsed-${key+1}`} className="hs-accordion-content hidden w-full overflow-auto transition-[height] duration-300" aria-labelledby={`streched-${key+1}`}>
+    
+      <table className="min-w-full divide-y overflow-auto divide-gray-200 dark:divide-gray-700">
           <thead>
             <tr>
               <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase"></th>
@@ -175,13 +175,13 @@ console.log(responses)
             </tr>)}
           </tbody>
         </table>
-        <div className="flex justify-end my-4 w-full">
+        
+    </div>
+    <div className="flex justify-end my-4 w-full">
         <Button type="submit" className=" bg-teal-600 text-white hover:bg-teal-700 rounded px-5 py-3">
           submit
         </Button></div>
         </form>
-
-    </div>
     </div>
     </div>
 )}
@@ -203,10 +203,10 @@ console.log(responses)
       </svg>
       </div>
     </button>
-    <div id={`collapsed-${key+1}`} className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby={`streched-${key+1}`}>
+    <div id={`collapsed-${key+1}`} className="hs-accordion-content hidden w-full overflow-auto transition-[height] duration-300" aria-labelledby={`streched-${key+1}`}>
     
     <form onSubmit={(e) => handleSubmit(e, survey)}>
-      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+      <table className="min-w-full overflow-auto divide-y divide-gray-200 dark:divide-gray-700">
           <thead>
             <tr>
               <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase"></th>

@@ -46,7 +46,7 @@ export default function Project() {
   // const members =  users.filter(user => project.members?.includes(user._id))
   return (
     <>
-      <div className="flex justify-between items-center mx-12 py-4">
+      <div className="flex justify-between items-center mx-2 sm:mx-12 py-4">
         <ol
           className="ml-3 flex items-center whitespace-nowrap min-w-0"
           aria-label="Breadcrumb"
@@ -93,7 +93,7 @@ export default function Project() {
       </div>
       {/* <!-- End Breadcrumb --> */}
       <main className="grid p-2 mb-8 mx-4 md:mx-20 mt-2">
-        <div className="grid w-full grid-cols-3 gap-6">
+        <div className="grid w-full sm:grid-cols-3 gap-4 sm:gap-6">
           {myProjects?.map((project) => (
             <Card key={project._id} color="transparent" shadow={false}>
               <CardHeader

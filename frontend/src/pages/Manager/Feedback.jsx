@@ -111,7 +111,7 @@ console.log(very_dissatisfied)
 
   return (
     <>
-    <div className="flex justify-between items-center mx-12 py-4">
+    <div className="flex justify-between items-center mx-2 sm:mx-12 py-4">
         <ol
           className="ml-3 flex items-center whitespace-nowrap min-w-0"
           aria-label="Breadcrumb"

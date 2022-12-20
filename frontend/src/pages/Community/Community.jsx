@@ -68,8 +68,8 @@ export default function Community() {
             </svg>
           </button>
         </div>
-        <div class="p-1">
-        <SearchBox />
+        <div class="p-1 mt-2">
+        {/* <SearchBox /> */}
           <ConversationBox
             user={user}
             currentChat={currentChat}

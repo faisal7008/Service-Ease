@@ -19,7 +19,7 @@ export default function MyProjects() {
   let myProjects = projects?.filter(project => project.admins.includes(user?._id) || project.members.includes(user?._id))
 
   return (
-    <div className="grid m-2 grid-cols-3 gap-6">
+    <div className="grid m-2 sm:grid-cols-3 gap-6">
             {myProjects?.map((project) => (
              <Card key={project._id} color="transparent" shadow={false}>
              <CardHeader

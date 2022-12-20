@@ -38,7 +38,7 @@ import ordersOverviewData from "../../utilities/data/orders-overview-data"
 export default function EmployeeDashboard() {
   return (
     <div>
-      <div className="flex items-center ml-12 py-4">
+      <div className="flex items-center mx-2 sm:mx-12 py-4">
           <ol
             className="ml-3 flex items-center whitespace-nowrap min-w-0"
             aria-label="Breadcrumb"
@@ -69,7 +69,7 @@ export default function EmployeeDashboard() {
             </li>
           </ol>
         </div>
-    <div className="mx-12 mt-4">
+    <div className="mx-2 sm:mx-12 mt-4">
       {/* <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
         {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
           <StatisticsCard

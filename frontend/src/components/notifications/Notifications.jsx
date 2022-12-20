@@ -40,7 +40,7 @@ export default function Notifications() {
         {unViewed?.length > 0 && <span class="absolute top-1 right-1 inline-flex items-center py-0.5 px-1.5 rounded-full text-xs font-medium transform -translate-y-1/2 translate-x-1/2 bg-rose-500 text-white">{unViewed?.length} +</span>}
         </div>
       </MenuHandler>
-      <MenuList className=" w-80 pb-0 pt-0 pr-0 pl-0 max-h-96 mt-1 z-30 -ml-28 shadow-lg">
+      <MenuList className=" w-80 pb-0 pt-0 pr-0 pl-0 max-h-96 mt-1 z-30 -ml-4 sm:-ml-28 shadow-lg">
         <MenuItem className="pt-2 bg-teal-100 rounded-none text-teal-700 text-xs font-medium border-b-2 border-white uppercase">
           Notifications
         </MenuItem>

@@ -13,10 +13,10 @@ export default function UserPosts({userId}) {
   }, [dispatch, isSuccess])
 
   return (
-    <div className='grid grid-cols-2 gap-4 p-4 h-full w-full overflow-auto bg-slate-50 shadow-slate-300 shadow-inner'>
-      {userPosts?.map(post => (
+    <div className='grid sm:grid-cols-2 gap-4 p-4 h-full w-full overflow-auto bg-slate-50 shadow-slate-300 shadow-inner'>
+      {userPosts.length > 0 ? userPosts?.map(post => (
         <Post key={post._id} post={post} />
-      ))}
+      )) : <h1 className=' text-center font-semibold text-lg my-4'>Nothing Posted Yet.</h1> }
     </div>
   )
 }

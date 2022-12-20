@@ -12,7 +12,7 @@ const dispatch = useDispatch()
     }, [])
   return (
     <div>
-      <div className="flex items-center ml-12 py-4">
+      <div className="flex items-center mx-2 sm:mx-12 py-4">
             <ol
               className="ml-3 flex items-center whitespace-nowrap min-w-0"
               aria-label="Breadcrumb"
@@ -43,11 +43,11 @@ const dispatch = useDispatch()
               </li>
             </ol>
       </div>
-      <main className="flex-1 mb-6 md:flex mx-12 gap-4 justify-center p-2 ">
+      <main className="flex flex-col sm:flex-row mb-6 md:flex mx-2 sm:mx-12 gap-4 justify-center p-2 ">
         <div className=" px-2 max-w-[25rem]">
           <ProfileCard profile={profile}/>
         </div>
-        <div className="shadow-lg shadow-slate-200 rounded-lg h-fit bg-white w-3/4">
+        <div className="shadow-lg shadow-slate-200 rounded-lg h-fit bg-white sm:w-3/4">
           <ProfileMain profile={profile}/>
         </div>
       </main>

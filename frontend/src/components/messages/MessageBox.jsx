@@ -69,7 +69,7 @@ export default function MessageBox(props) {
 
   return (
     <div className=" h-full">
-      <div className=" flex justify-between bg-teal-500 text-white w-full shadow-sm shadow-teal-700">
+      <div className="flex  justify-between bg-teal-500 text-white w-full shadow-sm shadow-teal-700">
           <h1 className="px-4 m-3 ml-7 sm:m-3 flex gap-2 items-center font-mono font-semibold capitalize">
             {/* <Avatar
                   src={GroupIcon}

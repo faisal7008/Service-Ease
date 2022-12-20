@@ -67,7 +67,7 @@ export default function AllProjects() {
 
   return (
     <div>
-      <div className="flex items-center ml-12 py-4">
+      <div className="flex items-center mx-2 sm:mx-12 py-4">
         <ol
           className="ml-3 flex items-center whitespace-nowrap min-w-0"
           aria-label="Breadcrumb"
@@ -100,7 +100,7 @@ export default function AllProjects() {
       </div>
       <div className="grid p-4 justify-center">
         <div>
-          <Card className="min-w-[85rem] my-6">
+          <Card className="min-w-[85rem] max-w-full my-6">
             <CardHeader
               variant="gradient"
               className="mb-6 -mt-6 bg-teal-500 p-6 flex items-center justify-between"
@@ -111,7 +111,7 @@ export default function AllProjects() {
               <SearchBox searchField={searchField} setSearchField={setSearchField}/>
             </CardHeader>
             <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
-              <table className="w-full min-w-[640px] table-auto">
+              <table className="w-full sm:min-w-[640px] table-auto">
                 <thead>
                   <tr>
                     {[

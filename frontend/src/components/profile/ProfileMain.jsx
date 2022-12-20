@@ -38,7 +38,7 @@ import MyProjects from "./MyProjects";
     ];
    
     return (
-      <>
+      <div className="w-full">
       <Tabs value="Edit Profile">
         <TabsHeader className="bg-slate-200 rounded-b-none">
           {data.map(({ label, value }) => (
@@ -57,6 +57,6 @@ import MyProjects from "./MyProjects";
           ))}
         </TabsBody>
       </Tabs>
-      </>
+      </div>
     );
   }

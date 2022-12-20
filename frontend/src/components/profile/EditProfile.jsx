@@ -114,9 +114,9 @@ export default function EditProfile() {
     </div>
   </div>
       </div>}
-      <form className="min-w-full px-6 py-3" onSubmit={onSubmit}>
+      <form className="min-w-full px-1 sm:px-6 py-3" onSubmit={onSubmit}>
         <div className="grid gap-5 mb-5">
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-2 gap-5">
             <div>
               <label for="fname" className="block text-sm font-medium mb-2">
                 First Name
@@ -242,7 +242,7 @@ export default function EditProfile() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-2 gap-5">
             <div>
               <label for="password" className="block text-sm font-medium mb-2">
                 Password
