@@ -39,7 +39,7 @@ export default function ProfileCard({profile}) {
     <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
       {profile?.name}
     </h3>
-      <p className="-mt-3 text-sm text-gray-800 dark:text-gray-400">
+      <p className="-mt-3 text-sm font-semibold text-gray-800 dark:text-gray-400">
       {profile?.username}
     </p>
     <p className="text-base font-medium text-gray-800 dark:text-gray-400">
