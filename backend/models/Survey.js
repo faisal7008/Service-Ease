@@ -20,7 +20,11 @@ const SurveySchema = new mongoose.Schema(
     expirydate: {
       type: Date,
       required: [true, "Please add a due date"],
-    }
+    },
+    submissions: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'submission'
+    }],
   },
   {
     timestamps: true,

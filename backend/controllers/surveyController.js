@@ -8,7 +8,7 @@ const Submission = require("../models/surveySubmission");
 // @access  Private
 
 const getSurveys = asyncHandler(async (req, res) => {
-  const surveys = await Survey.find({ user: req.user.id });
+  const surveys = await Survey.find();
   res.status(200).json(surveys);
 });
 
@@ -31,10 +31,10 @@ const addSurvey = asyncHandler(
       throw new Error("Please add duedate");
     }
     //Check for user
-    if(!req.user){
-        res.status(401)
-        throw new Error('User not found')
-    }
+    // if(!req.user){
+    //     res.status(401)
+    //     throw new Error('User not found')
+    // }
 
     const survey = await Survey.create({
       name: req.body.name,
@@ -100,7 +100,7 @@ const removeSurvey = asyncHandler(
 // @access  Private
 
 const getSubmissions = asyncHandler(async (req, res) => {
-  const submissions = await Submission.find({ user: req.user.id });
+  const submissions = await Submission.find();
   res.status(200).json(submissions);
 });
 
@@ -126,10 +126,10 @@ const addSubmission = asyncHandler(async (req, res) => {
   
 
   //Check for user
-  if(!req.user){
-      res.status(401)
-      throw new Error('User not found')
-  }
+  // if(!req.user){
+  //     res.status(401)
+  //     throw new Error('User not found')
+  // }
 
   const submission = await Submission.create({
     surveyName: req.body.surveyName,
@@ -137,6 +137,8 @@ const addSubmission = asyncHandler(async (req, res) => {
     employeeId: req.body.employeeId,
     responses: req.body.responses,
   });
+
+  await Survey.findByIdAndUpdate(submission.surveyId, {$push: {submissions: submission.employeeId}})
 
   res.status(200).json(submission);
 });
