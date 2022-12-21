@@ -6,7 +6,7 @@ import { Button, Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwin
 import moment from "moment";
 import { BsTrash } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
-import UserPic from "../../assets/user.webp";
+// import UserPic from "../../assets/user.webp";
 import DialogBox from "./DialogBox";
 import { deleteAnnouncement } from "../../features/announcements/announcementSlice";
 import announcementService from "../../features/announcements/announcementService";
@@ -16,6 +16,8 @@ import userService from "../../features/users/userService";
 // import { deleteAnnouncement } from "../../features/announcements/announcementSlice";
 // import userService from "../../features/users/userService";
 // import { followUser, getMyProfile, getUser } from "../../features/users/userSlice";
+
+const UserPic = "https://res.cloudinary.com/dopuxe0m5/image/upload/v1671447572/service%40ease%20project%20assets/user_ufjgmf.webp"
 
 export default function Announcement({ announcement }) {
     const { user } = useSelector((state) => state.auth);
@@ -67,6 +69,8 @@ export default function Announcement({ announcement }) {
   //   }
 
   const description = announcement?.desc?.split(/\n/g)
+
+  
 
   return (
     <div className="w-full bg-white rounded-lg shadow-md overflow-auto">
