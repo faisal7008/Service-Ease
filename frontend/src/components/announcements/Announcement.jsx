@@ -21,7 +21,7 @@ export default function Announcement({ announcement }) {
     const { user } = useSelector((state) => state.auth);
     const { profile } = useSelector((state) => state.users);
     const [friendUser, setFriendUser] = useState();
-    const [like, setLike] = useState(announcement?.likes.length);
+    const [like, setLike] = useState(announcement?.likes?.length);
     const [isLiked, setIsLiked] = useState(false);
     // const [isFollowing, setIsFollowing] = useState(false);
     const dispatch = useDispatch()
@@ -31,7 +31,7 @@ export default function Announcement({ announcement }) {
     },[announcement])
 
     useEffect(() => {
-      setIsLiked(announcement?.likes.includes(user._id));
+      setIsLiked(announcement?.likes?.includes(user._id));
     }, [user._id, announcement?.likes]);
 
     useEffect(() => {
@@ -66,7 +66,7 @@ export default function Announcement({ announcement }) {
   //     setIsFollowing(!isFollowing)
   //   }
 
-  const description = announcement?.desc.split(/\n/g)
+  const description = announcement?.desc?.split(/\n/g)
 
   return (
     <div className="w-full bg-white rounded-lg shadow-md overflow-auto">
@@ -88,7 +88,7 @@ export default function Announcement({ announcement }) {
             <p className="text-sm font-semibold inline-flex items-center text-gray-900 truncate dark:text-white">
               {friendUser?.name}{" "}
               <span className="ml-2 text-xs font-medium font-mono text-gray-500">
-                {moment(announcement.updatedAt).endOf('minutes').fromNow()}
+                {moment(announcement?.updatedAt).endOf('minutes').fromNow()}
               </span>
             </p>
             <p className="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -134,7 +134,7 @@ export default function Announcement({ announcement }) {
             Announcement title
           </h3> */}
           <p className="mt-2 font-normal text-justify text-sm text-gray-800 dark:text-gray-400">
-            {description.map(str => <> {str}<br/> </>)}
+            {description?.map(str => <> {str}<br/> </>)}
           </p>
           {/* <div className=" grid grid-cols-1">
             <a

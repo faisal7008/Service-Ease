@@ -32,10 +32,10 @@ const createAnnouncement = async (AnnouncementData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
+      // "Content-Type": "multipart/form-data",
     },
   }
-  console.log(AnnouncementData)
+  // console.log(AnnouncementData)
   const response = await axios.post(API_URL, AnnouncementData, config)
   return response.data
 }

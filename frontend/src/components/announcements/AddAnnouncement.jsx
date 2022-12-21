@@ -21,8 +21,8 @@ export default function AddAnnouncement() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const announcementData = {
-      userId: user._id,
-      desc,
+      userId: user?._id,
+      desc: desc
     }
     console.log(announcementData)
     dispatch(createAnnouncement(announcementData))
