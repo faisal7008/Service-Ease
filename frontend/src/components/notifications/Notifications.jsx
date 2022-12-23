@@ -37,7 +37,9 @@ export default function Notifications() {
         >
           <BellIcon className="h-5 w-5 text-slate-900" />
         </IconButton>
-        {unViewed?.length > 0 && <span class="absolute top-1 right-1 inline-flex items-center py-0.5 px-1.5 rounded-full text-xs font-medium transform -translate-y-1/2 translate-x-1/2 bg-rose-500 text-white">{unViewed?.length} +</span>}
+        {
+        unViewed.length > 0 && 
+        <span class="absolute animate-bounce -top-1 -right-2 inline-flex items-center py-0.5 px-1.5 rounded-full text-xs font-medium transform -translate-y-1/2 translate-x-1/2 bg-rose-500 text-white">{unViewed?.length} +</span>}
         </div>
       </MenuHandler>
       <MenuList className=" w-80 pb-0 pt-0 pr-0 pl-0 max-h-96 mt-1 z-30 -ml-4 sm:-ml-28 shadow-lg">

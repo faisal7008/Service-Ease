@@ -6,8 +6,8 @@ import { Alert } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function EditProfile() {
-  const { profile, isLoading, isError, isSuccess, message } = useSelector(
+export default function EditProfile({profile}) {
+  const { isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.users
   );
   const dispatch = useDispatch();

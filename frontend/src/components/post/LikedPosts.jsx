@@ -13,7 +13,7 @@ export default function LikedPosts({userId}) {
   }, [dispatch, isSuccess, isError])
 
   return (
-    <div className='grid gap-4 sm:grid-cols-2 p-4 h-full w-full overflow-auto bg-slate-50 shadow-slate-300 shadow-inner'>
+    <div className={`grid ${likedPosts.length > 0 ? 'sm:grid-cols-2' : '' } gap-4 p-4 h-full w-full overflow-auto bg-slate-50 shadow-slate-300 shadow-inner`}>
       {likedPosts.length > 0 ? likedPosts?.map(post => (
         <Post key={post._id} post={post} />
       )) : <h1 className=' text-center font-semibold text-lg my-4'>Nothing Posted Yet.</h1> }
