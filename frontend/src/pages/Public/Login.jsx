@@ -106,12 +106,12 @@ export default function Login() {
         <div className="w-full max-w-md space-y-4">
           <div>
             <h1 className="font-mono text-center text-slate-900 text-2xl font-semibold">Service<span className="text-3xl ml-1 mr-1 text-teal-500">@</span>Ease</h1>
-            <h2 className="mt-3 mb-6 text-center text-3xl font-bold tracking-normal text-gray-900">
+            <h2 className="mt-3 mb-3 text-center text-3xl font-bold tracking-normal text-gray-900">
               Sign in to your account
             </h2>
             <p className="text-center text-sm text-gray-600">
               Or{' '}
-              <Link to={"/register"} className="font-medium text-teal-600 hover:text-teal-500">
+              <Link to={"/signup"} className="font-medium text-teal-600 hover:text-teal-500">
                 New here
               </Link>
             </p>

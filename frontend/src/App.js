@@ -31,6 +31,7 @@ import AllProjects from "./pages/Projects/AllProjects";
 import AllUsers from "./pages/Leadership/AllUsers";
 import Survey from "./pages/Employee/Survey";
 import { getMyProfile } from "./features/users/userSlice";
+import Signup from "./pages/Public/Signup";
 
 const PublicLayout = () => (
   <div>
@@ -112,8 +113,8 @@ function App() {
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<UserRegister />} />
-            {/* <Route path="/register" element={user ? <UserRegister /> : <Navigate replace to={'/login'} />} /> */}
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/register" element={user ? <UserRegister /> : <Navigate replace to={'/login'} />} />
             <Route path="/dashboard" element={<NewDashboard />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
