@@ -85,7 +85,7 @@ export default function Signup() {
     return (
       <Alert className="bg-green-500">
         <span>
-          <span className="font-medium">Success!</span> {msg} Account created successfully. <Link className="ml-2 font-bold font-mono animate-pulse" to={'/login'}>Login</Link>
+          <span className="font-medium">Success!</span> {msg} <Link className="ml-2 font-bold font-mono animate-pulse" to={'/login'}>Login</Link>
         </span>
       </Alert>
     );
@@ -121,7 +121,6 @@ export default function Signup() {
           </div>
           {error ? <ErrorContainer /> : <></>}
           {msg ? <SuccessContainer /> : <></>}
-          <SuccessContainer />
           <form className="space-y-6" onSubmit={onSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
