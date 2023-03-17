@@ -9,6 +9,7 @@ import { FaHandshake, FaUsers } from "react-icons/fa";
 import {AiOutlineSetting} from 'react-icons/ai'
 import {BiUser} from 'react-icons/bi'
 import {FiLogOut} from 'react-icons/fi'
+import { getMyProfile } from "../features/users/userSlice";
 
 export default function Leadership(props) {
   const navigate = useNavigate();
@@ -16,6 +17,10 @@ export default function Leadership(props) {
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
+
+  useEffect(() => {
+    dispatch(getMyProfile())
+  }, [])
 
   useEffect(() => {
     if (user && isSuccess) {

@@ -59,6 +59,57 @@ const registerUser = asyncHandler( async (req, res) => {
     }
 })
 
+const signupUser = asyncHandler( async (req, res) => {
+    const {name, id_no, username, desc, location, email, role, password} = req.body
+    if(!name || !id_no || !email || !role || !password){
+        res.status(400)
+        throw new Error('Please enter all fields')
+    }
+
+    // check if user exits
+    const userExists = await User.findOne({email})
+
+    if (userExists){
+        res.status(400)
+        throw new Error('User already exists') 
+    }
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+
+  const url = req.protocol + "://" + req.get("host");
+
+    // Create user
+    const user = await User.create({
+        name,
+        id_no,
+        username,
+        desc,
+        location,
+        // profilePicture: url + "/uploads/profile/" + req.file.filename,
+        email,
+        role,
+        password: hashedPassword
+    })
+
+    if(user){
+        res.status(201).json( {
+            _id: user.id,
+            name: user.name,
+            id_no: user.id_no,
+            email: user.email,
+            role: user.role,
+            token: generateToken(user._id)
+        })
+    }
+    else{
+        res.status(400)
+        throw new Error('Invalid user data')
+    }
+})
+
 // @desc    Authenticate a user
 // @route   POST /api/login
 // @access  Public
@@ -228,5 +279,5 @@ const generateToken = (id) => {
 }
 
 module.exports = {
-    registerUser, loginUser, updateUser, deleteUser, getMe, getOther, getAllUsers, getEmployees, getManagers, follow
+    registerUser, loginUser, signupUser, updateUser, deleteUser, getMe, getOther, getAllUsers, getEmployees, getManagers, follow
 }

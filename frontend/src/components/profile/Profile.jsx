@@ -6,7 +6,7 @@ import { useEffect } from "react"
 
 export default function Profile() {
   const {profile} = useSelector(state => state.users)
-const dispatch = useDispatch()
+  const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getMyProfile())
     }, [])

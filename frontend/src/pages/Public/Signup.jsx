@@ -3,7 +3,7 @@ import { Alert } from "@material-tailwind/react";
 import { LockClosedIcon, ArrowLeftCircleIcon } from "@heroicons/react/20/solid";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { addUser, reset } from "../../features/users/userSlice";
+import { signup } from "../../features/auth/authSlice";
 
 export default function Signup() {
   const {user} = useSelector(state => state.auth)
@@ -56,8 +56,9 @@ export default function Signup() {
         role,
         password,
       };
-      dispatch(addUser(userData));
-      setMsg("User added successfully.")
+      dispatch(signup(userData));
+      setMsg("Account created successfully.")
+      // navigate('/login')
       // dispatch(reset());
     }
   };
@@ -84,7 +85,7 @@ export default function Signup() {
     return (
       <Alert className="bg-green-500">
         <span>
-          <span className="font-medium">Success!</span> {msg}
+          <span className="font-medium">Success!</span> {msg} Account created successfully. <Link className="ml-2 font-bold font-mono animate-pulse" to={'/login'}>Login</Link>
         </span>
       </Alert>
     );
@@ -120,6 +121,7 @@ export default function Signup() {
           </div>
           {error ? <ErrorContainer /> : <></>}
           {msg ? <SuccessContainer /> : <></>}
+          <SuccessContainer />
           <form className="space-y-6" onSubmit={onSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">

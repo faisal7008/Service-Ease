@@ -42,10 +42,10 @@ const PublicLayout = () => (
 
 function App() {
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getMyProfile())
-  }, [])
+  // const dispatch = useDispatch()
+  // useEffect(() => {
+  //   dispatch(getMyProfile())
+  // }, [])
   return (
     <div className="app min-h-screen">
       <Router>
