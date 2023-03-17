@@ -112,7 +112,8 @@ function App() {
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={user ? <UserRegister /> : <Navigate replace to={'/login'} />} />
+            <Route path="/register" element={<UserRegister />} />
+            {/* <Route path="/register" element={user ? <UserRegister /> : <Navigate replace to={'/login'} />} /> */}
             <Route path="/dashboard" element={<NewDashboard />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
