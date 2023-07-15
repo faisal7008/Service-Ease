@@ -51,6 +51,10 @@ To set up and run the Service@Ease platform locally, follow these steps:
 - Start the development server: npm run dev
 - Open your web browser and visit http://localhost:3000 to access the platform.
 
+## Deployment
+
+The Service@Ease platform is deployed and can be accessed online at https://service-at-ease.netlify.app.
+
 ## Conclusion
 
 Service@Ease is a powerful company engagement platform that empowers leadership, managers, and employees to collaborate, manage projects and tasks, share announcements, provide feedback, and engage in meaningful discussions. With its user-friendly interface and robust set of features, Service@Ease aims to streamline company engagement and enhance overall productivity.
