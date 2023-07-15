@@ -1,30 +1,30 @@
 
-#Service@Ease - A Company Engagement Platform
+# Service@Ease - A Company Engagement Platform
 
-Service@Ease is a comprehensive company engagement platform built using the MERN stack (MongoDB, Express.js, React.js, Node.js) and the TailwindCSS framework. It is designed to cater to the various engagement needs of companies, providing a user-friendly interface and a range of features including project management, task management, notification, feedback and community page.
+Service@Ease is a comprehensive company engagement platform built using the MERN stack (MongoDB, Express.js, React.js, Node.js) and the TailwindCSS framework. It is designed to cater to the various engagement needs of companies, providing a user-friendly interface and a range of features including project management, task management, notification, feedback, and a community page.
 
-##Features
+## Features
 
-###User Roles
+### User Roles
 Service@Ease supports three user roles:
 
 - Leadership: Users with leadership roles have access to advanced features, such as posting announcements, managing projects, and monitoring employee engagement. They can also initiate direct and group chats.
 - Manager: Managers have access to project management and task management functionalities. They can assign tasks to employees and track their progress. Managers can also participate in direct and group chats.
 - Employee: Employees can view and manage their tasks, receive notifications, and participate in community discussions. They can collaborate with their peers through direct and group chats.
 
-###Project Management
+### Project Management
 Service@Ease provides a project management feature that allows managers to create and manage projects. Managers can assign tasks, set deadlines, and track the progress of each project. The Kanban board provides a visual representation of tasks, helping teams manage their work efficiently.
 
-###Task Management (Kanban)
+### Task Management (Kanban)
 The task management feature utilizes a Kanban board, allowing users to create, update, and organize tasks using a drag-and-drop interface. Tasks can be categorized into different stages, such as "To Do," "In Progress," and "Completed," providing a clear overview of the workflow.
 
-###Notifications
+### Notifications
 Users receive notifications for important events, such as task assignments, task updates, and new announcements. Notifications help keep users informed and ensure timely communication within the platform.
 
-###Feedback
+### Feedback
 Service@Ease includes a feedback feature that enables employees to provide feedback on various aspects of the company, projects, or individual tasks. This feature promotes transparency and encourages constructive discussions within the organization.
 
-###Community Page
+### Community Page
 The community page serves as a platform for users to engage with one another. It includes the following channels:
 
 - General Channel: A space where all users can post and engage in discussions on various topics related to the company, projects, or any other relevant subjects.
@@ -32,7 +32,7 @@ The community page serves as a platform for users to engage with one another. It
 - Direct and Group Chats
 Service@Ease facilitates direct and group chats, enabling users to communicate and collaborate with one another in real-time. This feature promotes effective communication and teamwork within the company.
 
-##Technologies Used
+## Technologies Used
 
 Service@Ease is built using the following technologies:
 
@@ -51,11 +51,11 @@ To set up and run the Service@Ease platform locally, follow these steps:
 - Start the development server: npm run dev
 - Open your web browser and visit http://localhost:3000 to access the platform.
 
-##Conclusion
+## Conclusion
 
 Service@Ease is a powerful company engagement platform that empowers leadership, managers, and employees to collaborate, manage projects and tasks, share announcements, provide feedback, and engage in meaningful discussions. With its user-friendly interface and robust set of features, Service@Ease aims to streamline company engagement and enhance overall productivity.
 
-By
+## Developed By
 Faisal Hussain
 Mohd Aquib
 Ansh Parmar
