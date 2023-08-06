@@ -53,8 +53,8 @@ To set up and run the Service@Ease platform locally, follow these steps:
 
 ## Deployment
 
-The Service@Ease platform is deployed and can be accessed online at https://service-at-ease.netlify.app
-Check out the demo video at https://drive.google.com/file/d/1c2I3lfPc_mXZKG6JIXhvstQ8JbyHlrRT/view
+- The Service@Ease platform is deployed and can be accessed online at https://service-at-ease.netlify.app
+- Check out the demo video at https://drive.google.com/file/d/1c2I3lfPc_mXZKG6JIXhvstQ8JbyHlrRT/view
 
 ## Conclusion
 
