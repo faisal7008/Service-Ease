@@ -28,11 +28,11 @@ export default function ProjectTable() {
   const { issues } = useSelector((state) => state.issues);
   const dispatch = useDispatch();
   const [searchField, setSearchField] = useState("");
-  const [allProjects, setAllProjects] = useState([])
-  
+  const [allProjects, setAllProjects] = useState([]);
+
   useEffect(() => {
-    setAllProjects(projects)
-  },[dispatch, projects])
+    setAllProjects(projects);
+  }, [dispatch, projects]);
 
   useEffect(() => {
     dispatch(getProjects());
@@ -42,147 +42,161 @@ export default function ProjectTable() {
 
   useEffect(() => {
     // console.log(projects);
-    const filteredProjects = projects?.filter(
-      project => {
-        return (
-          project?.name.toLowerCase().includes(searchField?.toLowerCase()))
-      }
-    )
+    const filteredProjects = projects?.filter((project) => {
+      return project?.name.toLowerCase().includes(searchField?.toLowerCase());
+    });
     // console.log(filteredProjects)
-    setAllProjects(filteredProjects)
+    setAllProjects(filteredProjects);
     // console.log(allProjects)
-  }, [searchField])
-  
+  }, [searchField]);
+
   const completion = (projectId) => {
-    let currentIssues = issues.filter(issue => issue.project_id === projectId)
-    let done_issues = issues.filter(issue => issue.status === "Done" && issue.project_id === projectId)
-    let x = done_issues?.length
-    let y = currentIssues?.length
-    let completed = parseInt((x/y)*100)
-    return completed ? completed : 0
-  }
- 
+    let currentIssues = issues.filter(
+      (issue) => issue.project_id === projectId
+    );
+    let done_issues = issues.filter(
+      (issue) => issue.status === "Done" && issue.project_id === projectId
+    );
+    let x = done_issues?.length;
+    let y = currentIssues?.length;
+    let completed = parseInt((x / y) * 100);
+    return completed ? completed : 0;
+  };
 
   return (
     <table className="w-full min-w-[640px] table-auto">
-    <thead>
+      <thead>
         <tr>
-        {[
+          {[
             "project name",
             "members",
             "budget",
             "status",
             "completion",
             "",
-        ].map((el) => (
+          ].map((el) => (
             <th
-            key={el}
-            className="border-b border-blue-gray-50 py-3 px-5 text-left"
+              key={el}
+              className="border-b border-blue-gray-50 py-3 px-5 text-left"
             >
-            <Typography
+              <Typography
                 variant="small"
                 className="text-[11px] font-bold uppercase text-blue-gray-400"
-            >
+              >
                 {el}
-            </Typography>
+              </Typography>
             </th>
-        ))}
+          ))}
         </tr>
-    </thead>
-    <tbody>
-        {allProjects.length > 0 ? allProjects?.map(
-        (project, key) => {
+      </thead>
+      <tbody>
+        {allProjects.length > 0 ? (
+          allProjects?.map((project, key) => {
             const className = `py-3 px-5 ${
-            key === projects?.length - 1
-                ? ""
-                : "border-b border-blue-gray-50"
+              key === projects?.length - 1 ? "" : "border-b border-blue-gray-50"
             }`;
 
             return (
-            <tr key={project._id}>
+              <tr key={project._id}>
                 <td className={className}>
-                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4">
                     <Avatar src={company_logo} alt={project.name} size="sm" />
                     <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-bold"
+                      variant="small"
+                      color="blue-gray"
+                      className="font-bold"
                     >
-                    {project.name}
+                      {project.name}
                     </Typography>
-                </div>
+                  </div>
                 </td>
                 <td className={className}>
-                {users
+                  {users
                     .filter((user) => project?.members?.includes(user._id))
                     .map((member, key) => (
-                    <Tooltip key={member._id} className="bg-slate-900 rounded" content={member.name}>
+                      <Tooltip
+                        key={member._id}
+                        className="bg-slate-900 rounded"
+                        content={member.name}
+                      >
                         <Avatar
-                        src={pic}
-                        alt={"project member"}
-                        // size="xs"
-                        //  variant="circular"
-                        className={`cursor-pointer border-2 h-7 w-7 rounded-full border-white ${
+                          src={pic}
+                          alt={"project member"}
+                          // size="xs"
+                          //  variant="circular"
+                          className={`cursor-pointer border-2 h-7 w-7 rounded-full border-white ${
                             key === 0 ? "" : "-ml-2.5"
-                        }`}
+                          }`}
                         />
-                    </Tooltip>
+                      </Tooltip>
                     ))}
                 </td>
                 <td className={className}>
-                <Typography
+                  <Typography
                     variant="small"
                     className="text-xs font-medium text-blue-gray-600"
-                >
+                  >
                     $10,000
-                </Typography>
+                  </Typography>
                 </td>
                 <td className={className}>
-                <Typography
+                  <Typography
                     variant="small"
                     className="text-xs font-medium text-blue-gray-600"
-                >
-                    {completion(project?._id) === 100 ? <Button className="px-2 py-1 rounded bg-green-500 text-white">
-                    completed
-                    </Button> :
-                    <Button className="px-2 py-1 rounded bg-yellow-400 text-white">
-                    pending
-                    </Button>}
-                </Typography>
+                  >
+                    {completion(project?._id) === 100 ? (
+                      <Button className="px-2 py-1 rounded bg-green-500 text-white">
+                        completed
+                      </Button>
+                    ) : (
+                      <Button className="px-2 py-1 rounded bg-yellow-400 text-white">
+                        pending
+                      </Button>
+                    )}
+                  </Typography>
                 </td>
                 <td className={className}>
-                <div className="w-10/12">
+                  <div className="w-10/12">
                     <Typography
-                    variant="small"
-                    className="mb-1 block text-xs font-medium text-blue-gray-600"
+                      variant="small"
+                      className="mb-1 block text-xs font-medium text-blue-gray-600"
                     >
-                    {completion(project._id)}%
+                      {completion(project._id)}%
                     </Typography>
                     <Progress
-                    value={completion(project._id)}
-                    // variant="gradient"
-                    // color={completion(project._id) === 100 ? "green" : "blue"}
-                    className="h-1 bg-gray-200"
+                      value={completion(project._id)}
+                      // variant="gradient"
+                      // color={completion(project._id) === 100 ? "green" : "blue"}
+                      className="h-1 bg-gray-200"
                     />
-                </div>
+                  </div>
                 </td>
                 <td className={className}>
-                <Typography
+                  <Typography
                     as="a"
                     href="#"
                     className="text-xs font-semibold text-blue-gray-600"
-                >
+                  >
                     <EllipsisVerticalIcon
-                    strokeWidth={2}
-                    className="h-5 w-5 text-inherit"
+                      strokeWidth={2}
+                      className="h-5 w-5 text-inherit"
                     />
-                </Typography>
+                  </Typography>
                 </td>
-            </tr>
+              </tr>
             );
-        }
-        ) : <tr className=""><td colSpan={8}><p className="w-full flex my-6 text-lg font-semibold justify-center"> No results </p></td></tr>}
-    </tbody>
+          })
+        ) : (
+          <tr className="">
+            <td colSpan={8}>
+              <p className="w-full flex my-6 text-lg font-semibold justify-center">
+                {" "}
+                No results{" "}
+              </p>
+            </td>
+          </tr>
+        )}
+      </tbody>
     </table>
   );
 }

@@ -129,7 +129,7 @@ export default function Survey() {
           </li>
         </ol>
       </div>
-      <main className="mx-2 sm:mx-28 my-6">
+      <main className="mx-2 lg:mx-28 my-6">
         <Tabs value="Ongoing Surveys">
           <TabsHeader className="bg-slate-200 rounded-b-none">
             <Tab

@@ -48,11 +48,19 @@ export default function Task() {
     </div> */}
       {/* <!-- End Breadcrumb --> */}
     <div className="flex min-h-[91vh]">
-      <div className="w-1/5 border-r-[1px] bg-gray-100 border-gray-200">
+      <div className="w-1/5 hidden lg:block border-r-[1px] bg-gray-100 border-gray-200">
         <TaskSidebar project={project} current={current} setCurrent={setCurrent}/>
       </div>
-      <main className="flex w-4/5 overflow-auto bg-white justify-left">
+      <div id="hs-overlay-example" className="hs-overlay hs-overlay-open:translate-x-0 hidden -translate-x-full fixed top-0 left-0 transition-all duration-300 transform h-full w-72 z-[60] bg-white border-r" tabindex="-1">
+      <TaskSidebar project={project} current={current} setCurrent={setCurrent}/>
+      </div>
+      <main className="flex w-full lg:w-4/5 overflow-auto bg-white justify-left relative">
         {/* <AllTasks /> */}
+        <button type="button" className="py-2 px-0 lg:hidden rounded-r-md border border-transparent font-semibold bg-slate-300 shadow-lg focus:outline-none transition-all text-sm absolute top-10 left-0 z-50" data-hs-overlay="#hs-overlay-example">
+        <svg fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-4" aria-hidden="true">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+</svg>
+</button>
         {current === "Roadmap" && <Roadmap/>}
         {current === "Board" && <AllTasks/>}
         {current === "Settings" && <ProjectSettings project={project}/>}

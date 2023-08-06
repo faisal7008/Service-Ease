@@ -58,7 +58,7 @@ export default function ProjectSettings({project}) {
 
 
   return (
-    <div className='flex ml-20 justify-left items-start w-full'>
+    <div className='flex mx-2 justify-left items-start w-full'>
       {successMsg &&
       <div className="absolute z-10 top-20 right-4">
       <div className="max-w-xs bg-green-100 border border-green-200 text-sm text-green-500 rounded-md shadow-md" role="alert">
@@ -76,7 +76,7 @@ export default function ProjectSettings({project}) {
     </div>
   </div>
       </div>}
-    <div className="relative flex p-6 flex-col w-3/5 bg-white">
+    <div className="relative flex p-3 sm:p-6 flex-col w-full lg:w-2/3 bg-white">
         <div className='flex justify-between mb-6'>
             <h1 className='font-semibold tracking-wide text-slate-800 text-2xl'>Project details</h1>     
         </div>

@@ -50,7 +50,7 @@ export default function CreateSurvey() {
     <div>
         <div id="hs-vertically-centered-modal" className="hs-overlay hidden w-full h-full fixed -top-5 left-0 z-[60] overflow-x-hidden overflow-y-auto">
   <div className="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-full sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex justify-center items-center">
-    <div className="relative flex px-5 py-4 flex-col max-h-[80vh] w-2/5 bg-white border shadow-sm rounded h-5/6">
+    <div className="relative flex px-5 py-4 flex-col max-h-[80vh] w-11/12 lg:w-2/5 bg-white border shadow-sm rounded h-5/6">
         <div className='flex justify-between mb-4'>
             <h1 className='font-semibold tracking-wide text-slate-800 text-xl'>Start a survey</h1>     
             <button
