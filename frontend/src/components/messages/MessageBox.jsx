@@ -22,8 +22,8 @@ export default function MessageBox(props) {
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io.connect("http://localhost:9010")
-    // socket.current = io.connect("http://service-at-ease-chatapp.glitch.me")
+    socket.current = io.connect(process.env.REACT_APP_SOCKET_API)
+    // socket.current = io.connect(process.env.REACT_APP_SOCKET_API_LOCAL)
   },[])
 
   // useEffect(() => {
