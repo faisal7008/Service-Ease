@@ -1,35 +1,35 @@
 export const platformSettingsData = [
   {
-    title: "account",
+    title: 'account',
     options: [
       {
         checked: true,
-        label: "Email me when someone follows me",
+        label: 'Email me when someone follows me',
       },
       {
         checked: false,
-        label: "Email me when someone answers on my post",
+        label: 'Email me when someone answers on my post',
       },
       {
         checked: true,
-        label: "Email me when someone mentions me",
+        label: 'Email me when someone mentions me',
       },
     ],
   },
   {
-    title: "application",
+    title: 'application',
     options: [
       {
         checked: false,
-        label: "New launches and projects",
+        label: 'New launches and projects',
       },
       {
         checked: true,
-        label: "Monthly product updates",
+        label: 'Monthly product updates',
       },
       {
         checked: false,
-        label: "Subscribe to newsletter",
+        label: 'Subscribe to newsletter',
       },
     ],
   },

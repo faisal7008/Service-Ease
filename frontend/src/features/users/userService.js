@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axios from 'axios';
 
 // const API_URL = 'https://worried-hare-sweatsuit.cyclic.app/api/users/'
 // const API_URL = 'http://localhost:9000/api/users/'
-const API_URL = `${process.env.REACT_APP_BACKEND_API}/users/`
+const API_URL = `${process.env.REACT_APP_BACKEND_API}/users/`;
 
 // Add new user
 const addUser = async (UserData, token) => {
@@ -10,12 +10,12 @@ const addUser = async (UserData, token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
-  const response = await axios.post(API_URL, UserData, config)
+  const response = await axios.post(API_URL, UserData, config);
 
-  return response.data
-}
+  return response.data;
+};
 
 // get all users
 const getAllUsers = async (token) => {
@@ -23,12 +23,12 @@ const getAllUsers = async (token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
-  const response = await axios.get(API_URL, config)
+  const response = await axios.get(API_URL, config);
 
-  return response.data
-}
+  return response.data;
+};
 
 // get user
 const getUser = async (userId, token) => {
@@ -36,12 +36,12 @@ const getUser = async (userId, token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
-  const response = await axios.get(API_URL + userId, config)
+  const response = await axios.get(API_URL + userId, config);
 
-  return response.data
-}
+  return response.data;
+};
 
 // Get all managers
 const getManagers = async (token) => {
@@ -49,12 +49,12 @@ const getManagers = async (token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
-  const response = await axios.get(API_URL + 'managers', config)
+  const response = await axios.get(API_URL + 'managers', config);
 
-  return response.data
-}
+  return response.data;
+};
 
 // Get all employees
 const getEmployees = async (token) => {
@@ -62,12 +62,12 @@ const getEmployees = async (token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
-  const response = await axios.get(API_URL + 'employees', config)
+  const response = await axios.get(API_URL + 'employees', config);
 
-  return response.data
-}
+  return response.data;
+};
 
 // Delete user
 const deleteUser = async (userId, token) => {
@@ -75,12 +75,12 @@ const deleteUser = async (userId, token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
-  const response = await axios.delete(API_URL + userId, config)
+  const response = await axios.delete(API_URL + userId, config);
 
-  return response.data
-}
+  return response.data;
+};
 
 // follow user
 const followUser = async (id, userData, token) => {
@@ -88,11 +88,11 @@ const followUser = async (id, userData, token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
-  const response = await axios.put(API_URL + "follow/" + id, userData, config)
-  return response.data
-}
+  const response = await axios.put(API_URL + 'follow/' + id, userData, config);
+  return response.data;
+};
 
 // get my profile
 const getMyProfile = async (token) => {
@@ -100,25 +100,24 @@ const getMyProfile = async (token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
-  const response = await axios.get(API_URL + 'me', config)
+  const response = await axios.get(API_URL + 'me', config);
 
-  return response.data
-}
+  return response.data;
+};
 
 // Update profile
 const updateProfile = async (userData, token, id) => {
   const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        // "Content-Type": "multipart/form-data",
-      },
-  }
-  const response = await axios.put(API_URL + id, userData, config)
-  return response.data
-}
-
+    headers: {
+      Authorization: `Bearer ${token}`,
+      // "Content-Type": "multipart/form-data",
+    },
+  };
+  const response = await axios.put(API_URL + id, userData, config);
+  return response.data;
+};
 
 const userService = {
   addUser,
@@ -129,7 +128,7 @@ const userService = {
   getManagers,
   deleteUser,
   followUser,
-  updateProfile
-}
+  updateProfile,
+};
 
-export default userService
+export default userService;

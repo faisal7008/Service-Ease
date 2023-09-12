@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 #assignments_container::-webkit-scrollbar {
-    display: none;
+  display: none;
 }

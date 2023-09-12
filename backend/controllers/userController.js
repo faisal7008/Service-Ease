@@ -208,7 +208,7 @@ const deleteUser = asyncHandler(
 // @access  Admin
 
 const getAllUsers = asyncHandler( async (req, res) => {
-    const users = await User.find()
+    const users = await User.find().select("-password")
     res.status(200).json(users)
 })
 
@@ -218,7 +218,7 @@ const getAllUsers = asyncHandler( async (req, res) => {
 // @access  Admin
 
 const getManagers = asyncHandler( async (req, res) => {
-    const managers = await User.find({role: "Manager"})
+    const managers = await User.find({role: "Manager"}).select("-password")
     res.status(200).json(managers)
 })
 
@@ -227,7 +227,7 @@ const getManagers = asyncHandler( async (req, res) => {
 // @access  Admin
 
 const getEmployees = asyncHandler( async (req, res) => {
-    const employees = await User.find({role: "Employee"})
+    const employees = await User.find({role: "Employee"}).select("-password")
     res.status(200).json(employees)
 })
 
@@ -236,7 +236,7 @@ const getEmployees = asyncHandler( async (req, res) => {
 // @access  Private
 
 const getOther = asyncHandler( async (req, res) => {
-    const user = await User.findById(req.params.id)
+    const user = await User.findById(req.params.id).select("-password")
     res.status(200).json(user)
 })
 
@@ -245,7 +245,7 @@ const getOther = asyncHandler( async (req, res) => {
 // @access  Private
 
 const getMe = asyncHandler( async (req, res) => {
-    res.status(200).json(req.user)
+    res.status(200).json(req.user).select("-password")
 })
 
 // follow/unfollow a user

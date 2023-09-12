@@ -1,92 +1,75 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import projectService from "./projectService";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import projectService from './projectService';
 
 const initialState = {
   projects: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
-  message: "",
+  message: '',
 };
 
 // get projects
-export const getProjects = createAsyncThunk(
-  "projects/getAll",
-  async (_, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await projectService.getProjects(token);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
+export const getProjects = createAsyncThunk('projects/getAll', async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await projectService.getProjects(token);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 // create project
-export const createProject = createAsyncThunk(
-  "projects/create",
-  async (projectData, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await projectService.createProject(projectData, token);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
+export const createProject = createAsyncThunk('projects/create', async (projectData, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await projectService.createProject(projectData, token);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 // update project
 export const updateProject = createAsyncThunk(
-    "projects/update",
-    async ({projectId, projectData}, thunkAPI) => {
-      try {
-        const token = thunkAPI.getState().auth.user.token;
-        return await projectService.updateProject(projectId, projectData, token);
-      } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        return thunkAPI.rejectWithValue(message);
-      }
+  'projects/update',
+  async ({ projectId, projectData }, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await projectService.updateProject(projectId, projectData, token);
+    } catch (error) {
+      const message =
+        (error.response && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
-  );
+  },
+);
 
-  // delete project
-export const deleteProject = createAsyncThunk(
-    "projects/delete",
-    async (projectId, thunkAPI) => {
-      try {
-        const token = thunkAPI.getState().auth.user.token;
-        return await projectService.deleteProject(projectId, token);
-      } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        return thunkAPI.rejectWithValue(message);
-      }
-    }
-  );
+// delete project
+export const deleteProject = createAsyncThunk('projects/delete', async (projectId, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await projectService.deleteProject(projectId, token);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
 export const projectSlice = createSlice({
-  name: "projects",
+  name: 'projects',
   initialState,
   reducers: {
     reset: (state) => initialState,
@@ -120,37 +103,35 @@ export const projectSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(updateProject.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(updateProject.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.isLoading = false;
+        state.isSuccess = true;
         state.projects.forEach((issue, index) => {
           if (issue._id === action.payload._id) {
-            state.projects[index] = action.payload
+            state.projects[index] = action.payload;
           }
         });
       })
       .addCase(updateProject.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(deleteProject.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(deleteProject.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.projects = state.projects.filter(
-          (Project) => Project._id !== action.payload.id
-        )
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.projects = state.projects.filter((Project) => Project._id !== action.payload.id);
       })
       .addCase(deleteProject.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
-      })
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      });
   },
 });
 

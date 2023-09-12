@@ -1,92 +1,75 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import commentService from "./commentService";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import commentService from './commentService';
 
 const initialState = {
   comments: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
-  message: "",
+  message: '',
 };
 
 // get comments
-export const getComments = createAsyncThunk(
-  "comments/getAll",
-  async (issueId, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await commentService.getComments(issueId, token);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
+export const getComments = createAsyncThunk('comments/getAll', async (issueId, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await commentService.getComments(issueId, token);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 // create comment
-export const createComment = createAsyncThunk(
-  "comments/create",
-  async (commentData, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await commentService.createComment(commentData, token);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
+export const createComment = createAsyncThunk('comments/create', async (commentData, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await commentService.createComment(commentData, token);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 // update comment
 export const updateComment = createAsyncThunk(
-    "comments/update",
-    async ({commentId, commentData}, thunkAPI) => {
-      try {
-        const token = thunkAPI.getState().auth.user.token;
-        return await commentService.updateComment(commentId, commentData, token);
-      } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        return thunkAPI.rejectWithValue(message);
-      }
+  'comments/update',
+  async ({ commentId, commentData }, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await commentService.updateComment(commentId, commentData, token);
+    } catch (error) {
+      const message =
+        (error.response && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
-  );
+  },
+);
 
-  // delete comment
-export const deleteComment = createAsyncThunk(
-    "comments/delete",
-    async (commentId, thunkAPI) => {
-      try {
-        const token = thunkAPI.getState().auth.user.token;
-        return await commentService.deleteComment(commentId, token);
-      } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        return thunkAPI.rejectWithValue(message);
-      }
-    }
-  );
+// delete comment
+export const deleteComment = createAsyncThunk('comments/delete', async (commentId, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await commentService.deleteComment(commentId, token);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
 export const commentSlice = createSlice({
-  name: "comments",
+  name: 'comments',
   initialState,
   reducers: {
     reset: (state) => initialState,
@@ -120,32 +103,30 @@ export const commentSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(updateComment.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(updateComment.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.isLoading = false;
+        state.isSuccess = true;
       })
       .addCase(updateComment.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(deleteComment.pending, (state) => {
-        state.isLoading = true
+        state.isLoading = true;
       })
       .addCase(deleteComment.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.comments = state.comments.filter(
-          (comment) => comment._id !== action.payload.id
-        )
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.comments = state.comments.filter((comment) => comment._id !== action.payload.id);
       })
       .addCase(deleteComment.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
-      })
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      });
   },
 });
 

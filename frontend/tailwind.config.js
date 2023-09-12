@@ -11,6 +11,7 @@ module.exports =
   theme: {
     extend: {},
   },
+  darkMode: 'false',
   plugins: [
     require('@tailwindcss/forms'),
     require('preline/plugin'),
